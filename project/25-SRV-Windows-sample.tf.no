@@ -1,0 +1,45 @@
+module "SRV-CTXDDC1" {
+  source = "../../modules/terraform-azurerm_windows_virtual_machine"
+  # source                  = "github.com/canada-ca-terraform-modules/terraform-azurerm_windows_virtual_machine?ref=20200528.1"
+  deploy                  = var.vm_configs.SRV-CTXDDC1.deploy
+  vm_depends_on           = [module.SRV-SASAD]
+  name                    = "${var.env}SRV-CTXDDC1"
+  resource_group          = data.azurerm_resource_group.Project-rg
+  location                = var.location
+  nic_subnetName          = "${var.env}CNR-${var.group}-Project_OZ-snet"
+  nic_vnetName            = "${var.env}CNR-${var.group}-vnet"
+  nic_resource_group_name = "${local.prefix}_Network-rg"
+  nic_ip_configuration = {
+    private_ip_address            = [local.SRV-CTXDDC1]
+    private_ip_address_allocation = ["Static"]
+  }
+  dnsServers = [module.SRV-SASAD.NIC-dc1.private_ip_address, module.SRV-SASAD.NIC-dc2.private_ip_address]
+  domainToJoin = {
+    domainName        = var.vm_configs.SRV-CTXDDC1.domainName
+    domainUsername    = var.vm_configs.SRV-CTXDDC1.domainUsername
+    domainPassword    = var.vm_configs.SRV-CTXDDC1.domainPassword
+    domainJoinOptions = 3
+    ouPath            = ""
+  }
+  admin_username       = var.vm_configs.SRV-CTXDDC1.admin_username
+  admin_password       = var.vm_configs.SRV-CTXDDC1.admin_password
+  os_managed_disk_type = var.vm_configs.SRV-CTXDDC1.os_managed_disk_type
+  vm_size              = var.vm_configs.SRV-CTXDDC1.vm_size
+  license_type         = "Windows_Server"
+  encryptDisks = {
+    KeyVaultResourceId = azurerm_key_vault.Project-kv.id
+    KeyVaultURL        = azurerm_key_vault.Project-kv.vault_uri
+  }
+  monitoringAgent = data.azurerm_log_analytics_workspace.Project-law
+  public_ip       = false
+  tags            = var.tags
+}
+
+resource "azurerm_dns_a_record" "SRV-CTXDDC1" {
+  count               = var.vm_configs.SRV-CTXDDC1.deploy ? 1 : 0
+  zone_name           = data.azurerm_dns_zone.zone1.name
+  name                = lower("${var.env}SRV-CTXDDC1")
+  ttl                 = "60"
+  records             = [module.SRV-CTXDDC1.nic[0].private_ip_address]
+  resource_group_name = data.azurerm_resource_group.DNS-rg.name
+}
