@@ -1,7 +1,7 @@
 {
   "version": 4,
   "terraform_version": "0.12.26",
-  "serial": 31,
+  "serial": 33,
   "lineage": "b25a6488-229b-babb-5eea-bb890d56886b",
   "outputs": {},
   "resources": [
@@ -15,7 +15,7 @@
           "schema_version": 0,
           "attributes": {
             "client_id": "90ed0100-cbdd-4c6b-b7f7-3f2e0422e031",
-            "id": "2020-06-19 15:51:20.2003415 +0000 UTC",
+            "id": "2020-06-19 17:30:20.6698147 +0000 UTC",
             "object_id": "bb294f5d-fece-4d3a-a187-7f98cb64e478",
             "subscription_id": "c00dd93b-0f2b-4cd6-8273-e1038dcbd60e",
             "tenant_id": "4e1ed7ae-062e-4ec8-b989-de8cbd452c54",
@@ -884,7 +884,7 @@
               {
                 "name": "ipconfig1",
                 "primary": true,
-                "private_ip_address": "172.16.132.69",
+                "private_ip_address": "172.16.132.197",
                 "private_ip_address_allocation": "Dynamic",
                 "private_ip_address_version": "IPv4",
                 "public_ip_address_id": "",
@@ -892,11 +892,11 @@
               }
             ],
             "location": "canadacentral",
-            "mac_address": "00-0D-3A-E8-6C-DF",
+            "mac_address": "00-0D-3A-E8-53-A9",
             "name": "ScScSWJ-ESLZ01-nic1",
-            "private_ip_address": "172.16.132.69",
+            "private_ip_address": "172.16.132.197",
             "private_ip_addresses": [
-              "172.16.132.69"
+              "172.16.132.197"
             ],
             "resource_group_name": "ScSc-CIO_ESLZ_Management-rg",
             "tags": {
@@ -1040,7 +1040,7 @@
             "max_number_of_virtual_network_links": 1000,
             "max_number_of_virtual_network_links_with_registration": 100,
             "name": "eslz.local",
-            "number_of_record_sets": 2,
+            "number_of_record_sets": 3,
             "resource_group_name": "scsc-cio_eslz_dns-rg",
             "tags": {
               "branch": "CIO",
@@ -1353,7 +1353,7 @@
             "route": [
               {
                 "address_prefix": "172.16.128.0/20",
-                "name": "local_vnet-route",
+                "name": "local_vnet-route-0",
                 "next_hop_in_ip_address": "",
                 "next_hop_type": "VnetLocal"
               }
@@ -1732,15 +1732,6 @@
       "instances": []
     },
     {
-      "module": "module.windows-weekly-updates",
-      "mode": "managed",
-      "type": "azurerm_template_deployment",
-      "name": "linux",
-      "each": "list",
-      "provider": "provider.azurerm",
-      "instances": []
-    },
-    {
       "module": "module.linux-weekly-updates",
       "mode": "managed",
       "type": "azurerm_template_deployment",
@@ -1775,6 +1766,24 @@
       "module": "module.windows-weekly-updates",
       "mode": "managed",
       "type": "azurerm_template_deployment",
+      "name": "linux",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
+      "module": "module.linux-weekly-updates",
+      "mode": "managed",
+      "type": "azurerm_template_deployment",
+      "name": "windows",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
+      "module": "module.windows-weekly-updates",
+      "mode": "managed",
+      "type": "azurerm_template_deployment",
       "name": "windows",
       "each": "list",
       "provider": "provider.azurerm",
@@ -1801,15 +1810,6 @@
           ]
         }
       ]
-    },
-    {
-      "module": "module.linux-weekly-updates",
-      "mode": "managed",
-      "type": "azurerm_template_deployment",
-      "name": "windows",
-      "each": "list",
-      "provider": "provider.azurerm",
-      "instances": []
     },
     {
       "module": "module.SWJ-01",
@@ -2018,9 +2018,9 @@
             ],
             "plan": [],
             "priority": "Spot",
-            "private_ip_address": "172.16.132.69",
+            "private_ip_address": "172.16.132.197",
             "private_ip_addresses": [
-              "172.16.132.69"
+              "172.16.132.197"
             ],
             "provision_vm_agent": true,
             "proximity_placement_group_id": "",

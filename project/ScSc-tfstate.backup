@@ -1,7 +1,7 @@
 {
   "version": 4,
   "terraform_version": "0.12.26",
-  "serial": 14,
+  "serial": 15,
   "lineage": "e189d502-2307-cb4c-6d70-560124268f70",
   "outputs": {},
   "resources": [
@@ -117,7 +117,7 @@
           "schema_version": 0,
           "attributes": {
             "client_id": "90ed0100-cbdd-4c6b-b7f7-3f2e0422e031",
-            "id": "2020-06-19 15:49:33.5143961 +0000 UTC",
+            "id": "2020-06-19 17:32:11.9397301 +0000 UTC",
             "object_id": "bb294f5d-fece-4d3a-a187-7f98cb64e478",
             "subscription_id": "c00dd93b-0f2b-4cd6-8273-e1038dcbd60e",
             "tenant_id": "4e1ed7ae-062e-4ec8-b989-de8cbd452c54",
@@ -738,9 +738,9 @@
             ],
             "plan": [],
             "priority": "Spot",
-            "private_ip_address": "172.16.132.68",
+            "private_ip_address": "172.16.132.196",
             "private_ip_addresses": [
-              "172.16.132.68"
+              "172.16.132.196"
             ],
             "provision_vm_agent": true,
             "proximity_placement_group_id": "",
@@ -1009,7 +1009,7 @@
               {
                 "name": "ipconfig1",
                 "primary": true,
-                "private_ip_address": "172.16.132.68",
+                "private_ip_address": "172.16.132.196",
                 "private_ip_address_allocation": "Dynamic",
                 "private_ip_address_version": "IPv4",
                 "public_ip_address_id": "",
@@ -1017,11 +1017,11 @@
               }
             ],
             "location": "canadacentral",
-            "mac_address": "00-0D-3A-84-B5-98",
+            "mac_address": "00-0D-3A-E8-79-74",
             "name": "ScScSRV-linux-mgmt-nic1",
-            "private_ip_address": "172.16.132.68",
+            "private_ip_address": "172.16.132.196",
             "private_ip_addresses": [
-              "172.16.132.68"
+              "172.16.132.196"
             ],
             "resource_group_name": "ScSc-CIO_ESLZ_Management-rg",
             "tags": {

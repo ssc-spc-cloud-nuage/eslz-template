@@ -4,7 +4,7 @@ resource "azurerm_subnet" "Project_PAZ-snet" {
   name                 = "${var.env}CNR-${var.group}_${var.project}_PAZ-snet"
   virtual_network_name = azurerm_virtual_network.Project-vnet.name
   resource_group_name  = azurerm_resource_group.Network-rg.name
-  address_prefixes     = [var.Project-subnets.PAZ]
+  address_prefixes     = var.network.subnets.PAZ
 }
 
 resource azurerm_subnet_route_table_association Project_PAZ-rta {
@@ -16,7 +16,7 @@ resource "azurerm_subnet" "Project_OZ-snet" {
   name                 = "${var.env}CNR-${var.group}_${var.project}_OZ-snet"
   virtual_network_name = azurerm_virtual_network.Project-vnet.name
   resource_group_name  = azurerm_resource_group.Network-rg.name
-  address_prefixes     = [var.Project-subnets.OZ]
+  address_prefixes     = var.network.subnets.OZ
 }
 
 resource azurerm_subnet_route_table_association Project_OZ-rta {
@@ -28,7 +28,7 @@ resource "azurerm_subnet" "Project_RZ-snet" {
   name                 = "${var.env}CNR-${var.group}_${var.project}_RZ-snet"
   virtual_network_name = azurerm_virtual_network.Project-vnet.name
   resource_group_name  = azurerm_resource_group.Network-rg.name
-  address_prefixes     = [var.Project-subnets.RZ]
+  address_prefixes     = var.network.subnets.RZ
 }
 
 resource azurerm_subnet_route_table_association Project_RZ-rta {
@@ -40,7 +40,7 @@ resource "azurerm_subnet" "Project_MAZ-snet" {
   name                 = "${var.env}CNR-${var.group}_${var.project}_MAZ-snet"
   virtual_network_name = azurerm_virtual_network.Project-vnet.name
   resource_group_name  = azurerm_resource_group.Network-rg.name
-  address_prefixes     = [var.Project-subnets.MAZ]
+  address_prefixes     = var.network.subnets.MAZ
 }
 
 resource azurerm_subnet_route_table_association Project_MAZ-rta {

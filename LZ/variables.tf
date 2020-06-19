@@ -8,8 +8,7 @@ variable "location" {}
 
 variable "Subscription_AADGroup_Owners_ids" {}
 
-variable "Project-vnet" {}
-variable "Project-subnets" {}
+variable "network" {}
 variable "Landing-Zone-Next-Hop" {}
 variable "RDS-Gateway" {}
 

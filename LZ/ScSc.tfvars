@@ -20,14 +20,14 @@ Subscription_AADGroup_Owners_ids = [
   "aea74c39-1a88-47f5-8c31-a6d0c1173aa3"  # Louis-Eric Tremblay
 ]
 
-Project-vnet = [
-  "172.16.128.0/20"
-]
-Project-subnets = {
-  PAZ = "172.16.132.0/26"
-  OZ  = "172.16.132.64/26"
-  RZ  = "172.16.132.128/26"
-  MAZ = "172.16.132.192/26"
+network = {
+  vnet = ["172.16.128.0/20"]
+  subnets = {
+    PAZ = ["172.16.132.0/26"]
+    OZ  = ["172.16.132.64/26"]
+    RZ  = ["172.16.132.128/26"]
+    MAZ = ["172.16.132.192/26"]
+  }
 }
 Landing-Zone-Next-Hop = "172.168.3.22"
 RDS-Gateway           = "10.101.16.4"
