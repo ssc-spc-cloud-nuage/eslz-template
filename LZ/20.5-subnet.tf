@@ -31,10 +31,10 @@ resource "azurerm_role_assignment" "Project_Network-rt-Contributors" {
 # Subnets
 
 resource "azurerm_subnet" "Project_PAZ-snet" {
-  name                      = "${var.env}CNR-${var.group}_${var.project}_PAZ-snet"
-  virtual_network_name      = azurerm_virtual_network.Project-vnet.name
-  resource_group_name       = azurerm_resource_group.Network-rg.name
-  address_prefixes          = [var.Project-subnets.PAZ]
+  name                 = "${var.env}CNR-${var.group}_${var.project}_PAZ-snet"
+  virtual_network_name = azurerm_virtual_network.Project-vnet.name
+  resource_group_name  = azurerm_resource_group.Network-rg.name
+  address_prefixes     = [var.Project-subnets.PAZ]
 }
 
 resource azurerm_subnet_route_table_association Project_PAZ-rta {
@@ -61,10 +61,10 @@ resource "azurerm_role_assignment" "Project_PAZ-snet-Readers" {
 # }
 
 resource "azurerm_subnet" "Project_OZ-snet" {
-  name                      = "${var.env}CNR-${var.group}_${var.project}_OZ-snet"
-  virtual_network_name      = azurerm_virtual_network.Project-vnet.name
-  resource_group_name       = azurerm_resource_group.Network-rg.name
-  address_prefixes            = [var.Project-subnets.OZ]
+  name                 = "${var.env}CNR-${var.group}_${var.project}_OZ-snet"
+  virtual_network_name = azurerm_virtual_network.Project-vnet.name
+  resource_group_name  = azurerm_resource_group.Network-rg.name
+  address_prefixes     = [var.Project-subnets.OZ]
 }
 
 resource azurerm_subnet_route_table_association Project_OZ-rta {
@@ -91,10 +91,10 @@ resource "azurerm_role_assignment" "Project_OZ-snet-Readers" {
 # }
 
 resource "azurerm_subnet" "Project_RZ-snet" {
-  name                      = "${var.env}CNR-${var.group}_${var.project}_RZ-snet"
-  virtual_network_name      = azurerm_virtual_network.Project-vnet.name
-  resource_group_name       = azurerm_resource_group.Network-rg.name
-  address_prefixes            = [var.Project-subnets.RZ]
+  name                 = "${var.env}CNR-${var.group}_${var.project}_RZ-snet"
+  virtual_network_name = azurerm_virtual_network.Project-vnet.name
+  resource_group_name  = azurerm_resource_group.Network-rg.name
+  address_prefixes     = [var.Project-subnets.RZ]
 }
 
 resource azurerm_subnet_route_table_association Project_RZ-rta {

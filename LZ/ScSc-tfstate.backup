@@ -1,7 +1,7 @@
 {
   "version": 4,
   "terraform_version": "0.12.26",
-  "serial": 15,
+  "serial": 19,
   "lineage": "b25a6488-229b-babb-5eea-bb890d56886b",
   "outputs": {},
   "resources": [
@@ -15,7 +15,7 @@
           "schema_version": 0,
           "attributes": {
             "client_id": "90ed0100-cbdd-4c6b-b7f7-3f2e0422e031",
-            "id": "2020-06-19 01:33:46.3636078 +0000 UTC",
+            "id": "2020-06-19 02:12:58.0451499 +0000 UTC",
             "object_id": "bb294f5d-fece-4d3a-a187-7f98cb64e478",
             "subscription_id": "c00dd93b-0f2b-4cd6-8273-e1038dcbd60e",
             "tenant_id": "4e1ed7ae-062e-4ec8-b989-de8cbd452c54",
@@ -1578,6 +1578,67 @@
     },
     {
       "mode": "managed",
+      "type": "azurerm_private_dns_zone",
+      "name": "privatezone1",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/scsc-cio_eslz_dns-rg/providers/Microsoft.Network/privateDnsZones/eslz.local",
+            "max_number_of_record_sets": 25000,
+            "max_number_of_virtual_network_links": 1000,
+            "max_number_of_virtual_network_links_with_registration": 100,
+            "name": "eslz.local",
+            "number_of_record_sets": 1,
+            "resource_group_name": "scsc-cio_eslz_dns-rg",
+            "tags": {
+              "branch": "CIO",
+              "classification": "pbmm",
+              "cloudusageprofile": "3",
+              "contact": "bernard.maltais@canada.ca; john.nephin@canada.ca",
+              "costcentre": "566811",
+              "env": "sandbox",
+              "owner": "bernard.maltais@canada.ca; john.nephin@canada.ca"
+            },
+            "timeouts": null
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_resource_group.DNS-rg"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_private_dns_zone_virtual_network_link",
+      "name": "privatezone1-vnet_link",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/scsc-cio_eslz_dns-rg/providers/Microsoft.Network/privateDnsZones/eslz.local/virtualNetworkLinks/scsccnr-cio_eslz_privatezone1-vnet_link",
+            "name": "scsccnr-cio_eslz_privatezone1-vnet_link",
+            "private_dns_zone_name": "eslz.local",
+            "registration_enabled": true,
+            "resource_group_name": "scsc-cio_eslz_dns-rg",
+            "tags": {},
+            "timeouts": null,
+            "virtual_network_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_private_dns_zone.privatezone1",
+            "azurerm_resource_group.DNS-rg",
+            "azurerm_virtual_network.Project-vnet"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
       "type": "azurerm_resource_group",
       "name": "AutomationAccount-rg",
       "provider": "provider.azurerm",
@@ -2188,6 +2249,15 @@
       ]
     },
     {
+      "module": "module.windows-weekly-updates",
+      "mode": "managed",
+      "type": "azurerm_template_deployment",
+      "name": "linux",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
       "module": "module.linux-weekly-updates",
       "mode": "managed",
       "type": "azurerm_template_deployment",
@@ -2222,24 +2292,6 @@
       "module": "module.windows-weekly-updates",
       "mode": "managed",
       "type": "azurerm_template_deployment",
-      "name": "linux",
-      "each": "list",
-      "provider": "provider.azurerm",
-      "instances": []
-    },
-    {
-      "module": "module.linux-weekly-updates",
-      "mode": "managed",
-      "type": "azurerm_template_deployment",
-      "name": "windows",
-      "each": "list",
-      "provider": "provider.azurerm",
-      "instances": []
-    },
-    {
-      "module": "module.windows-weekly-updates",
-      "mode": "managed",
-      "type": "azurerm_template_deployment",
       "name": "windows",
       "each": "list",
       "provider": "provider.azurerm",
@@ -2266,6 +2318,15 @@
           ]
         }
       ]
+    },
+    {
+      "module": "module.linux-weekly-updates",
+      "mode": "managed",
+      "type": "azurerm_template_deployment",
+      "name": "windows",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
     },
     {
       "mode": "managed",

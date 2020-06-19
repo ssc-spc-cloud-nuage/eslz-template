@@ -22,7 +22,7 @@ module "linux-weekly-updates" {
   resource_group_name        = azurerm_resource_group.AutomationAccount-rg.name
   azurerm_automation_account = azurerm_automation_account.Project-aa
   operatingSystem            = "Linux"
-  scope                      = [data.azurerm_subscription.primary.id] # Whole subscription
+  scope                      = [data.azurerm_subscription.primary.id]               # Whole subscription
   startTime                  = "${local.update_date}T${local.update_time}:00-00:00" # "2020-06-16T00:00:00-00:00"
   weekDays                   = ["Sunday"]
 }
@@ -33,7 +33,7 @@ module "windows-weekly-updates" {
   resource_group_name        = azurerm_resource_group.AutomationAccount-rg.name
   azurerm_automation_account = azurerm_automation_account.Project-aa
   operatingSystem            = "Windows"
-  scope                      = [data.azurerm_subscription.primary.id] # Whole subscription
+  scope                      = [data.azurerm_subscription.primary.id]               # Whole subscription
   startTime                  = "${local.update_date}T${local.update_time}:00-00:00" # "2020-06-16T00:00:00-00:00"
   weekDays                   = ["Sunday"]
 }

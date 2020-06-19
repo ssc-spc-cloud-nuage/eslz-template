@@ -61,16 +61,16 @@ resource "azurerm_log_analytics_solution" "ChangeTracking" {
 
 resource "azurerm_log_analytics_datasource_windows_event" "windows_Application_event" {
   name                = "windows_Application_event"
-  resource_group_name   = azurerm_resource_group.Logs-rg.name
-  workspace_name        = azurerm_log_analytics_workspace.Project-law.name
+  resource_group_name = azurerm_resource_group.Logs-rg.name
+  workspace_name      = azurerm_log_analytics_workspace.Project-law.name
   event_log_name      = "Application"
   event_types         = ["error", "warning"]
 }
 
 resource "azurerm_log_analytics_datasource_windows_event" "windows_System_event" {
   name                = "windows_System_event"
-  resource_group_name   = azurerm_resource_group.Logs-rg.name
-  workspace_name        = azurerm_log_analytics_workspace.Project-law.name
+  resource_group_name = azurerm_resource_group.Logs-rg.name
+  workspace_name      = azurerm_log_analytics_workspace.Project-law.name
   event_log_name      = "System"
   event_types         = ["error", "warning"]
 }

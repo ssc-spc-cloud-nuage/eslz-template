@@ -7,14 +7,14 @@ resource azurerm_route_table Global-rt {
     address_prefix = var.Project-vnet[0]
     next_hop_type  = "VnetLocal"
   }
-  
+
   route {
     name                   = "default-route"
     address_prefix         = "0.0.0.0/0"
     next_hop_type          = "VirtualAppliance"
     next_hop_in_ip_address = var.Landing-Zone-Next-Hop
   }
-  
+
   tags = var.tags
 }
 

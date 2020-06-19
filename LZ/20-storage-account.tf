@@ -6,5 +6,5 @@ resource "azurerm_storage_account" "Project_law-sa" {
   account_tier             = "Standard"
   account_kind             = "StorageV2"
   account_replication_type = "GRS"
-  tags                = var.tags
+  tags                     = var.tags
 }

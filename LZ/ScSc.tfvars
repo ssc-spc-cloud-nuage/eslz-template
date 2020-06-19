@@ -29,6 +29,10 @@ Project-subnets = {
   RZ  = "172.16.132.128/26"
 }
 Landing-Zone-Next-Hop = "172.168.3.22"
-RDS-Gateway      = "10.101.16.4"
+RDS-Gateway           = "10.101.16.4"
 
 domain = "eslz.sb.ciso.ssc-spc.gc.ca"
+privatedomain = {
+  name                 = "eslz.local"
+  registration_enabled = true # Set to true if auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled?
+}

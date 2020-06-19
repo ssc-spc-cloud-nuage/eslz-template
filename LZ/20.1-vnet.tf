@@ -7,8 +7,8 @@ resource "azurerm_virtual_network" "Project-vnet" {
 }
 
 resource "azurerm_monitor_diagnostic_setting" "Project-logs" {
-  name               = "${var.env}CNR-${var.group}_${var.project}-logs"
-  target_resource_id = azurerm_virtual_network.Project-vnet.id
+  name                       = "${var.env}CNR-${var.group}_${var.project}-logs"
+  target_resource_id         = azurerm_virtual_network.Project-vnet.id
   log_analytics_workspace_id = azurerm_log_analytics_workspace.Project-law.id
 
   log {
