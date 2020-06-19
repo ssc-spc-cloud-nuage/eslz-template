@@ -11,7 +11,6 @@ module "SWJ-01" {
   admin_password          = var.vmConfigs.SWJ-01.admin_password
   vm_size                 = var.vmConfigs.SWJ-01.vm_size
   license_type            = "Windows_Server"
-  monitoringAgent         = azurerm_log_analytics_workspace.Project-law
-  public_ip               = false
+  dependancyAgent         = true
   tags                    = var.tags
 }

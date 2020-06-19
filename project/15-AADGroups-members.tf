@@ -1,5 +1,5 @@
 data "azuread_group" "Subscription_Contributors" {
-  name = "${local.prefix}_${var.project}-Contributors"
+  name = "${local.prefix}_${var.project}_Subscription_Contributors"
 }
 
 data "azuread_users" "Subscription_Contributors" {
@@ -22,7 +22,7 @@ resource "azuread_group_member" "SP_Subscription_Contributors-Members" {
 }
 
 data "azuread_group" "Subscription_Readers" {
-  name = "${local.prefix}_${var.project}-Readers"
+  name = "${local.prefix}_${var.project}_Subscription_Readers"
 }
 
 data "azuread_users" "Subscription_Readers" {

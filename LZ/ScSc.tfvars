@@ -1,9 +1,9 @@
 tags = {
   "classification"    = "pbmm"
-  "contact"           = "bernard.maltais@canada.ca; john.nephin@canada.ca"
+  "contact"           = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
   "costcentre"        = "566811"
   "env"               = "sandbox"
-  "owner"             = "bernard.maltais@canada.ca; john.nephin@canada.ca"
+  "owner"             = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
   "cloudusageprofile" = "3"
   "branch"            = "CIO"
 }

@@ -1,7 +1,0 @@
-resource "azurerm_powerbi_embedded" "Project-pbie" {
-  name                = "${var.env}-BYOD-pbie"
-  resourceGroup         = data.azurerm_resource_group.Project-rg
-  location              = data.azurerm_resource_group.Project-rg.location
-  sku_name            = "A1"
-  administrators      = var.contributorNames
-}
