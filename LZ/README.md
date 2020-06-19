@@ -1,16 +1,25 @@
-# ESLZ (Enterprise Scale Landing Zone) project blueprint
+# ESLZ (Enterprise Scale Landing Zone) LZ blueprint
 
 ## Description
 
-This blueprint will deploy the project specific resources needed to support the Client Project.
+This blueprint will deploy the project specific Landing Zone resources needed to support the ESLZ.
 
 The following resources will be deployed by this blueprint:
 
-1. Project resource group
-2. Azure Active Directory group members for the project
-3. NSG (Network Security Group) for MAZ, PAZ, OZ and RZ
-4. Project storage account
-5. Demo linux management VM
+1. Azure Active Directory Security Groups for Owners, Contributors and Readers
+2. Subscription IAM (RBAC) using the groups defined above
+3. LZ Resource Groups
+4. Log Analytics Workspace
+5. Storage Accounts
+6. VNET
+7. Routes
+8. Subnets (MAZ, PAZ, OZ, RZ)
+9. Keyvault
+10. Private DNS
+11. Public DNS
+12. Automation Account
+13. Update Management Schedules for Linux and Windows VMs
+14. Jump Server
 
 ## Deployment
 
@@ -20,9 +29,9 @@ The following resources will be deployed by this blueprint:
 ```sh
 source <some path to updated sp file>/ScSc.sp
 ```
-4. Deploy project specific resources by running the following commands:
+4. Deploy the Landing Zone resources by running the following commands:
 ```sh
-cd ../project
+cd ../LZ
 ./terraform-init.sh
 ./terraform-apply-ScSc.sh
 ```
