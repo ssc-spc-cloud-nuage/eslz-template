@@ -16,7 +16,19 @@ location = "canadacentral"
 
 Subscription_AADGroup_Owners_ids = [
   "446fe20e-1b5c-45fc-a04e-5ae7cfb66684", # Bernard Maltais
-  "d4decfde-8300-4fa4-aa36-7c22bf22a868",  # John Nephin
-  "bb294f5d-fece-4d3a-a187-7f98cb64e478", # Bernard Maltais SP
-  "2000c7f5-0f8d-4a45-a65d-d70dc3edcac3"  # John Nephin SP
+  "d4decfde-8300-4fa4-aa36-7c22bf22a868", # John Nephin
+  "aea74c39-1a88-47f5-8c31-a6d0c1173aa3"  # Louis-Eric Tremblay
 ]
+
+Project-vnet = [
+  "172.16.128.0/20"
+]
+Project-subnets = {
+  PAZ = "172.16.132.0/26"
+  OZ  = "172.16.132.64/26"
+  RZ  = "172.16.132.128/26"
+}
+Landing-Zone-Next-Hop = "172.168.3.22"
+RDS-Gateway      = "10.101.16.4"
+
+domain = "eslz.sb.ciso.ssc-spc.gc.ca"

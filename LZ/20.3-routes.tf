@@ -1,10 +1,10 @@
 resource azurerm_route_table Global-rt {
-  name                = "${var.env}CNR-${var.group}-rt"
+  name                = "${var.env}CNR-${var.group}_${var.project}_Global-rt"
   location            = azurerm_resource_group.Network-rg.location
   resource_group_name = azurerm_resource_group.Network-rg.name
   route {
     name           = "local_vnet-route"
-    address_prefix = var.Core-vnet
+    address_prefix = var.Project-vnet[0]
     next_hop_type  = "VnetLocal"
   }
   
