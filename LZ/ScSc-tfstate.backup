@@ -1,7 +1,7 @@
 {
   "version": 4,
   "terraform_version": "0.12.26",
-  "serial": 19,
+  "serial": 24,
   "lineage": "b25a6488-229b-babb-5eea-bb890d56886b",
   "outputs": {},
   "resources": [
@@ -15,11 +15,39 @@
           "schema_version": 0,
           "attributes": {
             "client_id": "90ed0100-cbdd-4c6b-b7f7-3f2e0422e031",
-            "id": "2020-06-19 02:12:58.0451499 +0000 UTC",
+            "id": "2020-06-19 13:08:37.2401084 +0000 UTC",
             "object_id": "bb294f5d-fece-4d3a-a187-7f98cb64e478",
             "subscription_id": "c00dd93b-0f2b-4cd6-8273-e1038dcbd60e",
             "tenant_id": "4e1ed7ae-062e-4ec8-b989-de8cbd452c54",
             "timeouts": null
+          }
+        }
+      ]
+    },
+    {
+      "module": "module.SWJ-01",
+      "mode": "data",
+      "type": "azurerm_subnet",
+      "name": "subnet",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address_prefix": "172.16.132.64/26",
+            "address_prefixes": [
+              "172.16.132.64/26"
+            ],
+            "enforce_private_link_endpoint_network_policies": false,
+            "enforce_private_link_service_network_policies": false,
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_OZ-snet",
+            "name": "ScScCNR-CIO_ESLZ_OZ-snet",
+            "network_security_group_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/networkSecurityGroups/ScScCNR-CIO_ESLZ_OZ-nsg",
+            "resource_group_name": "ScSc-CIO_ESLZ_Network-rg",
+            "route_table_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/routeTables/ScScCNR-CIO_ESLZ_Global-rt",
+            "service_endpoints": [],
+            "timeouts": null,
+            "virtual_network_name": "ScScCNR-CIO_ESLZ-vnet"
           }
         }
       ]
@@ -641,6 +669,15 @@
       ]
     },
     {
+      "module": "module.SWJ-01",
+      "mode": "managed",
+      "type": "azurerm_managed_disk",
+      "name": "data_disks",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
       "mode": "managed",
       "type": "azurerm_monitor_diagnostic_setting",
       "name": "Project-kv-logs",
@@ -966,6 +1003,171 @@
             "azurerm_automation_account.Project-aa",
             "azurerm_log_analytics_workspace.Project-law",
             "azurerm_resource_group.AutomationAccount-rg"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.SWJ-01",
+      "mode": "managed",
+      "type": "azurerm_network_interface",
+      "name": "NIC",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "applied_dns_servers": [],
+            "dns_servers": [],
+            "enable_accelerated_networking": false,
+            "enable_ip_forwarding": false,
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg/providers/Microsoft.Network/networkInterfaces/ScScSWJ-ESLZ01-nic1",
+            "internal_dns_name_label": "",
+            "internal_domain_name_suffix": "lnqnhuxgz0culffeafymxe35td.ux.internal.cloudapp.net",
+            "ip_configuration": [
+              {
+                "name": "ipconfig1",
+                "primary": true,
+                "private_ip_address": "172.16.132.69",
+                "private_ip_address_allocation": "Dynamic",
+                "private_ip_address_version": "IPv4",
+                "public_ip_address_id": "",
+                "subnet_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_OZ-snet"
+              }
+            ],
+            "location": "canadacentral",
+            "mac_address": "00-0D-3A-E8-6C-DF",
+            "name": "ScScSWJ-ESLZ01-nic1",
+            "private_ip_address": "172.16.132.69",
+            "private_ip_addresses": [
+              "172.16.132.69"
+            ],
+            "resource_group_name": "ScSc-CIO_ESLZ_Management-rg",
+            "tags": {
+              "branch": "CIO",
+              "classification": "pbmm",
+              "cloudusageprofile": "3",
+              "contact": "bernard.maltais@canada.ca; john.nephin@canada.ca",
+              "costcentre": "566811",
+              "env": "sandbox",
+              "owner": "bernard.maltais@canada.ca; john.nephin@canada.ca"
+            },
+            "timeouts": null,
+            "virtual_machine_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg/providers/Microsoft.Compute/virtualMachines/ScScSWJ-ESLZ01"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_resource_group.Management-rg",
+            "module.SWJ-01.azurerm_public_ip.VM-EXT-PubIP"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.SWJ-01",
+      "mode": "managed",
+      "type": "azurerm_network_interface_security_group_association",
+      "name": "nic-nsg",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg/providers/Microsoft.Network/networkInterfaces/ScScSWJ-ESLZ01-nic1|/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg/providers/Microsoft.Network/networkSecurityGroups/ScScSWJ-ESLZ01-nsg",
+            "network_interface_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg/providers/Microsoft.Network/networkInterfaces/ScScSWJ-ESLZ01-nic1",
+            "network_security_group_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg/providers/Microsoft.Network/networkSecurityGroups/ScScSWJ-ESLZ01-nsg",
+            "timeouts": null
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_resource_group.Management-rg",
+            "module.SWJ-01.azurerm_network_interface.NIC",
+            "module.SWJ-01.azurerm_network_security_group.NSG",
+            "module.SWJ-01.azurerm_public_ip.VM-EXT-PubIP"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.SWJ-01",
+      "mode": "managed",
+      "type": "azurerm_network_security_group",
+      "name": "NSG",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg/providers/Microsoft.Network/networkSecurityGroups/ScScSWJ-ESLZ01-nsg",
+            "location": "canadacentral",
+            "name": "ScScSWJ-ESLZ01-nsg",
+            "resource_group_name": "ScSc-CIO_ESLZ_Management-rg",
+            "security_rule": [
+              {
+                "access": "Allow",
+                "description": "Allow all in",
+                "destination_address_prefix": "*",
+                "destination_address_prefixes": [],
+                "destination_application_security_group_ids": [],
+                "destination_port_range": "",
+                "destination_port_ranges": [
+                  "0-65535"
+                ],
+                "direction": "Inbound",
+                "name": "AllowAllInbound",
+                "priority": 100,
+                "protocol": "*",
+                "source_address_prefix": "*",
+                "source_address_prefixes": [],
+                "source_application_security_group_ids": [],
+                "source_port_range": "",
+                "source_port_ranges": [
+                  "0-65535"
+                ]
+              },
+              {
+                "access": "Allow",
+                "description": "Allow all out",
+                "destination_address_prefix": "*",
+                "destination_address_prefixes": [],
+                "destination_application_security_group_ids": [],
+                "destination_port_range": "",
+                "destination_port_ranges": [
+                  "0-65535"
+                ],
+                "direction": "Outbound",
+                "name": "AllowAllOutbound",
+                "priority": 105,
+                "protocol": "*",
+                "source_address_prefix": "*",
+                "source_address_prefixes": [],
+                "source_application_security_group_ids": [],
+                "source_port_range": "",
+                "source_port_ranges": [
+                  "0-65535"
+                ]
+              }
+            ],
+            "tags": {
+              "branch": "CIO",
+              "classification": "pbmm",
+              "cloudusageprofile": "3",
+              "contact": "bernard.maltais@canada.ca; john.nephin@canada.ca",
+              "costcentre": "566811",
+              "env": "sandbox",
+              "owner": "bernard.maltais@canada.ca; john.nephin@canada.ca"
+            },
+            "timeouts": null
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_resource_group.Management-rg"
           ]
         }
       ]
@@ -1590,7 +1792,7 @@
             "max_number_of_virtual_network_links": 1000,
             "max_number_of_virtual_network_links_with_registration": 100,
             "name": "eslz.local",
-            "number_of_record_sets": 1,
+            "number_of_record_sets": 2,
             "resource_group_name": "scsc-cio_eslz_dns-rg",
             "tags": {
               "branch": "CIO",
@@ -1636,6 +1838,15 @@
           ]
         }
       ]
+    },
+    {
+      "module": "module.SWJ-01",
+      "mode": "managed",
+      "type": "azurerm_public_ip",
+      "name": "VM-EXT-PubIP",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
     },
     {
       "mode": "managed",
@@ -1730,6 +1941,33 @@
             "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Logs-rg",
             "location": "canadacentral",
             "name": "ScSc-CIO_ESLZ_Logs-rg",
+            "tags": {
+              "branch": "CIO",
+              "classification": "pbmm",
+              "cloudusageprofile": "3",
+              "contact": "bernard.maltais@canada.ca; john.nephin@canada.ca",
+              "costcentre": "566811",
+              "env": "sandbox",
+              "owner": "bernard.maltais@canada.ca; john.nephin@canada.ca"
+            },
+            "timeouts": null
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo1NDAwMDAwMDAwMDAwLCJkZWxldGUiOjU0MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjo1NDAwMDAwMDAwMDAwfX0="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_resource_group",
+      "name": "Management-rg",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg",
+            "location": "canadacentral",
+            "name": "ScSc-CIO_ESLZ_Management-rg",
             "tags": {
               "branch": "CIO",
               "classification": "pbmm",
@@ -2015,6 +2253,15 @@
       ]
     },
     {
+      "module": "module.SWJ-01",
+      "mode": "managed",
+      "type": "azurerm_storage_account",
+      "name": "boot_diagnostic",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
       "mode": "managed",
       "type": "azurerm_subnet",
       "name": "Project_OZ-snet",
@@ -2249,10 +2496,10 @@
       ]
     },
     {
-      "module": "module.windows-weekly-updates",
+      "module": "module.SWJ-01",
       "mode": "managed",
       "type": "azurerm_template_deployment",
-      "name": "linux",
+      "name": "autoshutdown",
       "each": "list",
       "provider": "provider.azurerm",
       "instances": []
@@ -2292,6 +2539,24 @@
       "module": "module.windows-weekly-updates",
       "mode": "managed",
       "type": "azurerm_template_deployment",
+      "name": "linux",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
+      "module": "module.linux-weekly-updates",
+      "mode": "managed",
+      "type": "azurerm_template_deployment",
+      "name": "windows",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
+      "module": "module.windows-weekly-updates",
+      "mode": "managed",
+      "type": "azurerm_template_deployment",
       "name": "windows",
       "each": "list",
       "provider": "provider.azurerm",
@@ -2320,13 +2585,108 @@
       ]
     },
     {
-      "module": "module.linux-weekly-updates",
+      "module": "module.SWJ-01",
       "mode": "managed",
-      "type": "azurerm_template_deployment",
-      "name": "windows",
+      "type": "azurerm_virtual_machine_data_disk_attachment",
+      "name": "data_disks",
       "each": "list",
       "provider": "provider.azurerm",
       "instances": []
+    },
+    {
+      "module": "module.SWJ-01",
+      "mode": "managed",
+      "type": "azurerm_virtual_machine_extension",
+      "name": "AADLoginForWindows",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
+      "module": "module.SWJ-01",
+      "mode": "managed",
+      "type": "azurerm_virtual_machine_extension",
+      "name": "AzureDiskEncryption",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
+      "module": "module.SWJ-01",
+      "mode": "managed",
+      "type": "azurerm_virtual_machine_extension",
+      "name": "CustomScriptExtension",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
+      "module": "module.SWJ-01",
+      "mode": "managed",
+      "type": "azurerm_virtual_machine_extension",
+      "name": "DAAgentForWindows",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
+      "module": "module.SWJ-01",
+      "mode": "managed",
+      "type": "azurerm_virtual_machine_extension",
+      "name": "DomainJoinExtension",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
+      "module": "module.SWJ-01",
+      "mode": "managed",
+      "type": "azurerm_virtual_machine_extension",
+      "name": "IaaSAntimalware",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
+      "module": "module.SWJ-01",
+      "mode": "managed",
+      "type": "azurerm_virtual_machine_extension",
+      "name": "MicrosoftMonitoringAgent",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "auto_upgrade_minor_version": true,
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg/providers/Microsoft.Compute/virtualMachines/ScScSWJ-ESLZ01/extensions/MicrosoftMonitoringAgent",
+            "name": "MicrosoftMonitoringAgent",
+            "protected_settings": "        {\n          \"workspaceKey\": \"VjnHaSrNDk+0ANzl8BsJKbs1Ln1SKf4ltarZeMytDtqZZCKyq0Mjr/5GStVogyd2kQ5uq9sBDm+ghzjtSuMh0g==\"\n        }\n",
+            "publisher": "Microsoft.EnterpriseCloud.Monitoring",
+            "settings": "{\"workspaceId\":\"be05a1f2-9864-4cd9-b345-857c9d1bee09\"}",
+            "tags": {},
+            "timeouts": null,
+            "type": "MicrosoftMonitoringAgent",
+            "type_handler_version": "1.0",
+            "virtual_machine_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg/providers/Microsoft.Compute/virtualMachines/ScScSWJ-ESLZ01"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_log_analytics_workspace.Project-law",
+            "azurerm_resource_group.Management-rg",
+            "module.SWJ-01.azurerm_network_interface.NIC",
+            "module.SWJ-01.azurerm_public_ip.VM-EXT-PubIP",
+            "module.SWJ-01.azurerm_storage_account.boot_diagnostic",
+            "module.SWJ-01.azurerm_virtual_machine_data_disk_attachment.data_disks",
+            "module.SWJ-01.azurerm_virtual_machine_extension.AADLoginForWindows",
+            "module.SWJ-01.azurerm_virtual_machine_extension.CustomScriptExtension",
+            "module.SWJ-01.azurerm_virtual_machine_extension.DAAgentForWindows",
+            "module.SWJ-01.azurerm_virtual_machine_extension.DomainJoinExtension",
+            "module.SWJ-01.azurerm_windows_virtual_machine.VM"
+          ]
+        }
+      ]
     },
     {
       "mode": "managed",
@@ -2381,6 +2741,98 @@
           "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
           "dependencies": [
             "azurerm_resource_group.Network-rg"
+          ]
+        }
+      ]
+    },
+    {
+      "module": "module.SWJ-01",
+      "mode": "managed",
+      "type": "azurerm_windows_virtual_machine",
+      "name": "VM",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "additional_capabilities": [],
+            "additional_unattend_content": [],
+            "admin_password": "tmp-Canada123!",
+            "admin_username": "azureadmin",
+            "allow_extension_operations": true,
+            "availability_set_id": "",
+            "boot_diagnostics": [],
+            "computer_name": "ScScSWJ-ESLZ01",
+            "custom_data": null,
+            "dedicated_host_id": "",
+            "enable_automatic_updates": true,
+            "eviction_policy": "Deallocate",
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg/providers/Microsoft.Compute/virtualMachines/ScScSWJ-ESLZ01",
+            "identity": [],
+            "license_type": "Windows_Server",
+            "location": "canadacentral",
+            "max_bid_price": -1,
+            "name": "ScScSWJ-ESLZ01",
+            "network_interface_ids": [
+              "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg/providers/Microsoft.Network/networkInterfaces/ScScSWJ-ESLZ01-nic1"
+            ],
+            "os_disk": [
+              {
+                "caching": "ReadWrite",
+                "diff_disk_settings": [],
+                "disk_encryption_set_id": "",
+                "disk_size_gb": 127,
+                "name": "ScScSWJ-ESLZ01-osdisk1",
+                "storage_account_type": "Standard_LRS",
+                "write_accelerator_enabled": false
+              }
+            ],
+            "plan": [],
+            "priority": "Spot",
+            "private_ip_address": "172.16.132.69",
+            "private_ip_addresses": [
+              "172.16.132.69"
+            ],
+            "provision_vm_agent": true,
+            "proximity_placement_group_id": "",
+            "public_ip_address": "",
+            "public_ip_addresses": [],
+            "resource_group_name": "ScSc-CIO_ESLZ_Management-rg",
+            "secret": [],
+            "size": "Standard_D2s_v3",
+            "source_image_id": "",
+            "source_image_reference": [
+              {
+                "offer": "WindowsServer",
+                "publisher": "MicrosoftWindowsServer",
+                "sku": "2016-Datacenter",
+                "version": "latest"
+              }
+            ],
+            "tags": {
+              "branch": "CIO",
+              "classification": "pbmm",
+              "cloudusageprofile": "3",
+              "contact": "bernard.maltais@canada.ca; john.nephin@canada.ca",
+              "costcentre": "566811",
+              "env": "sandbox",
+              "owner": "bernard.maltais@canada.ca; john.nephin@canada.ca"
+            },
+            "timeouts": null,
+            "timezone": "",
+            "virtual_machine_id": "ec565e18-c9bc-441b-a6ba-218e4ebec69b",
+            "virtual_machine_scale_set_id": "",
+            "winrm_listener": [],
+            "zone": ""
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoyNzAwMDAwMDAwMDAwLCJkZWxldGUiOjI3MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoyNzAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_resource_group.Management-rg",
+            "module.SWJ-01.azurerm_network_interface.NIC",
+            "module.SWJ-01.azurerm_public_ip.VM-EXT-PubIP",
+            "module.SWJ-01.azurerm_storage_account.boot_diagnostic"
           ]
         }
       ]

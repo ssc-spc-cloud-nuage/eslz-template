@@ -14,4 +14,5 @@ variable "Landing-Zone-Next-Hop" {}
 variable "RDS-Gateway" {}
 
 variable "domain" {}
-variable "privatedomain" {}
+
+variable "vmConfigs" {}

@@ -26,6 +26,16 @@ data "azurerm_subnet" "Project_RZ-snet" {
   resource_group_name  = "${local.prefix}_Network-rg"
 }
 
-data "azurerm_resource_group" "Project-rg" {
-  name = "${var.env}-${var.group}_${var.project}-rg"
+data azurerm_log_analytics_workspace Project-law {
+  name = var.logAnalyticsWorkspaceName
+  resource_group_name = var.logAnalyticsWorkspaceResourceGroupName
+}
+
+data azurerm_resource_group Keyvault-rg {
+  name = "${local.prefix}_${var.project}_Keyvault-rg"
+}
+
+data azurerm_key_vault Project-kv {
+  name                = "${substr("${var.env}CKV-${var.group}-${var.project}-${substr(sha1("${data.azurerm_resource_group.Keyvault-rg.id}"), 0, 8)}", 0, 21)}-kv"
+  resource_group_name = data.azurerm_resource_group.Keyvault-rg.name
 }

@@ -1,5 +1,5 @@
 resource azurerm_dns_zone zone1 {
-  name                = var.domain
+  name                = var.domain.public.name
   resource_group_name = azurerm_resource_group.DNS-rg.name
   tags                = var.tags
 }

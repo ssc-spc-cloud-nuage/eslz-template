@@ -31,8 +31,33 @@ Project-subnets = {
 Landing-Zone-Next-Hop = "172.168.3.22"
 RDS-Gateway           = "10.101.16.4"
 
-domain = "eslz.sb.ciso.ssc-spc.gc.ca"
-privatedomain = {
-  name                 = "eslz.local"
-  registration_enabled = true # Set to true if auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled?
+domain = {
+  public = {
+    name = "eslz.sb.ciso.ssc-spc.gc.ca"
+  }
+  private = {
+    name                 = "eslz.local"
+    registration_enabled = true # Set to true if auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled?
+  }
+}
+
+vmConfigs = {
+  /*
+  # Template for Linux server variables
+
+  Server-Name = {
+    deploy = bool # Optional. Default is true
+    admin_username       = string # Optional. Default is "azureadmin" 
+    admin_password       = string # Required
+    os_managed_disk_type = string # Optional. Default is "StandardSSD_LRS"
+    vm_size              = string # Required. Example: "Standard_D2s_v3"
+    priority             = string # Optional. Default is "Regular". possible values are "Regular" or "Spot"
+  }
+  */
+
+  SWJ-01 = {
+    admin_password = "tmp-Canada123!"
+    vm_size        = "Standard_D2s_v3"
+    priority       = "Spot"
+  }
 }

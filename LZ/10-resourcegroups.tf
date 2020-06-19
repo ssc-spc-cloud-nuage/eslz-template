@@ -29,3 +29,9 @@ resource "azurerm_resource_group" "DNS-rg" {
   location = var.location
   tags     = var.tags
 }
+
+resource "azurerm_resource_group" "Management-rg" {
+  name     = "${local.prefix}_${var.project}_Management-rg"
+  location = var.location
+  tags     = var.tags
+}
