@@ -1,7 +1,7 @@
 {
   "version": 4,
   "terraform_version": "0.12.26",
-  "serial": 29,
+  "serial": 31,
   "lineage": "b25a6488-229b-babb-5eea-bb890d56886b",
   "outputs": {},
   "resources": [
@@ -15,7 +15,7 @@
           "schema_version": 0,
           "attributes": {
             "client_id": "90ed0100-cbdd-4c6b-b7f7-3f2e0422e031",
-            "id": "2020-06-19 15:04:45.0605105 +0000 UTC",
+            "id": "2020-06-19 15:51:20.2003415 +0000 UTC",
             "object_id": "bb294f5d-fece-4d3a-a187-7f98cb64e478",
             "subscription_id": "c00dd93b-0f2b-4cd6-8273-e1038dcbd60e",
             "tenant_id": "4e1ed7ae-062e-4ec8-b989-de8cbd452c54",
@@ -34,15 +34,15 @@
         {
           "schema_version": 0,
           "attributes": {
-            "address_prefix": "172.16.132.64/26",
+            "address_prefix": "172.16.132.192/26",
             "address_prefixes": [
-              "172.16.132.64/26"
+              "172.16.132.192/26"
             ],
             "enforce_private_link_endpoint_network_policies": false,
             "enforce_private_link_service_network_policies": false,
-            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_OZ-snet",
-            "name": "ScScCNR-CIO_ESLZ_OZ-snet",
-            "network_security_group_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/networkSecurityGroups/ScScCNR-CIO_ESLZ_OZ-nsg",
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_MAZ-snet",
+            "name": "ScScCNR-CIO_ESLZ_MAZ-snet",
+            "network_security_group_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/networkSecurityGroups/ScScCNR-CIO_ESLZ_MAZ-nsg",
             "resource_group_name": "ScSc-CIO_ESLZ_Network-rg",
             "route_table_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/routeTables/ScScCNR-CIO_ESLZ_Global-rt",
             "service_endpoints": [],
@@ -888,7 +888,7 @@
                 "private_ip_address_allocation": "Dynamic",
                 "private_ip_address_version": "IPv4",
                 "public_ip_address_id": "",
-                "subnet_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_OZ-snet"
+                "subnet_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_MAZ-snet"
               }
             ],
             "location": "canadacentral",
@@ -1040,7 +1040,7 @@
             "max_number_of_virtual_network_links": 1000,
             "max_number_of_virtual_network_links_with_registration": 100,
             "name": "eslz.local",
-            "number_of_record_sets": 3,
+            "number_of_record_sets": 2,
             "resource_group_name": "scsc-cio_eslz_dns-rg",
             "tags": {
               "branch": "CIO",
@@ -1359,6 +1359,7 @@
               }
             ],
             "subnets": [
+              "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_MAZ-snet",
               "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_OZ-snet",
               "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_PAZ-snet",
               "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_RZ-snet"
@@ -1506,6 +1507,37 @@
     {
       "mode": "managed",
       "type": "azurerm_subnet",
+      "name": "Project_MAZ-snet",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address_prefix": "172.16.132.192/26",
+            "address_prefixes": [
+              "172.16.132.192/26"
+            ],
+            "delegation": [],
+            "enforce_private_link_endpoint_network_policies": false,
+            "enforce_private_link_service_network_policies": false,
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_MAZ-snet",
+            "name": "ScScCNR-CIO_ESLZ_MAZ-snet",
+            "resource_group_name": "ScSc-CIO_ESLZ_Network-rg",
+            "service_endpoints": [],
+            "timeouts": null,
+            "virtual_network_name": "ScScCNR-CIO_ESLZ-vnet"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_resource_group.Network-rg",
+            "azurerm_virtual_network.Project-vnet"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_subnet",
       "name": "Project_OZ-snet",
       "provider": "provider.azurerm",
       "instances": [
@@ -1591,6 +1623,30 @@
           "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
           "dependencies": [
             "azurerm_resource_group.Network-rg",
+            "azurerm_virtual_network.Project-vnet"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_subnet_route_table_association",
+      "name": "Project_MAZ-rta",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_MAZ-snet",
+            "route_table_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/routeTables/ScScCNR-CIO_ESLZ_Global-rt",
+            "subnet_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_MAZ-snet",
+            "timeouts": null
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_resource_group.Network-rg",
+            "azurerm_route_table.Global-rt",
+            "azurerm_subnet.Project_MAZ-snet",
             "azurerm_virtual_network.Project-vnet"
           ]
         }
@@ -1809,7 +1865,7 @@
             "protected_settings": null,
             "publisher": "Microsoft.Azure.Monitoring.DependencyAgent",
             "settings": null,
-            "tags": null,
+            "tags": {},
             "timeouts": null,
             "type": "DependencyAgentWindows",
             "type_handler_version": "9.5",
@@ -1884,6 +1940,12 @@
                 "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_RZ-snet",
                 "name": "ScScCNR-CIO_ESLZ_RZ-snet",
                 "security_group": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/networkSecurityGroups/ScScCNR-CIO_ESLZ_RZ-nsg"
+              },
+              {
+                "address_prefix": "172.16.132.192/26",
+                "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_MAZ-snet",
+                "name": "ScScCNR-CIO_ESLZ_MAZ-snet",
+                "security_group": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/networkSecurityGroups/ScScCNR-CIO_ESLZ_MAZ-nsg"
               },
               {
                 "address_prefix": "172.16.132.64/26",

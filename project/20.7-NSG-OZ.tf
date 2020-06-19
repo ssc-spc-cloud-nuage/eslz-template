@@ -26,13 +26,13 @@ resource "azurerm_network_security_group" "Project_OZ-nsg" {
     destination_address_prefix = "*"
   }
   security_rule {
-    name                       = "AllowAllOnLocalSubnet"
+    name                       = "AllowAllOnMAZSubnet"
     access                     = "Allow"
     priority                   = "200"
     protocol                   = "*"
     direction                  = "Inbound"
     source_port_range          = "*"
-    source_address_prefix      = var.Project-subnets.OZ
+    source_address_prefixes    = data.azurerm_subnet.Project_MAZ-snet.address_prefixes
     destination_port_range     = "*"
     destination_address_prefix = "*" # Implicit local subnet destination
   }
@@ -43,7 +43,7 @@ resource "azurerm_network_security_group" "Project_OZ-nsg" {
     protocol                   = "*"
     direction                  = "Inbound"
     source_port_range          = "*"
-    source_address_prefix      = var.Project-subnets.PAZ
+    source_address_prefixes    = data.azurerm_subnet.Project_PAZ-snet.address_prefixes
     destination_port_range     = "*"
     destination_address_prefix = "*"
   }
@@ -54,7 +54,7 @@ resource "azurerm_network_security_group" "Project_OZ-nsg" {
     protocol                   = "*"
     direction                  = "Inbound"
     source_port_range          = "*"
-    source_address_prefix      = var.Project-subnets.OZ
+    source_address_prefixes    = data.azurerm_subnet.Project_OZ-snet.address_prefixes
     destination_port_range     = "*"
     destination_address_prefix = "*"
   }
@@ -65,7 +65,7 @@ resource "azurerm_network_security_group" "Project_OZ-nsg" {
     protocol                   = "*"
     direction                  = "Inbound"
     source_port_range          = "*"
-    source_address_prefix      = var.Project-subnets.RZ
+    source_address_prefixes    = data.azurerm_subnet.Project_RZ-snet.address_prefixes
     destination_port_range     = "*"
     destination_address_prefix = "*"
   }

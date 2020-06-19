@@ -3,7 +3,7 @@ module "SWJ-01" {
   name                    = "${var.env}SWJ-${var.project}01"
   resource_group          = azurerm_resource_group.Management-rg
   location                = azurerm_resource_group.Management-rg.location
-  nic_subnetName          = azurerm_subnet.Project_OZ-snet.name
+  nic_subnetName          = azurerm_subnet.Project_MAZ-snet.name
   nic_vnetName            = azurerm_virtual_network.Project-vnet.name
   nic_resource_group_name = azurerm_resource_group.Network-rg.name
   priority                = try(var.vmConfigs.SWJ-01.priority, "Regular")

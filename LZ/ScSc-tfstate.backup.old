@@ -1,7 +1,7 @@
 {
   "version": 4,
   "terraform_version": "0.12.26",
-  "serial": 28,
+  "serial": 30,
   "lineage": "b25a6488-229b-babb-5eea-bb890d56886b",
   "outputs": {},
   "resources": [
@@ -15,7 +15,7 @@
           "schema_version": 0,
           "attributes": {
             "client_id": "90ed0100-cbdd-4c6b-b7f7-3f2e0422e031",
-            "id": "2020-06-19 14:13:08.9163074 +0000 UTC",
+            "id": "2020-06-19 15:35:48.125176 +0000 UTC",
             "object_id": "bb294f5d-fece-4d3a-a187-7f98cb64e478",
             "subscription_id": "c00dd93b-0f2b-4cd6-8273-e1038dcbd60e",
             "tenant_id": "4e1ed7ae-062e-4ec8-b989-de8cbd452c54",
@@ -42,9 +42,9 @@
             "enforce_private_link_service_network_policies": false,
             "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_OZ-snet",
             "name": "ScScCNR-CIO_ESLZ_OZ-snet",
-            "network_security_group_id": "",
+            "network_security_group_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/networkSecurityGroups/ScScCNR-CIO_ESLZ_OZ-nsg",
             "resource_group_name": "ScSc-CIO_ESLZ_Network-rg",
-            "route_table_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/scsc-cio_eslz_network-rg/providers/Microsoft.Network/routeTables/scsccnr-cio_eslz_global-rt",
+            "route_table_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/routeTables/ScScCNR-CIO_ESLZ_Global-rt",
             "service_endpoints": [],
             "timeouts": null,
             "virtual_network_name": "ScScCNR-CIO_ESLZ-vnet"
@@ -1040,7 +1040,7 @@
             "max_number_of_virtual_network_links": 1000,
             "max_number_of_virtual_network_links_with_registration": 100,
             "name": "eslz.local",
-            "number_of_record_sets": 2,
+            "number_of_record_sets": 3,
             "resource_group_name": "scsc-cio_eslz_dns-rg",
             "tags": {
               "branch": "CIO",
@@ -1356,12 +1356,6 @@
                 "name": "local_vnet-route",
                 "next_hop_in_ip_address": "",
                 "next_hop_type": "VnetLocal"
-              },
-              {
-                "address_prefix": "0.0.0.0/0",
-                "name": "default-route",
-                "next_hop_in_ip_address": "172.168.3.22",
-                "next_hop_type": "VirtualAppliance"
               }
             ],
             "subnets": [
@@ -1512,6 +1506,37 @@
     {
       "mode": "managed",
       "type": "azurerm_subnet",
+      "name": "Project_MAZ-snet",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "address_prefix": "172.16.132.192/26",
+            "address_prefixes": [
+              "172.16.132.192/26"
+            ],
+            "delegation": [],
+            "enforce_private_link_endpoint_network_policies": false,
+            "enforce_private_link_service_network_policies": false,
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_MAZ-snet",
+            "name": "ScScCNR-CIO_ESLZ_MAZ-snet",
+            "resource_group_name": "ScSc-CIO_ESLZ_Network-rg",
+            "service_endpoints": null,
+            "timeouts": null,
+            "virtual_network_name": "ScScCNR-CIO_ESLZ-vnet"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_resource_group.Network-rg",
+            "azurerm_virtual_network.Project-vnet"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_subnet",
       "name": "Project_OZ-snet",
       "provider": "provider.azurerm",
       "instances": [
@@ -1605,6 +1630,30 @@
     {
       "mode": "managed",
       "type": "azurerm_subnet_route_table_association",
+      "name": "Project_MAZ-rta",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_MAZ-snet",
+            "route_table_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/routeTables/ScScCNR-CIO_ESLZ_Global-rt",
+            "subnet_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_MAZ-snet",
+            "timeouts": null
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_resource_group.Network-rg",
+            "azurerm_route_table.Global-rt",
+            "azurerm_subnet.Project_MAZ-snet",
+            "azurerm_virtual_network.Project-vnet"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_subnet_route_table_association",
       "name": "Project_OZ-rta",
       "provider": "provider.azurerm",
       "instances": [
@@ -1682,6 +1731,15 @@
       "instances": []
     },
     {
+      "module": "module.windows-weekly-updates",
+      "mode": "managed",
+      "type": "azurerm_template_deployment",
+      "name": "linux",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
       "module": "module.linux-weekly-updates",
       "mode": "managed",
       "type": "azurerm_template_deployment",
@@ -1716,24 +1774,6 @@
       "module": "module.windows-weekly-updates",
       "mode": "managed",
       "type": "azurerm_template_deployment",
-      "name": "linux",
-      "each": "list",
-      "provider": "provider.azurerm",
-      "instances": []
-    },
-    {
-      "module": "module.linux-weekly-updates",
-      "mode": "managed",
-      "type": "azurerm_template_deployment",
-      "name": "windows",
-      "each": "list",
-      "provider": "provider.azurerm",
-      "instances": []
-    },
-    {
-      "module": "module.windows-weekly-updates",
-      "mode": "managed",
-      "type": "azurerm_template_deployment",
       "name": "windows",
       "each": "list",
       "provider": "provider.azurerm",
@@ -1760,6 +1800,15 @@
           ]
         }
       ]
+    },
+    {
+      "module": "module.linux-weekly-updates",
+      "mode": "managed",
+      "type": "azurerm_template_deployment",
+      "name": "windows",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
     },
     {
       "module": "module.SWJ-01",
@@ -1804,7 +1853,33 @@
       "name": "DAAgentForWindows",
       "each": "list",
       "provider": "provider.azurerm",
-      "instances": []
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "auto_upgrade_minor_version": true,
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg/providers/Microsoft.Compute/virtualMachines/ScScSWJ-ESLZ01/extensions/DAAgentForWindows",
+            "name": "DAAgentForWindows",
+            "protected_settings": null,
+            "publisher": "Microsoft.Azure.Monitoring.DependencyAgent",
+            "settings": null,
+            "tags": {},
+            "timeouts": null,
+            "type": "DependencyAgentWindows",
+            "type_handler_version": "9.5",
+            "virtual_machine_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg/providers/Microsoft.Compute/virtualMachines/ScScSWJ-ESLZ01"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "module.SWJ-01.azurerm_virtual_machine_data_disk_attachment.data_disks",
+            "module.SWJ-01.azurerm_virtual_machine_extension.AADLoginForWindows",
+            "module.SWJ-01.azurerm_virtual_machine_extension.CustomScriptExtension",
+            "module.SWJ-01.azurerm_virtual_machine_extension.DomainJoinExtension",
+            "module.SWJ-01.azurerm_windows_virtual_machine.VM"
+          ]
+        }
+      ]
     },
     {
       "module": "module.SWJ-01",
@@ -1831,39 +1906,7 @@
       "name": "MicrosoftMonitoringAgent",
       "each": "list",
       "provider": "provider.azurerm",
-      "instances": [
-        {
-          "index_key": 0,
-          "schema_version": 0,
-          "attributes": {
-            "auto_upgrade_minor_version": true,
-            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg/providers/Microsoft.Compute/virtualMachines/ScScSWJ-ESLZ01/extensions/MicrosoftMonitoringAgent",
-            "name": "MicrosoftMonitoringAgent",
-            "protected_settings": "        {\n          \"workspaceKey\": \"VjnHaSrNDk+0ANzl8BsJKbs1Ln1SKf4ltarZeMytDtqZZCKyq0Mjr/5GStVogyd2kQ5uq9sBDm+ghzjtSuMh0g==\"\n        }\n",
-            "publisher": "Microsoft.EnterpriseCloud.Monitoring",
-            "settings": "{\"workspaceId\":\"be05a1f2-9864-4cd9-b345-857c9d1bee09\"}",
-            "tags": {},
-            "timeouts": null,
-            "type": "MicrosoftMonitoringAgent",
-            "type_handler_version": "1.0",
-            "virtual_machine_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg/providers/Microsoft.Compute/virtualMachines/ScScSWJ-ESLZ01"
-          },
-          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
-          "dependencies": [
-            "azurerm_log_analytics_workspace.Project-law",
-            "azurerm_resource_group.Management-rg",
-            "module.SWJ-01.azurerm_network_interface.NIC",
-            "module.SWJ-01.azurerm_public_ip.VM-EXT-PubIP",
-            "module.SWJ-01.azurerm_storage_account.boot_diagnostic",
-            "module.SWJ-01.azurerm_virtual_machine_data_disk_attachment.data_disks",
-            "module.SWJ-01.azurerm_virtual_machine_extension.AADLoginForWindows",
-            "module.SWJ-01.azurerm_virtual_machine_extension.CustomScriptExtension",
-            "module.SWJ-01.azurerm_virtual_machine_extension.DAAgentForWindows",
-            "module.SWJ-01.azurerm_virtual_machine_extension.DomainJoinExtension",
-            "module.SWJ-01.azurerm_windows_virtual_machine.VM"
-          ]
-        }
-      ]
+      "instances": []
     },
     {
       "mode": "managed",
@@ -1901,7 +1944,7 @@
                 "address_prefix": "172.16.132.64/26",
                 "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/virtualNetworks/ScScCNR-CIO_ESLZ-vnet/subnets/ScScCNR-CIO_ESLZ_OZ-snet",
                 "name": "ScScCNR-CIO_ESLZ_OZ-snet",
-                "security_group": ""
+                "security_group": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Network-rg/providers/Microsoft.Network/networkSecurityGroups/ScScCNR-CIO_ESLZ_OZ-nsg"
               }
             ],
             "tags": {

@@ -10,9 +10,9 @@ module "SRV-linux-mgmt" {
     version   = "7.7.2020031212"
   }
   priority                = try(var.vmConfigs.SRV-linux-mgmt.priority, "Regular")
-  nic_subnetName          = data.azurerm_subnet.Project_OZ-snet.name
-  nic_vnetName            = data.azurerm_subnet.Project_OZ-snet.virtual_network_name
-  nic_resource_group_name = data.azurerm_subnet.Project_OZ-snet.resource_group_name
+  nic_subnetName          = data.azurerm_subnet.Project_MAZ-snet.name
+  nic_vnetName            = data.azurerm_subnet.Project_MAZ-snet.virtual_network_name
+  nic_resource_group_name = data.azurerm_subnet.Project_MAZ-snet.resource_group_name
   admin_username          = try(var.vmConfigs.SRV-linux-mgmt.admin_username, "azureadmin")
   admin_password          = var.vmConfigs.SRV-linux-mgmt.admin_password
   os_managed_disk_type    = try(var.vmConfigs.SRV-linux-mgmt.os_managed_disk_type, "StandardSSD_LRS")

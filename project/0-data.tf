@@ -22,6 +22,12 @@ data "azurerm_subnet" "Project_RZ-snet" {
   resource_group_name  = data.azurerm_resource_group.Network-rg.name
 }
 
+data azurerm_subnet Project_MAZ-snet {
+  name                 = "${var.env}CNR-${var.group}_${var.project}_MAZ-snet"
+  virtual_network_name = "${var.env}CNR-${var.group}_${var.project}-vnet"
+  resource_group_name  = data.azurerm_resource_group.Network-rg.name
+}
+
 data azurerm_log_analytics_workspace Project-law {
   name                = "${var.env}CLD-${var.group}-${var.project}-Project-law"
   resource_group_name = data.azurerm_resource_group.Logs-rg.name
