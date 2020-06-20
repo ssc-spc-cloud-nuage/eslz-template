@@ -44,5 +44,5 @@ launchpad /tf/launchpads/launchpad_opensource_light apply -var 'location=canadac
 6. Deploy the desired Landing Zone environment resources by running the following commands:
 ```sh
 cd /tf/caf/LZ
-./rover-apply-Sc<letter of the environment you want to deply>c.sh
+./rover-Sc<letter of the environment you want to deply>c.sh apply
 ```

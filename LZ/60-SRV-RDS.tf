@@ -29,8 +29,8 @@ resource "azurerm_monitor_diagnostic_setting" "SWJ-01-logs" {
     enabled  = true
 
     retention_policy {
-      days    = 0
-      enabled = false
+      enabled = true
+      days    = 30
     }
   }
 }

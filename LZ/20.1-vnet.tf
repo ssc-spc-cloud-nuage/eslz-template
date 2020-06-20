@@ -1,4 +1,4 @@
-resource "azurerm_virtual_network" "Project-vnet" {
+resource azurerm_virtual_network Project-vnet {
   name                = "${var.env}CNR-${var.group}_${var.project}-vnet"
   location            = azurerm_resource_group.Network-rg.location
   resource_group_name = azurerm_resource_group.Network-rg.name
@@ -16,7 +16,8 @@ resource "azurerm_monitor_diagnostic_setting" "Project-logs" {
     enabled  = true
 
     retention_policy {
-      enabled = false
+      enabled = true
+      days    = 30
     }
   }
 
@@ -25,7 +26,8 @@ resource "azurerm_monitor_diagnostic_setting" "Project-logs" {
     enabled  = true
 
     retention_policy {
-      enabled = false
+      enabled = true
+      days    = 30
     }
   }
 }

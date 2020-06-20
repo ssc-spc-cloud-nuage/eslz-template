@@ -24,7 +24,7 @@ resource "azurerm_monitor_diagnostic_setting" "Project-kv-logs" {
 
     retention_policy {
       enabled = true
-      days    = 365
+      days    = 30
     }
   }
 
@@ -34,7 +34,7 @@ resource "azurerm_monitor_diagnostic_setting" "Project-kv-logs" {
 
     retention_policy {
       enabled = true
-      days    = 365
+      days    = 30
     }
   }
 }

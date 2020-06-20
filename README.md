@@ -27,7 +27,7 @@ Once installed, open **Visual Studio Code** and install "**Remote Development**"
 
 Follow the README.md documentation in the LZ and project folders:
 
-1. [LZ](./LZ/README.md)
-2. [project](./LZ/README.md)
+1. [LZ blueprint](./LZ/README.md)
+2. [project blueprint](./project/README.md)
 
 If all went well you will now have deployed the solution in the subscription as specified in the `ScSc-CIO-EBAP.sp` file.

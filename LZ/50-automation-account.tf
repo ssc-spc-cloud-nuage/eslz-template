@@ -27,7 +27,8 @@ resource "azurerm_monitor_diagnostic_setting" "Project_automation_account-logs" 
     enabled  = true
 
     retention_policy {
-      enabled = false
+      enabled = true
+      days    = 30
     }
   }
 
@@ -36,7 +37,8 @@ resource "azurerm_monitor_diagnostic_setting" "Project_automation_account-logs" 
     enabled  = true
 
     retention_policy {
-      enabled = false
+      enabled = true
+      days    = 30
     }
   }
 
@@ -45,7 +47,8 @@ resource "azurerm_monitor_diagnostic_setting" "Project_automation_account-logs" 
     enabled  = true
 
     retention_policy {
-      enabled = false
+      enabled = true
+      days    = 30
     }
   }
 
@@ -54,8 +57,8 @@ resource "azurerm_monitor_diagnostic_setting" "Project_automation_account-logs" 
     enabled  = true
 
     retention_policy {
-      days    = 0
-      enabled = false
+      enabled = true
+      days    = 30
     }
   }
 }
