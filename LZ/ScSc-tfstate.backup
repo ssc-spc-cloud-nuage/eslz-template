@@ -1,7 +1,7 @@
 {
   "version": 4,
   "terraform_version": "0.12.26",
-  "serial": 33,
+  "serial": 40,
   "lineage": "b25a6488-229b-babb-5eea-bb890d56886b",
   "outputs": {},
   "resources": [
@@ -15,7 +15,7 @@
           "schema_version": 0,
           "attributes": {
             "client_id": "90ed0100-cbdd-4c6b-b7f7-3f2e0422e031",
-            "id": "2020-06-19 17:30:20.6698147 +0000 UTC",
+            "id": "2020-06-20 00:58:16.2191292 +0000 UTC",
             "object_id": "bb294f5d-fece-4d3a-a187-7f98cb64e478",
             "subscription_id": "c00dd93b-0f2b-4cd6-8273-e1038dcbd60e",
             "tenant_id": "4e1ed7ae-062e-4ec8-b989-de8cbd452c54",
@@ -862,6 +862,14 @@
       ]
     },
     {
+      "mode": "managed",
+      "type": "azurerm_network_ddos_protection_plan",
+      "name": "Project_ddos_protection_plan",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
       "module": "module.SWJ-01",
       "mode": "managed",
       "type": "azurerm_network_interface",
@@ -1098,6 +1106,14 @@
     },
     {
       "mode": "managed",
+      "type": "azurerm_recovery_services_vault",
+      "name": "Project-rv",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
+      "mode": "managed",
       "type": "azurerm_resource_group",
       "name": "AutomationAccount-rg",
       "provider": "provider.azurerm",
@@ -1108,6 +1124,33 @@
             "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_AutomationAccount-rg",
             "location": "canadacentral",
             "name": "ScSc-CIO_ESLZ_AutomationAccount-rg",
+            "tags": {
+              "branch": "CIO",
+              "classification": "pbmm",
+              "cloudusageprofile": "3",
+              "contact": "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca",
+              "costcentre": "566811",
+              "env": "sandbox",
+              "owner": "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
+            },
+            "timeouts": null
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo1NDAwMDAwMDAwMDAwLCJkZWxldGUiOjU0MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjo1NDAwMDAwMDAwMDAwfX0="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_resource_group",
+      "name": "Backups-rg",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Backups-rg",
+            "location": "canadacentral",
+            "name": "ScSc-CIO_ESLZ_Backups-rg",
             "tags": {
               "branch": "CIO",
               "classification": "pbmm",
@@ -1732,6 +1775,15 @@
       "instances": []
     },
     {
+      "module": "module.windows-weekly-updates",
+      "mode": "managed",
+      "type": "azurerm_template_deployment",
+      "name": "linux",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
       "module": "module.linux-weekly-updates",
       "mode": "managed",
       "type": "azurerm_template_deployment",
@@ -1766,24 +1818,6 @@
       "module": "module.windows-weekly-updates",
       "mode": "managed",
       "type": "azurerm_template_deployment",
-      "name": "linux",
-      "each": "list",
-      "provider": "provider.azurerm",
-      "instances": []
-    },
-    {
-      "module": "module.linux-weekly-updates",
-      "mode": "managed",
-      "type": "azurerm_template_deployment",
-      "name": "windows",
-      "each": "list",
-      "provider": "provider.azurerm",
-      "instances": []
-    },
-    {
-      "module": "module.windows-weekly-updates",
-      "mode": "managed",
-      "type": "azurerm_template_deployment",
       "name": "windows",
       "each": "list",
       "provider": "provider.azurerm",
@@ -1810,6 +1844,15 @@
           ]
         }
       ]
+    },
+    {
+      "module": "module.linux-weekly-updates",
+      "mode": "managed",
+      "type": "azurerm_template_deployment",
+      "name": "windows",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
     },
     {
       "module": "module.SWJ-01",

@@ -6,6 +6,8 @@ variable "project" {}
 
 variable "location" {}
 
+variable "deployOptionalFeatures" {}
+
 variable "Subscription_AADGroup_Owners_ids" {}
 
 variable "network" {}
@@ -15,3 +17,5 @@ variable "RDS-Gateway" {}
 variable "domain" {}
 
 variable "vmConfigs" {}
+
+variable "optionalFeaturesConfig" {}

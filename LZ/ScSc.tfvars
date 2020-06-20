@@ -14,6 +14,11 @@ project = "ESLZ"
 
 location = "canadacentral"
 
+deployOptionalFeatures = {
+  ddos_protection_plan    = false
+  recovery_services_vault = false
+}
+
 Subscription_AADGroup_Owners_ids = [
   "446fe20e-1b5c-45fc-a04e-5ae7cfb66684", # Bernard Maltais
   "d4decfde-8300-4fa4-aa36-7c22bf22a868", # John Nephin
@@ -60,5 +65,14 @@ vmConfigs = {
     admin_password = "tmp-Canada123!"
     vm_size        = "Standard_D2s_v3"
     priority       = "Spot"
+  }
+}
+
+## Optional Features variables ##
+
+optionalFeaturesConfig = {
+  recovery_services_vault = {
+    sku                 = "Standard" # Sets the vault's SKU. Possible values include: Standard, RS0
+    soft_delete_enabled = true       # Is soft delete enable for this Vault?
   }
 }

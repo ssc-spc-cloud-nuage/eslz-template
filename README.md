@@ -1,5 +1,9 @@
 # ESLZ (Enterprise Scale Landing Zone)
 
+## Note
+
+This blueprint is an alternative implementation of the project found here: https://github.com/Azure/caf-terraform-landingzones
+
 ## Requirements
 
 This deployment is based on linux shell scripts, azurecli and terraform. You can run those by installing the pre-requisite software in a WSL1/2 Ubuntu 18.04 environment on Windows 10 system or by using a Ubuntu Linux VM with the requires software installed.

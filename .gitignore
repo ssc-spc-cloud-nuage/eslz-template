@@ -1,5 +1,6 @@
 .terraform.tfstate.lock.info
 init/.terraform/plugins
 project/.terraform
+LZ/.terraform
 *.stackdump
 errored.tfstate

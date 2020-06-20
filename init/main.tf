@@ -10,5 +10,3 @@ provider "azurerm" {
 provider "azuread" {
   version = ">=0.8.0"
 }
-
-data "azurerm_client_config" "current" {}
