@@ -2,13 +2,13 @@ tags = {
   "classification"    = "pbmm"
   "contact"           = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
   "costcentre"        = "566811"
-  "env"               = "sandbox"
+  "env"               = "dev"
   "owner"             = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
   "cloudusageprofile" = "3"
   "branch"            = "CIO"
 }
 
-env     = "ScSc"
+env     = "ScDc"
 group   = "CIO"
 project = "ESLZ"
 
@@ -44,12 +44,12 @@ Subscription_AADGroup_Owners_ids = [
 ]
 
 network = {
-  vnet = ["172.16.128.0/20"]
+  vnet = ["10.101.240.0/24"]
   subnets = {
-    PAZ = ["172.16.132.0/26"]
-    OZ  = ["172.16.132.64/26"]
-    RZ  = ["172.16.132.128/26"]
-    MAZ = ["172.16.132.192/26"]
+    PAZ = ["10.101.240.0/27"]
+    OZ  = ["10.101.240.32/27"]
+    RZ  = ["10.101.240.64/27"]
+    MAZ = ["10.101.240.96/27"]
   }
 }
 Landing-Zone-Next-Hop = "172.168.3.22"
@@ -57,10 +57,10 @@ RDS-Gateway           = "10.101.16.4"
 
 domain = {
   public = {
-    name = "eslz.sb.ciso.ssc-spc.gc.ca"
+    name = "eslz.dev.ciso.ssc-spc.gc.ca"
   }
   private = {
-    name                 = "eslz.sb.local"
+    name                 = "eslz.dev.local"
     registration_enabled = true # Set to true if auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled?
   }
 }

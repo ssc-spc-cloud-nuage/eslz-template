@@ -14,15 +14,22 @@ The following resources will be deployed by this blueprint:
 
 ## Deployment
 
-1. copy the included `config-sample/ScSc.sp` file to a personal folder (outside this project structure as you do not want to commit your SP credentials)and edit the content with your Service Principal, subscription and tenant information.
-2. Edit the content of each folder ScSc.tfvars files.
-3. Source this file in a bash terminal to create the environment variables required by the scripts located in the `init`, `LZ` and `project` folders:
-```sh
-source <some path to updated sp file>/ScSc.sp
+1. Launch the development workspace in a container following the instructions found at: https://github.com/Azure/caf-terraform-landingzones/blob/master/documentation/getting_started/getting_started.md
+2. If not already logged-in:
 ```
-4. Deploy project specific resources by running the following commands:
+rover login
+```
+3. Select the subscription to use with:
+```
+az account set --subscription <subscription_GUID>
+```
+4. Make sure you install or have access to the existing subscription launchpad with:
+```
+launchpad /tf/launchpads/launchpad_opensource_light apply -var 'location=canadacentral'
+```
+5. Edit the content of the desired variable files ScSc.tfvars (sandobx), ScDc.tfvars (dev) or ScPc.tfvars (prod) files depending on the environment LZ config you want to deploy.
+6. Deploy the desired Landing Zone environment resources by running the following commands:
 ```sh
-cd ../project
-./terraform-init.sh
-./terraform-apply-ScSc.sh
+cd /tf/caf/LZ
+./rover-apply-Sc<letter of the environment you want to deply>c.sh
 ```
