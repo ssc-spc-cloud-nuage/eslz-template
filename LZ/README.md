@@ -18,12 +18,12 @@ The following resources will be deployed by this blueprint:
 10. Private DNS
 11. Public DNS
 12. Automation Account
-13. Recovery Services Vault
+13. (Optional)Recovery Services Vault
 14. Update Management Schedules for Linux and Windows VMs
 15. Jump Server
-16. Azure policies
-17. Security Center
-18. Sentinel
+16. (Optional)Azure policies
+17. (Optional)Security Center
+18. (Optional)Sentinel
 
 ## Deployment
 
