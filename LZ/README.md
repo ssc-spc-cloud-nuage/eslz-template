@@ -9,7 +9,7 @@ The following resources will be deployed by this blueprint:
 1. Azure Active Directory Security Groups for Owners, Contributors and Readers
 2. Subscription IAM (RBAC) using the groups defined above
 3. LZ Resource Groups
-4. Log Analytics Workspace
+4. Log Analytics Workspace and solutions
 5. Storage Accounts
 6. VNET
 7. Routes
@@ -18,8 +18,12 @@ The following resources will be deployed by this blueprint:
 10. Private DNS
 11. Public DNS
 12. Automation Account
-13. Update Management Schedules for Linux and Windows VMs
-14. Jump Server
+13. Recovery Services Vault
+14. Update Management Schedules for Linux and Windows VMs
+15. Jump Server
+16. Azure policies
+17. Security Center
+18. Sentinel
 
 ## Deployment
 

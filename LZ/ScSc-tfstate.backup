@@ -1,7 +1,7 @@
 {
   "version": 4,
   "terraform_version": "0.12.26",
-  "serial": 40,
+  "serial": 52,
   "lineage": "b25a6488-229b-babb-5eea-bb890d56886b",
   "outputs": {},
   "resources": [
@@ -15,7 +15,7 @@
           "schema_version": 0,
           "attributes": {
             "client_id": "90ed0100-cbdd-4c6b-b7f7-3f2e0422e031",
-            "id": "2020-06-20 00:58:16.2191292 +0000 UTC",
+            "id": "2020-06-20 02:17:33.5876747 +0000 UTC",
             "object_id": "bb294f5d-fece-4d3a-a187-7f98cb64e478",
             "subscription_id": "c00dd93b-0f2b-4cd6-8273-e1038dcbd60e",
             "tenant_id": "4e1ed7ae-062e-4ec8-b989-de8cbd452c54",
@@ -509,6 +509,39 @@
     {
       "mode": "managed",
       "type": "azurerm_log_analytics_solution",
+      "name": "AgentHealthAssessment",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourcegroups/ScSc-CIO_ESLZ_Logs-rg/providers/Microsoft.OperationsManagement/solutions/AgentHealthAssessment(ScScCLD-CIO-ESLZ-Project-law)",
+            "location": "canadacentral",
+            "plan": [
+              {
+                "name": "AgentHealthAssessment(ScScCLD-CIO-ESLZ-Project-law)",
+                "product": "OMSGallery/AgentHealthAssessment",
+                "promotion_code": "",
+                "publisher": "Microsoft"
+              }
+            ],
+            "resource_group_name": "ScSc-CIO_ESLZ_Logs-rg",
+            "solution_name": "AgentHealthAssessment",
+            "timeouts": null,
+            "workspace_name": "ScScCLD-CIO-ESLZ-Project-law",
+            "workspace_resource_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourcegroups/ScSc-CIO_ESLZ_Logs-rg/providers/Microsoft.OperationalInsights/workspaces/ScScCLD-CIO-ESLZ-Project-law"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_log_analytics_workspace.Project-law",
+            "azurerm_resource_group.Logs-rg"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_log_analytics_solution",
       "name": "AzureActivity",
       "provider": "provider.azurerm",
       "instances": [
@@ -560,6 +593,72 @@
             ],
             "resource_group_name": "ScSc-CIO_ESLZ_Logs-rg",
             "solution_name": "ChangeTracking",
+            "timeouts": null,
+            "workspace_name": "ScScCLD-CIO-ESLZ-Project-law",
+            "workspace_resource_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourcegroups/ScSc-CIO_ESLZ_Logs-rg/providers/Microsoft.OperationalInsights/workspaces/ScScCLD-CIO-ESLZ-Project-law"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_log_analytics_workspace.Project-law",
+            "azurerm_resource_group.Logs-rg"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_log_analytics_solution",
+      "name": "DnsAnalytics",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourcegroups/ScSc-CIO_ESLZ_Logs-rg/providers/Microsoft.OperationsManagement/solutions/DnsAnalytics(ScScCLD-CIO-ESLZ-Project-law)",
+            "location": "canadacentral",
+            "plan": [
+              {
+                "name": "DnsAnalytics(ScScCLD-CIO-ESLZ-Project-law)",
+                "product": "OMSGallery/DnsAnalytics",
+                "promotion_code": "",
+                "publisher": "Microsoft"
+              }
+            ],
+            "resource_group_name": "ScSc-CIO_ESLZ_Logs-rg",
+            "solution_name": "DnsAnalytics",
+            "timeouts": null,
+            "workspace_name": "ScScCLD-CIO-ESLZ-Project-law",
+            "workspace_resource_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourcegroups/ScSc-CIO_ESLZ_Logs-rg/providers/Microsoft.OperationalInsights/workspaces/ScScCLD-CIO-ESLZ-Project-law"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_log_analytics_workspace.Project-law",
+            "azurerm_resource_group.Logs-rg"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_log_analytics_solution",
+      "name": "KeyVaultAnalytics",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourcegroups/ScSc-CIO_ESLZ_Logs-rg/providers/Microsoft.OperationsManagement/solutions/KeyVaultAnalytics(ScScCLD-CIO-ESLZ-Project-law)",
+            "location": "canadacentral",
+            "plan": [
+              {
+                "name": "KeyVaultAnalytics(ScScCLD-CIO-ESLZ-Project-law)",
+                "product": "OMSGallery/KeyVaultAnalytics",
+                "promotion_code": "",
+                "publisher": "Microsoft"
+              }
+            ],
+            "resource_group_name": "ScSc-CIO_ESLZ_Logs-rg",
+            "solution_name": "KeyVaultAnalytics",
             "timeouts": null,
             "workspace_name": "ScScCLD-CIO-ESLZ-Project-law",
             "workspace_resource_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourcegroups/ScSc-CIO_ESLZ_Logs-rg/providers/Microsoft.OperationalInsights/workspaces/ScScCLD-CIO-ESLZ-Project-law"
@@ -637,6 +736,14 @@
           ]
         }
       ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_log_analytics_solution",
+      "name": "sentinel",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
     },
     {
       "mode": "managed",
@@ -863,6 +970,54 @@
     },
     {
       "mode": "managed",
+      "type": "azurerm_monitor_diagnostic_setting",
+      "name": "Project_recovery_services_vault-logs",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_monitor_diagnostic_setting",
+      "name": "SWJ-01-logs",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "eventhub_authorization_rule_id": "",
+            "eventhub_name": "",
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg/providers/Microsoft.Network/networkInterfaces/ScScSWJ-ESLZ01-nic1|ScScSWJ-ESLZ01-logs",
+            "log": [],
+            "log_analytics_destination_type": "",
+            "log_analytics_workspace_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourcegroups/scsc-cio_eslz_logs-rg/providers/microsoft.operationalinsights/workspaces/scsccld-cio-eslz-project-law",
+            "metric": [
+              {
+                "category": "AllMetrics",
+                "enabled": true,
+                "retention_policy": [
+                  {
+                    "days": 0,
+                    "enabled": false
+                  }
+                ]
+              }
+            ],
+            "name": "ScScSWJ-ESLZ01-logs",
+            "storage_account_id": "",
+            "target_resource_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg/providers/Microsoft.Network/networkInterfaces/ScScSWJ-ESLZ01-nic1",
+            "timeouts": null
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_log_analytics_workspace.Project-law",
+            "module.SWJ-01.azurerm_network_interface.NIC"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
       "type": "azurerm_network_ddos_protection_plan",
       "name": "Project_ddos_protection_plan",
       "each": "list",
@@ -1031,6 +1186,124 @@
           "dependencies": [
             "azurerm_resource_group.Management-rg"
           ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_policy_assignment",
+      "name": "deny-publicip-subscription",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "description": "Policy Assignment for deny public IP creating in subscriptions",
+            "display_name": "TF Deny public IP in subscription",
+            "enforcement_mode": true,
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/providers/Microsoft.Authorization/policyAssignments/deny-publicip-subscription",
+            "identity": [],
+            "location": null,
+            "name": "deny-publicip-subscription",
+            "not_scopes": [],
+            "parameters": null,
+            "policy_definition_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/providers/Microsoft.Authorization/policyDefinitions/pol-deny-publicip-creation",
+            "scope": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e",
+            "timeouts": null
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_policy_definition.deny_publicip_subscription"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_policy_assignment",
+      "name": "publicIP-deny-on-nics",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "description": "Policy Assignment for deny public IP on NICs",
+            "display_name": "TF Deny public IP assignment on NICs",
+            "enforcement_mode": true,
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/providers/Microsoft.Authorization/policyAssignments/deny-publicip-on-nics",
+            "identity": [],
+            "location": null,
+            "name": "deny-publicip-on-nics",
+            "not_scopes": [],
+            "parameters": null,
+            "policy_definition_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/providers/Microsoft.Authorization/policyDefinitions/pol-deny-publicips-on-nics",
+            "scope": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e",
+            "timeouts": null
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_policy_definition.deny_publicips_on_nics"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_policy_definition",
+      "name": "deny_publicip_subscription",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "description": "",
+            "display_name": "TF-Deny public IP in subscription",
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/providers/Microsoft.Authorization/policyDefinitions/pol-deny-publicip-creation",
+            "management_group_id": "",
+            "management_group_name": "",
+            "metadata": "{\"createdBy\":\"bb294f5d-fece-4d3a-a187-7f98cb64e478\",\"createdOn\":\"2020-06-20T01:45:25.5553606Z\",\"updatedBy\":null,\"updatedOn\":null}",
+            "mode": "Indexed",
+            "name": "pol-deny-publicip-creation",
+            "parameters": "",
+            "policy_rule": "{\"if\":{\"field\":\"type\",\"in\":[\"Microsoft.Network/publicIPAddresses\"]},\"then\":{\"effect\":\"deny\"}}",
+            "policy_type": "Custom",
+            "timeouts": null
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_policy_definition",
+      "name": "deny_publicips_on_nics",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "description": "",
+            "display_name": "TF-Deny public IP on NICS",
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/providers/Microsoft.Authorization/policyDefinitions/pol-deny-publicips-on-nics",
+            "management_group_id": "",
+            "management_group_name": "",
+            "metadata": "{\"createdBy\":\"bb294f5d-fece-4d3a-a187-7f98cb64e478\",\"createdOn\":\"2020-06-20T01:49:37.2946591Z\",\"updatedBy\":null,\"updatedOn\":null}",
+            "mode": "Indexed",
+            "name": "pol-deny-publicips-on-nics",
+            "parameters": "",
+            "policy_rule": "{\"if\":{\"allOf\":[{\"equals\":\"Microsoft.Network/networkInterfaces\",\"field\":\"type\"},{\"exists\":true,\"field\":\"Microsoft.Network/networkInterfaces/ipconfigurations[*].publicIpAddress.id\"}]},\"then\":{\"effect\":\"deny\"}}",
+            "policy_type": "Custom",
+            "timeouts": null
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0="
         }
       ]
     },
@@ -1427,6 +1700,71 @@
     },
     {
       "mode": "managed",
+      "type": "azurerm_security_center_contact",
+      "name": "contact",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "alert_notifications": true,
+            "alerts_to_admins": true,
+            "email": "some@test.com",
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/providers/Microsoft.Security/securityContacts/default1",
+            "phone": "123-456-7890",
+            "timeouts": null
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozNjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjozNjAwMDAwMDAwMDAwfX0="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_security_center_subscription_pricing",
+      "name": "sc",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/providers/Microsoft.Security/pricings/default",
+            "tier": "Standard",
+            "timeouts": null
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozNjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjozNjAwMDAwMDAwMDAwfX0="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_security_center_workspace",
+      "name": "sc",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/providers/Microsoft.Security/workspaceSettings/default",
+            "scope": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e",
+            "timeouts": null,
+            "workspace_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourcegroups/scsc-cio_eslz_logs-rg/providers/microsoft.operationalinsights/workspaces/scsccld-cio-eslz-project-law"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjozNjAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjozNjAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "azurerm_log_analytics_workspace.Project-law",
+            "azurerm_security_center_subscription_pricing.sc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
       "type": "azurerm_storage_account",
       "name": "Project_law-sa",
       "provider": "provider.azurerm",
@@ -1775,15 +2113,6 @@
       "instances": []
     },
     {
-      "module": "module.windows-weekly-updates",
-      "mode": "managed",
-      "type": "azurerm_template_deployment",
-      "name": "linux",
-      "each": "list",
-      "provider": "provider.azurerm",
-      "instances": []
-    },
-    {
       "module": "module.linux-weekly-updates",
       "mode": "managed",
       "type": "azurerm_template_deployment",
@@ -1818,6 +2147,24 @@
       "module": "module.windows-weekly-updates",
       "mode": "managed",
       "type": "azurerm_template_deployment",
+      "name": "linux",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
+      "module": "module.linux-weekly-updates",
+      "mode": "managed",
+      "type": "azurerm_template_deployment",
+      "name": "windows",
+      "each": "list",
+      "provider": "provider.azurerm",
+      "instances": []
+    },
+    {
+      "module": "module.windows-weekly-updates",
+      "mode": "managed",
+      "type": "azurerm_template_deployment",
       "name": "windows",
       "each": "list",
       "provider": "provider.azurerm",
@@ -1844,15 +2191,6 @@
           ]
         }
       ]
-    },
-    {
-      "module": "module.linux-weekly-updates",
-      "mode": "managed",
-      "type": "azurerm_template_deployment",
-      "name": "windows",
-      "each": "list",
-      "provider": "provider.azurerm",
-      "instances": []
     },
     {
       "module": "module.SWJ-01",

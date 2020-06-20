@@ -20,3 +20,21 @@ module "SRV-linux-mgmt" {
   dependancyAgent         = true
   tags                    = var.tags
 }
+
+# azurerm_monitor_diagnostic_setting is required for PBMM-Guardrails
+
+resource "azurerm_monitor_diagnostic_setting" "SRV-linux-mgmt-logs" {
+  name                       = "${var.env}SRV-linux-mgmt-logs"
+  target_resource_id         = module.SRV-linux-mgmt.nic[0].id
+  log_analytics_workspace_id = data.azurerm_log_analytics_workspace.Project-law.id
+
+  metric {
+    category = "AllMetrics"
+    enabled  = true
+
+    retention_policy {
+      days    = 0
+      enabled = false
+    }
+  }
+}

@@ -15,8 +15,12 @@ project = "ESLZ"
 location = "canadacentral"
 
 deployOptionalFeatures = {
-  ddos_protection_plan    = false
-  recovery_services_vault = false
+  ddos_protection_plan       = false
+  recovery_services_vault    = false
+  security_center            = true
+  sentinel                   = false
+  deny_publicip_subscription = true
+  deny_publicips_on_nics     = true
 }
 
 Subscription_AADGroup_Owners_ids = [
@@ -74,5 +78,9 @@ optionalFeaturesConfig = {
   recovery_services_vault = {
     sku                 = "Standard" # Sets the vault's SKU. Possible values include: Standard, RS0
     soft_delete_enabled = true       # Is soft delete enable for this Vault?
+  }
+  security_center = {
+    email = "some@test.com"
+    phone = "123-456-7890"
   }
 }

@@ -1,7 +1,7 @@
 {
   "version": 4,
   "terraform_version": "0.12.26",
-  "serial": 15,
+  "serial": 16,
   "lineage": "e189d502-2307-cb4c-6d70-560124268f70",
   "outputs": {},
   "resources": [
@@ -117,7 +117,7 @@
           "schema_version": 0,
           "attributes": {
             "client_id": "90ed0100-cbdd-4c6b-b7f7-3f2e0422e031",
-            "id": "2020-06-19 17:32:11.9397301 +0000 UTC",
+            "id": "2020-06-20 01:35:14.9723643 +0000 UTC",
             "object_id": "bb294f5d-fece-4d3a-a187-7f98cb64e478",
             "subscription_id": "c00dd93b-0f2b-4cd6-8273-e1038dcbd60e",
             "tenant_id": "4e1ed7ae-062e-4ec8-b989-de8cbd452c54",
@@ -982,6 +982,45 @@
           "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
           "dependencies": [
             "azurerm_network_security_group.Project_RZ-nsg"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "azurerm_monitor_diagnostic_setting",
+      "name": "SRV-linux-mgmt-logs",
+      "provider": "provider.azurerm",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "eventhub_authorization_rule_id": "",
+            "eventhub_name": "",
+            "id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg/providers/Microsoft.Network/networkInterfaces/ScScSRV-linux-mgmt-nic1|ScScSRV-linux-mgmt-logs",
+            "log": [],
+            "log_analytics_destination_type": "",
+            "log_analytics_workspace_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourcegroups/scsc-cio_eslz_logs-rg/providers/microsoft.operationalinsights/workspaces/scsccld-cio-eslz-project-law",
+            "metric": [
+              {
+                "category": "AllMetrics",
+                "enabled": true,
+                "retention_policy": [
+                  {
+                    "days": 0,
+                    "enabled": false
+                  }
+                ]
+              }
+            ],
+            "name": "ScScSRV-linux-mgmt-logs",
+            "storage_account_id": "",
+            "target_resource_id": "/subscriptions/c00dd93b-0f2b-4cd6-8273-e1038dcbd60e/resourceGroups/ScSc-CIO_ESLZ_Management-rg/providers/Microsoft.Network/networkInterfaces/ScScSRV-linux-mgmt-nic1",
+            "timeouts": null
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjM2MDAwMDAwMDAwMDAsInJlYWQiOjMwMDAwMDAwMDAwMCwidXBkYXRlIjoxODAwMDAwMDAwMDAwfX0=",
+          "dependencies": [
+            "module.SRV-linux-mgmt.azurerm_network_interface.NIC"
           ]
         }
       ]

@@ -31,6 +31,42 @@ resource "azurerm_log_analytics_solution" "AzureActivity" {
   }
 }
 
+resource "azurerm_log_analytics_solution" "AgentHealthAssessment" {
+  solution_name         = "AgentHealthAssessment"
+  location              = azurerm_resource_group.Logs-rg.location
+  resource_group_name   = azurerm_resource_group.Logs-rg.name
+  workspace_resource_id = azurerm_log_analytics_workspace.Project-law.id
+  workspace_name        = azurerm_log_analytics_workspace.Project-law.name
+  plan {
+    publisher = "Microsoft"
+    product   = "OMSGallery/AgentHealthAssessment"
+  }
+}
+
+resource "azurerm_log_analytics_solution" "DnsAnalytics" {
+  solution_name         = "DnsAnalytics"
+  location              = azurerm_resource_group.Logs-rg.location
+  resource_group_name   = azurerm_resource_group.Logs-rg.name
+  workspace_resource_id = azurerm_log_analytics_workspace.Project-law.id
+  workspace_name        = azurerm_log_analytics_workspace.Project-law.name
+  plan {
+    publisher = "Microsoft"
+    product   = "OMSGallery/DnsAnalytics"
+  }
+}
+
+resource "azurerm_log_analytics_solution" "KeyVaultAnalytics" {
+  solution_name         = "KeyVaultAnalytics"
+  location              = azurerm_resource_group.Logs-rg.location
+  resource_group_name   = azurerm_resource_group.Logs-rg.name
+  workspace_resource_id = azurerm_log_analytics_workspace.Project-law.id
+  workspace_name        = azurerm_log_analytics_workspace.Project-law.name
+  plan {
+    publisher = "Microsoft"
+    product   = "OMSGallery/KeyVaultAnalytics"
+  }
+}
+
 # Add Updates workspace solution to log analytics.
 # Adding this solution to the log analytics workspace, combined with above linked service resource enables update management for the automation account.
 resource "azurerm_log_analytics_solution" "Updates" {
