@@ -21,6 +21,7 @@ deployOptionalFeatures = {
   sentinel                   = false
   deny_publicip_subscription = true
   deny_publicips_on_nics     = true
+  jumpServer                 = false
 }
 
 ## Optional Features variables ##
