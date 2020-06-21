@@ -2,9 +2,9 @@
 
 ## Note
 
-This blueprint is a custom implementation of the blueprint_project found here: https://github.com/Azure/caf-terraform-landingzones
+This blueprint is a custom implementation of the "Azure Cloud Adoption Framework landing zones for Terraform" found at the following URL: https://github.com/Azure/caf-terraform-landingzones
 
-It follows the GC Naming Convention documentation found in: -enter link to document-
+This landinzone solution follows the GC Naming Convention documentation found in: -enter link to document-
 
 ## Prerequisites
 
@@ -25,9 +25,10 @@ Once installed, open **Visual Studio Code** and install "**Remote Development**"
 
 ## Deployment
 
-Follow the README.md documentation in the blueprint_fundations and blueprint_project folders:
+Follow the README.md documentation in:
 
-1. [blueprint_fundations](./blueprint_fundations/README.md)
-2. [blueprint_project](./blueprint_project/README.md)
+1. [L0_blueprint_launchpad](./L0_blueprint_launchpad/README.md)
+2. [L1_blueprint_base](./L1_blueprint_base/README.md)
+3. [L2_blueprint_project](./L2_blueprint_project/README.md)
 
-If all went well you will now have deployed the solution in the subscription as specified in the `ScSc-CIO-EBAP.sp` file.
+If all went well you will now have deployed the landinzone in the subscription.
