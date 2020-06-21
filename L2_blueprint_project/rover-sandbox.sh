@@ -1,7 +1,7 @@
 # command can be plan, apply, destroy or validate
 command=${1-validate}
 env="sandbox"
-blueprint="blueprint_fundations"
+blueprint="L2_blueprint_project"
 
 /tf/rover/launchpad.sh workspace create $env
 

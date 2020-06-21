@@ -1,0 +1,61 @@
+variable "workspace" {}
+variable "lowerlevel_storage_account_name" {}
+variable "lowerlevel_container_name" {}
+variable "lowerlevel_key" {}                  # Keeping the key for the lower level0 access
+variable "lowerlevel_resource_group_name" {}
+
+data "terraform_remote_state" "landingzone_caf_foundations" {
+  backend = "azurerm"
+  config = {
+    storage_account_name  = var.lowerlevel_storage_account_name
+    container_name        = var.workspace
+    key                   = "landingzone_caf_foundations.tfstate"
+    resource_group_name   = var.lowerlevel_resource_group_name
+  }
+}
+
+locals {  
+    L0_prefix                      = data.terraform_remote_state.landingzone_caf_foundations.outputs.prefix
+    L0_caf_foundations_accounting  = data.terraform_remote_state.landingzone_caf_foundations.outputs.blueprint_foundations_accounting 
+    L0_caf_foundations_security    = data.terraform_remote_state.landingzone_caf_foundations.outputs.blueprint_foundations_security
+    L0_global_settings             = data.terraform_remote_state.landingzone_caf_foundations.outputs.global_settings 
+}
+/*
+data "azuread_group" "Subscription_Contributors" {
+  name = "${local.prefix}_${var.project}_Subscription_Contributors"
+}
+
+data "azuread_users" "Subscription_Contributors" {
+  user_principal_names = var.contributorNames
+}
+
+resource "azuread_group_member" "Subscription_Contributors-Members" {
+  for_each = toset(data.azuread_users.Subscription_Contributors.object_ids)
+
+  group_object_id  = data.azuread_group.Subscription_Contributors.id
+  member_object_id = each.key
+}
+
+# Give access to SP (Enterprise App) to be able to manage resources via AAD group membership
+resource "azuread_group_member" "SP_Subscription_Contributors-Members" {
+  for_each = toset(var.contributorEnterpriseID)
+
+  group_object_id  = data.azuread_group.Subscription_Contributors.id
+  member_object_id = each.key
+}
+
+data "azuread_group" "Subscription_Readers" {
+  name = "${local.prefix}_${var.project}_Subscription_Readers"
+}
+
+data "azuread_users" "Subscription_Readers" {
+  user_principal_names = var.readerNames
+}
+
+resource "azuread_group_member" "Subscription_Readers-Members" {
+  for_each = toset(data.azuread_users.Subscription_Readers.object_ids)
+
+  group_object_id  = data.azuread_group.Subscription_Readers.id
+  member_object_id = each.key
+}
+*/
