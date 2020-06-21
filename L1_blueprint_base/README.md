@@ -1,8 +1,8 @@
-# ESLZ (Enterprise Scale Landing Zone) fundations blueprint
+# ESLZ (Enterprise Scale Landing Zone) base blueprint
 
 ## Description
 
-This level 1 blueprint will deploy all Landing Zone resources needed to support the ESLZ.
+This level 1 blueprint will deploy all base resources needed to support the ESLZ.
 
 The following resources will be deployed by this blueprint:
 

@@ -1,8 +1,8 @@
-# ESLZ (Enterprise Scale Landing Zone) fundations blueprint
+# ESLZ (Enterprise Scale Landing Zone) launchpad blueprint
 
 ## Description
 
-This level0 blueprint will deploy the required launchpad in support the ESLZ.
+This level 0 blueprint will deploy the required launchpad in support the ESLZ.
 
 The following resources will be deployed by this blueprint:
 
@@ -12,7 +12,6 @@ The following resources will be deployed by this blueprint:
 4. Log Analytics Workspace and solutions
 5. Storage Accounts
 6. Keyvault
-
 
 ## Deployment
 

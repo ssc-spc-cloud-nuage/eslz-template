@@ -2,7 +2,7 @@
 
 ## Description
 
-This level 2 blueprint will deploy the project specific resources needed to support the Client Project.
+This level 2 blueprint will deploy the project  resources needed.
 
 The following resources will be deployed by this blueprint:
 
