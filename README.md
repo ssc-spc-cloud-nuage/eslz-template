@@ -1,10 +1,10 @@
-# ESblueprint_fundations (Enterprise Scale Landing Zone)
+# ESLZ (Enterprise Scale Landing Zone) Template
 
 ## Note
 
 This blueprint is a custom implementation of the blueprint_project found here: https://github.com/Azure/caf-terraform-landingzones
 
-It follows the SSC Naming Convention documentation found in: -enter link to document-
+It follows the GC Naming Convention documentation found in: -enter link to document-
 
 ## Prerequisites
 
