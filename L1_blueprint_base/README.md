@@ -44,7 +44,8 @@ az account set --subscription <subscription_GUID>
 4. Make sure you install or have access to the existing subscription launchpad with:
 
 ```
-launchpad /tf/launchpads/launchpad_opensource_light apply -var 'location=canadacentral'
+cd L0_blueprint_launchpad
+./launchpad apply
 ```
 
 5. Edit the content of the environment variable files located in the environments folder.
@@ -52,6 +53,6 @@ launchpad /tf/launchpads/launchpad_opensource_light apply -var 'location=canadac
 6. Deploy the desired Landing Zone environment resources. For example, to deploy the dev environment use the following commands:
 
 ```sh
-cd /tf/caf/blueprint_fundations
+cd /tf/caf/L1_blueprint_base
 ./rover-dev.sh apply
 ```

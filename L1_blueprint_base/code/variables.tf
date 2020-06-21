@@ -16,6 +16,8 @@ variable "RDS-Gateway" {}
 
 variable "domain" {}
 
+variable "L1_RBAC" {}
+
 variable "vmConfigs" {}
 
 variable "optionalFeaturesConfig" {}

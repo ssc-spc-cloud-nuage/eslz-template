@@ -65,6 +65,17 @@ domain = {
   }
 }
 
+L1_RBAC = {
+  contributorNames = [
+    "john.nephin@163dev.onmicrosoft.com",
+    "bernard.maltais@163dev.onmicrosoft.com",
+    "louis-eric.tremblay@163dev.onmicrosoft.com",
+    "test-bernard.maltais@163dev.onmicrosoft.com"
+  ]
+
+  readerNames = []
+}
+
 vmConfigs = {
   /*
   # Template for Linux server variables

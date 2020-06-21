@@ -27,19 +27,21 @@ domain = {
   }
 }
 
-contributorNames = [
-  "john.nephin@163dev.onmicrosoft.com",
-  "bernard.maltais@163dev.onmicrosoft.com",
-  "louis-eric.tremblay@163dev.onmicrosoft.com",
-  "test-bernard.maltais@163dev.onmicrosoft.com"
-]
+L2_RBAC = {
+  contributorNames = [
+    "john.nephin@163dev.onmicrosoft.com",
+    "bernard.maltais@163dev.onmicrosoft.com",
+    "louis-eric.tremblay@163dev.onmicrosoft.com",
+    "test-bernard.maltais@163dev.onmicrosoft.com"
+  ]
 
-contributorEnterpriseID = [
-  "bb294f5d-fece-4d3a-a187-7f98cb64e478", # Bernard Maltais SP
-  "2000c7f5-0f8d-4a45-a65d-d70dc3edcac3"  # John Nephin SP
-]
+  contributorEnterpriseID = [
+    "bb294f5d-fece-4d3a-a187-7f98cb64e478", # Bernard Maltais SP
+    "2000c7f5-0f8d-4a45-a65d-d70dc3edcac3"  # John Nephin SP
+  ]
 
-readerNames = []
+  readerNames = []
+}
 
 vmConfigs = {
   /*

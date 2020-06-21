@@ -10,8 +10,6 @@ variable "Landing-Zone-Next-Hop" {}
 variable "RDS-Gateway" {}
 
 variable "domain" {}
-variable "contributorNames" {}
-variable "contributorEnterpriseID" {}
+variable "L2_RBAC" {}
 
-variable "readerNames" {}
 variable "vmConfigs" {}
