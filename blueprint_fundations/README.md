@@ -1,8 +1,8 @@
-# ESLZ (Enterprise Scale Landing Zone) LZ blueprint
+# ESLZ (Enterprise Scale Landing Zone) fundations blueprint
 
 ## Description
 
-This level1 blueprint will deploy the project specific Landing Zone resources needed to support the ESLZ.
+This level 1 blueprint will deploy all Landing Zone resources needed to support the ESLZ.
 
 The following resources will be deployed by this blueprint:
 
@@ -19,7 +19,7 @@ The following resources will be deployed by this blueprint:
 11. Public DNS
 12. Automation Account
 13. (Optional)Recovery Services Vault
-14. (Optional)Update Management Schedules for Linux and Windows VMs
+14. Update Management Schedules for Linux and Windows VMs
 15. (Optional)Jump Server
 16. (Optional)Azure policies
 17. (Optional)Security Center
