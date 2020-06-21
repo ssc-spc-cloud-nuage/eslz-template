@@ -1,10 +1,10 @@
-# ESLZ (Enterprise Scale Landing Zone)
+# ESblueprint_fundations (Enterprise Scale Landing Zone)
 
 ## Note
 
-This blueprint is a custom implementation of the project found here: https://github.com/Azure/caf-terraform-landingzones
+This blueprint is a custom implementation of the blueprint_project found here: https://github.com/Azure/caf-terraform-landingzones
 
-It follows the SSC Naming Convention documentation found in: <enter link to document>
+It follows the SSC Naming Convention documentation found in: -enter link to document-
 
 ## Prerequisites
 
@@ -25,9 +25,9 @@ Once installed, open **Visual Studio Code** and install "**Remote Development**"
 
 ## Deployment
 
-Follow the README.md documentation in the LZ and project folders:
+Follow the README.md documentation in the blueprint_fundations and blueprint_project folders:
 
-1. [LZ blueprint](./LZ/README.md)
-2. [project blueprint](./project/README.md)
+1. [blueprint_fundations](./blueprint_fundations/README.md)
+2. [blueprint_project](./blueprint_project/README.md)
 
 If all went well you will now have deployed the solution in the subscription as specified in the `ScSc-CIO-EBAP.sp` file.

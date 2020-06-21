@@ -1,6 +1,6 @@
 //Can't have a "_" in the name, only "-"
 resource "azurerm_key_vault" "Project-kv" {
-  name                            = "${substr("${var.env}CKV-${var.group}-${var.project}-${substr(sha1("${azurerm_resource_group.Keyvault-rg.id}"), 0, 8)}", 0, 21)}-kv"
+  name                            = "${substr("${var.env}CKV-${var.group}-${var.project}-${local.unique_Keyvault}", 0, 21)}-kv"
   location                        = azurerm_resource_group.Keyvault-rg.location
   resource_group_name             = azurerm_resource_group.Keyvault-rg.name
   sku_name                        = "standard"
