@@ -38,13 +38,6 @@ optionalFeaturesConfig = {
   }
 }
 
-# Who will own the AAD Security Group and could make membership modification.
-Subscription_AADGroup_Owners_ids = [
-  "446fe20e-1b5c-45fc-a04e-5ae7cfb66684", # User 1 ID
-  "d4decfde-8300-4fa4-aa36-7c22bf22a868", # User 2 ID
-  "aea74c39-1a88-47f5-8c31-a6d0c1173aa3"  # User 3 ID
-]
-
 network = {
   vnet = ["10.101.240.0/24"]
   subnets = {

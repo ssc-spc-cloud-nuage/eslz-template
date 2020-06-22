@@ -8,8 +8,6 @@ variable "location" {}
 
 variable "deployOptionalFeatures" {}
 
-variable "Subscription_AADGroup_Owners_ids" {}
-
 variable "network" {}
 variable "Landing-Zone-Next-Hop" {}
 variable "RDS-Gateway" {}

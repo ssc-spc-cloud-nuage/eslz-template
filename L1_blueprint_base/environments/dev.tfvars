@@ -17,7 +17,7 @@ location = "canadacentral"
 deployOptionalFeatures = {
   ddos_protection_plan       = false
   recovery_services_vault    = false
-  security_center            = false
+  security_center            = true
   sentinel                   = false
   update_management          = true
   deny_publicip_subscription = true
@@ -37,12 +37,6 @@ optionalFeaturesConfig = {
     phone = "123-456-7890"
   }
 }
-
-Subscription_AADGroup_Owners_ids = [
-  "446fe20e-1b5c-45fc-a04e-5ae7cfb66684", # Bernard Maltais
-  "d4decfde-8300-4fa4-aa36-7c22bf22a868", # John Nephin
-  "aea74c39-1a88-47f5-8c31-a6d0c1173aa3"  # Louis-Eric Tremblay
-]
 
 network = {
   vnet = ["10.101.240.0/24"]
