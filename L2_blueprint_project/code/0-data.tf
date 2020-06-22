@@ -29,7 +29,7 @@ data azurerm_subnet Project_MAZ-snet {
 }
 
 data azurerm_log_analytics_workspace Project-law {
-  name                = "${var.env}CLD-${var.group}-${var.project}-Project-law"
+  name                = "${var.env}CLD-${var.group}-${var.project}-${local.unique_Logs}-Project-law"
   resource_group_name = data.azurerm_resource_group.Logs-rg.name
 }
 
