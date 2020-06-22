@@ -1,4 +1,4 @@
-# ESLZ (Enterprise Scale Landing Zone) Template
+# ESLZ (Enterprise Scale Landing Zone) Client Template
 
 ## Background
 

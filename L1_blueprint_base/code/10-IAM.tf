@@ -1,7 +1,7 @@
 resource "azurerm_role_assignment" "L1_Subscription_Owners" {
   scope                = data.azurerm_subscription.primary.id
   role_definition_name = "Owner"
-  principal_id         = azuread_group.L1_Subscription_Contributors.id
+  principal_id         = azuread_group.L1_Subscription_Owners.id
 }
 
 resource "azurerm_role_assignment" "L1_Subscription_Contributors" {
@@ -19,7 +19,7 @@ resource "azurerm_role_assignment" "L1_Subscription_Readers" {
 resource "azurerm_role_assignment" "L2_Subscription_Owners" {
   scope                = data.azurerm_subscription.primary.id
   role_definition_name = "Owner"
-  principal_id         = azuread_group.L2_Subscription_Contributors.id
+  principal_id         = azuread_group.L2_Subscription_Owners.id
 }
 
 resource "azurerm_role_assignment" "L2_Subscription_Contributors" {

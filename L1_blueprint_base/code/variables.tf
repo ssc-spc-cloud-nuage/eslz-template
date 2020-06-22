@@ -3,6 +3,7 @@ variable "tags" {}
 variable "env" {}
 variable "group" {}
 variable "project" {}
+variable "l0_prefix" {}
 
 variable "location" {}
 

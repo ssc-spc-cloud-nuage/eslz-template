@@ -6,12 +6,13 @@ This level 0 blueprint will deploy the required launchpad in support the ESLZ.
 
 The following resources will be deployed by this blueprint:
 
-1. Azure Active Directory Security Groups for launchpad users
-2. Subscription IAM (RBAC) using the groups defined above
-3. launchpad Resource Groups
-4. Log Analytics Workspace and solutions
-5. Storage Accounts
-6. Keyvault
+1. Azure Active Directory Security Groups for level0-rover-developers
+2. Launchpad enterprise application
+3. Launchpad resourcegroup
+4. Launchpad keyvault for terraform secrets
+5. Launchpad Log Analytics Workspace and KeyVaultAnalytics solutions
+6. Launchpad Storage Account for terraform state
+7. Launchpad Storage Account for diagnostic logs
 
 ## Deployment
 
@@ -29,9 +30,13 @@ rover login
 az account set --subscription <subscription_GUID>
 ```
 
-4. Make sure you install or have access to the existing subscription launchpad with:
+4. Configure the level0.tfvars file with the desired values
+   
+5. Make sure you install or have access to the existing subscription launchpad with:
 
 ```
 cd L0_blueprint_launchpad
 ./launchpad apply
 ```
+
+5. Take note of the output from the launchpad command in a safe place as it will be required to fill in some of the variables in L1_blueprint_base
