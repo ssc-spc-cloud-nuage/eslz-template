@@ -36,7 +36,5 @@ az account set --subscription <subscription_GUID>
 
 ```
 cd L0_blueprint_launchpad
-./launchpad apply
+./launchpad.sh apply
 ```
-
-5. Take note of the output from the launchpad command in a safe place as it will be required to fill in some of the variables in L1_blueprint_base

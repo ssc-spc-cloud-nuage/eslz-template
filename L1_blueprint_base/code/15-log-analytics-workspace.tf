@@ -1,6 +1,6 @@
 //Can't have a "_" in the name, only "-"
 resource "azurerm_log_analytics_workspace" "Project-law" {
-  name                = "${var.env}CLD-${var.group}-${var.project}-Project-law"
+  name                = "${var.env}CLD-${var.group}-${var.project}-${local.unique_Logs}-Project-law"
   location            = azurerm_resource_group.Logs-rg.location
   resource_group_name = azurerm_resource_group.Logs-rg.name
   sku                 = "PerGB2018"

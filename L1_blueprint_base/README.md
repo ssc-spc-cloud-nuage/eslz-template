@@ -45,7 +45,7 @@ az account set --subscription <subscription_GUID>
 
 ```
 cd L0_blueprint_launchpad
-./launchpad apply
+./launchpad.sh apply
 ```
 
 5. Edit the content of the environment variable files located in the environments folder.

@@ -1,9 +1,9 @@
 tags = {
   "classification"    = "pbmm"
-  "contact"           = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
-  "costcentre"        = "566811"
+  "contact"           = "user1@domain.ca; user1@domain.ca"
+  "costcentre"        = "56a54668sdfsf11"
   "env"               = "dev"
-  "owner"             = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
+  "owner"             = "user1@domain.ca; user1@domain.ca"
   "cloudusageprofile" = "3"
   "branch"            = "CIO"
 }
@@ -17,7 +17,7 @@ location = "canadacentral"
 deployOptionalFeatures = {
   ddos_protection_plan       = false
   recovery_services_vault    = false
-  security_center            = false
+  security_center            = true
   sentinel                   = false
   deny_publicip_subscription = true
   deny_publicips_on_nics     = true
@@ -37,10 +37,11 @@ optionalFeaturesConfig = {
   }
 }
 
+# Who will own the AAD Security Group and could make membership modification.
 Subscription_AADGroup_Owners_ids = [
-  "446fe20e-1b5c-45fc-a04e-5ae7cfb66684", # Bernard Maltais
-  "d4decfde-8300-4fa4-aa36-7c22bf22a868", # John Nephin
-  "aea74c39-1a88-47f5-8c31-a6d0c1173aa3"  # Louis-Eric Tremblay
+  "446fe20e-1b5c-45fc-a04e-5ae7cfb66684", # User 1 ID
+  "d4decfde-8300-4fa4-aa36-7c22bf22a868", # User 2 ID
+  "aea74c39-1a88-47f5-8c31-a6d0c1173aa3"  # User 3 ID
 ]
 
 network = {
@@ -67,15 +68,17 @@ domain = {
 
 L1_RBAC = {
   ownerNames = [
-    "john.nephin@163dev.onmicrosoft.com",
-    "bernard.maltais@163dev.onmicrosoft.com",
-    "louis-eric.tremblay@163dev.onmicrosoft.com",
-    "test-bernard.maltais@163dev.onmicrosoft.com"
+    "user1@163dev.onmicrosoft.com",
+    "user1@163dev.onmicrosoft.com"
   ]
 
-  contributorNames = []
+  contributorNames = [
+    "user3@163dev.onmicrosoft.com"
+  ]
 
-  readerNames = []
+  readerNames = [
+    "user4@163dev.onmicrosoft.com"
+  ]
 }
 
 vmConfigs = {
@@ -93,7 +96,7 @@ vmConfigs = {
   */
 
   SWJ-01 = {
-    admin_password = "tmp-Canada123!"
+    admin_password = "tmp-53w45trdfg"
     vm_size        = "Standard_D2s_v3"
     priority       = "Spot"
   }

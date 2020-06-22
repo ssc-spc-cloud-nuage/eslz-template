@@ -40,7 +40,7 @@ resource "azuread_group_member" "L1_Subscription_Readers-Members" {
 # Add the L1_Subscription_Owners AAD Security group as a member of caf-level0-rover-developers (also assigned to Subscription Owner role)
 
 data "azuread_group" "caf-level0-rover-developers" {
-  name = "${var.l0_prefix}caf-level0-rover-developers"
+  name = "${local.l0_prefix}caf-level0-rover-developers"
 }
 
 resource "azuread_group_member" "caf-level0-rover-developers-Members" {

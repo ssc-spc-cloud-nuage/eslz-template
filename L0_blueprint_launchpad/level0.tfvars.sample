@@ -1,4 +1,3 @@
-prefix = "ScDc-CIO_ESLZ"
-convention = "passthrough"
+prefix = "scdc-cio_eslz"
 enable_collaboration = true
 location = "canadacentral"

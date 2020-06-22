@@ -11,7 +11,6 @@ tags = {
 env     = "ScSc"
 group   = "CIO"
 project = "ESLZ"
-l0_prefix = "eslz" # Set this to the launchpad local0.tfvars prefix value
 
 location = "canadacentral"
 
