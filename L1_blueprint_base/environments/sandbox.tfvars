@@ -19,6 +19,7 @@ deployOptionalFeatures = {
   recovery_services_vault    = false
   security_center            = true
   sentinel                   = false
+  update_management          = false
   deny_publicip_subscription = true
   deny_publicips_on_nics     = true
   jumpServer                 = false
