@@ -37,7 +37,7 @@ cd L0_blueprint_launchpad
 
 5. Edit the content of the environment variable files located in the environments folder.
 
-6. Deploy the desired Landing Zone environment resources by running. FOr example, to deploy the dev environment use the following commands:
+6. Deploy the desired Landing Zone environment resources. For example, to deploy the dev environment use the following commands:
 
 ```sh
 cd /tf/caf/L2_blueprint_project

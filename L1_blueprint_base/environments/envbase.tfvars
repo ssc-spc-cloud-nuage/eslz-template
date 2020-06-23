@@ -1,14 +1,14 @@
 tags = {
   "classification"    = "pbmm"
-  "contact"           = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
-  "costcentre"        = "566811"
+  "contact"           = "user1@domain.ca; user1@domain.ca"
+  "costcentre"        = "56a54668sdfsf11"
   "env"               = "dev"
-  "owner"             = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
+  "owner"             = "user1@domain.ca; user1@domain.ca"
   "cloudusageprofile" = "3"
   "branch"            = "CIO"
 }
 
-env     = "ScDc"
+env     = "ScDc" # Derived from the 
 group   = "CIO"
 project = "ESLZ"
 
@@ -19,10 +19,10 @@ deployOptionalFeatures = {
   recovery_services_vault    = false
   security_center            = true
   sentinel                   = false
-  update_management          = true
+  update_management          = false
   deny_publicip_subscription = true
   deny_publicips_on_nics     = true
-  jumpServer                 = true
+  jumpServer                 = false
 }
 
 ## Optional Features variables ##
@@ -62,15 +62,17 @@ domain = {
 
 L1_RBAC = {
   ownerNames = [
-    "john.nephin@163dev.onmicrosoft.com",
-    "bernard.maltais@163dev.onmicrosoft.com",
-    "louis-eric.tremblay@163dev.onmicrosoft.com",
-    "test-bernard.maltais@163dev.onmicrosoft.com"
+    "user1@163dev.onmicrosoft.com",
+    "user1@163dev.onmicrosoft.com"
   ]
 
-  contributorNames = []
+  contributorNames = [
+    "user3@163dev.onmicrosoft.com"
+  ]
 
-  readerNames = []
+  readerNames = [
+    "user4@163dev.onmicrosoft.com"
+  ]
 }
 
 vmConfigs = {
@@ -88,7 +90,7 @@ vmConfigs = {
   */
 
   SWJ-01 = {
-    admin_password = "tmp-Canada123!"
+    admin_password = "tmp-53w45trdfg"
     vm_size        = "Standard_D2s_v3"
     priority       = "Spot"
   }
