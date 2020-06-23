@@ -1,5 +1,5 @@
 module "SWJ-01" {
-  source                  = "github.com/canada-ca-terraform-modules/terraform-azurerm_windows_virtual_machine?ref=20200612.1"
+  source                  = "github.com/canada-ca-terraform-modules/terraform-azurerm_windows_virtual_machine?ref=20200622.2"
   deploy                  = var.deployOptionalFeatures.jumpServer
   name                    = "${var.env}SWJ-${var.project}01"
   resource_group          = azurerm_resource_group.Management-rg
@@ -12,7 +12,7 @@ module "SWJ-01" {
   admin_password          = var.vmConfigs.SWJ-01.admin_password
   vm_size                 = var.vmConfigs.SWJ-01.vm_size
   license_type            = "Windows_Server"
-  dependancyAgent         = true
+  dependancyAgent         = false
   tags                    = var.tags
 }
 
