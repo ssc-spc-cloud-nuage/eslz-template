@@ -2,43 +2,73 @@ tags = {
   "classification"    = "pbmm"
   "contact"           = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
   "costcentre"        = "566811"
-  "env"               = "sandbox"
+  "env"               = "dev"
   "owner"             = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
   "cloudusageprofile" = "3"
   "branch"            = "CIO"
 }
 
-env     = "ScSc"
+env     = "ScDc"
 group   = "CIO"
 project = "ESLZ"
 
 location = "canadacentral"
 
+deployOptionalFeatures = {
+  ddos_protection_plan       = false
+  recovery_services_vault    = false
+  security_center            = true
+  sentinel                   = false
+  update_management          = true
+  deny_publicip_subscription = true
+  deny_publicips_on_nics     = true
+  jumpServer                 = true
+}
+
+## Optional Features variables ##
+
+optionalFeaturesConfig = {
+  recovery_services_vault = {
+    sku                 = "Standard" # Sets the vault's SKU. Possible values include: Standard, RS0
+    soft_delete_enabled = true       # Is soft delete enable for this Vault?
+  }
+  security_center = {
+    email = "some@test.com"
+    phone = "123-456-7890"
+  }
+}
+
+network = {
+  vnet = ["10.101.240.0/24"]
+  subnets = {
+    PAZ = ["10.101.240.0/27"]
+    OZ  = ["10.101.240.32/27"]
+    RZ  = ["10.101.240.64/27"]
+    MAZ = ["10.101.240.96/27"]
+  }
+}
 Landing-Zone-Next-Hop = "172.168.3.22"
 RDS-Gateway           = "10.101.16.4"
 
 domain = {
   public = {
-    name = "eslz.sb.ciso.ssc-spc.gc.ca"
+    name = "eslz.dev.ciso.ssc-spc.gc.ca"
   }
   private = {
-    name                 = "eslz.local"
+    name                 = "eslz.dev.local"
     registration_enabled = true # Set to true if auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled?
   }
 }
 
-L2_RBAC = {
-  contributorNames = [
+L1_RBAC = {
+  ownerNames = [
     "john.nephin@163dev.onmicrosoft.com",
     "bernard.maltais@163dev.onmicrosoft.com",
     "louis-eric.tremblay@163dev.onmicrosoft.com",
     "test-bernard.maltais@163dev.onmicrosoft.com"
   ]
 
-  contributorEnterpriseID = [
-    "bb294f5d-fece-4d3a-a187-7f98cb64e478", # Bernard Maltais SP
-    "2000c7f5-0f8d-4a45-a65d-d70dc3edcac3"  # John Nephin SP
-  ]
+  contributorNames = []
 
   readerNames = []
 }
@@ -57,9 +87,10 @@ vmConfigs = {
   }
   */
 
-  SRV-linux-mgmt = {
-    admin_password = "tmp-canada123!"
+  SWJ-01 = {
+    admin_password = "tmp-Canada123!"
     vm_size        = "Standard_D2s_v3"
     priority       = "Spot"
   }
 }
+

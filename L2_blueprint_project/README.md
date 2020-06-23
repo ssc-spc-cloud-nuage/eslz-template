@@ -22,24 +22,11 @@ The following resources will be deployed by this blueprint:
 rover login
 ```
 
-3. Select the subscription to use with:
+3. Edit the content of the environment variable files located in the environments folder.
 
-```
-az account set --subscription <subscription_GUID>
-```
-
-4. Make sure you install or have access to the existing subscription launchpad with:
-
-```
-cd L0_blueprint_launchpad
-./launchpad apply
-```
-
-5. Edit the content of the environment variable files located in the environments folder.
-
-6. Deploy the desired Landing Zone environment resources. For example, to deploy the dev environment use the following commands:
+4. Deploy the desired Landing Zone environment resources. For example, to deploy the `dev` environment use the following commands:
 
 ```sh
 cd /tf/caf/L2_blueprint_project
-./rover-dev.sh apply
+./gorover.sh dev apply
 ```

@@ -16,25 +16,42 @@ The following resources will be deployed by this blueprint:
 
 ## Deployment
 
-1. Launch the development workspace in a container following the instructions found at: https://github.com/Azure/caf-terraform-landingzones/blob/master/documentation/getting_started/getting_started.md
+1. If you have more than one subscription associated to your user, and even you don't, update the `global.envvars` file located in the `envvars` folder with the desired Azure subscription id. This way all commands used in the blueprint will automatically target this subscription.
 
-2. If not already logged-in:
+2. Launch the development workspace in a container following the instructions found at: https://github.com/Azure/caf-terraform-landingzones/blob/master/documentation/getting_started/getting_started.md
+
+3. If not already logged-in:
 
 ```
 rover login
 ```
 
-3. Select the subscription to use with:
-
-```
-az account set --subscription <subscription_GUID>
-```
-
 4. Configure the level0.tfvars file with the desired values
-   
-5. Make sure you install or have access to the existing subscription launchpad with:
+
+5. Install the subscription launchpad. For example, to install the launchpad in a dev subscription do:
 
 ```
 cd L0_blueprint_launchpad
-./launchpad.sh apply
+./golaunchpad.sh dev apply
 ```
+
+## Managing access to the launchpad
+
+If you want to allow more than one user to deploy code based on this launchpad you will need to add them as members of the Azure Active Directory security group that was created as part of the `L0_blueprint_launchpad` deployment.
+
+This membership assignment is handles in the L1_blueprint_base deployment. Simply add any user login email address as found in Azure Active Directory to the desired `<environment>.tfvar` file located in the `L1_blueprint_base/environments` folder. You will list toes identitied in the `L1_RBAC` variable object definition under the `ownerNames` list. For example:
+
+```json
+L1_RBAC = {
+  ownerNames = [
+    "user1.name@111dev.onmicrosoft.com",
+    "user1.name@111dev.onmicrosoft.com"
+  ]
+
+  contributorNames = []
+
+  readerNames = []
+}
+```
+
+You can add as many as you need. You can also remove them when needed and simple re-run the `rover-<environment>.sh` script to update the membership.
