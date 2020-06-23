@@ -4,7 +4,7 @@
 
 This blueprint is a custom implementation of the "Azure Cloud Adoption Framework landing zones for Terraform" found at the following URL: https://github.com/Azure/caf-terraform-landingzones
 
-This landinzone solution follows the GC Naming Convention documentation found in: -enter link to document-
+This landinzone solution follows the [GC Naming and Tagging Standard for Azure](https://bernardmaltais.github.io/GC_Naming_and_Tagging/index.html).
 
 In summary the concept of the Landingzone is similar to how you would build presence on a remote planet (the cloud).
 
