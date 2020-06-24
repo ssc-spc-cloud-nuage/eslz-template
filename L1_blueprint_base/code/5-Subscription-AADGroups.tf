@@ -1,5 +1,5 @@
 resource "azuread_group" "L1_Subscription_Owners" {
-  name = "${local.prefix}_${var.project}_L1_Subscription_Owners"
+  name   = "${local.prefix}_${var.project}_L1_Subscription_Owners"
   owners = data.azuread_users.L1_Subscription_Owners.object_ids
 }
 

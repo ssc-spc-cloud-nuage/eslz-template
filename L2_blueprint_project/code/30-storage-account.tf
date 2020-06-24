@@ -1,5 +1,5 @@
 resource azurecaf_naming_convention Project-sa {  
-  name    = "${lower(var.env)}${lower(var.group)}${lower(substr(var.project, 0, 4))}prj${local.unique_Logs}stg"
+  name    = "${local.env_short}${local.group_short}${local.project_short}prj${local.unique_Logs}"
   resource_type    = "st"
   convention  = "passthrough"
 }

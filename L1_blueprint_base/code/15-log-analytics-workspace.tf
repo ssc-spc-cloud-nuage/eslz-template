@@ -1,12 +1,26 @@
+# Can't use azurecaf_naming_convention for now due to casing bug https://github.com/aztfmod/terraform-provider-azurecaf/issues/25
+# Will use when bug is fixed
+/*
 resource azurecaf_naming_convention Project-law {  
-  name    = "${var.env}CLD-${var.group}-${var.project}-${local.unique_Logs}-Project-law"
+  name    = "${var.env}CLD-${var.group}-${var.project}-${local.unique_Logs}"
   resource_type    = "la"
+  postfix = "law"
   convention  = "passthrough"
+}
+*/
+
+locals {
+  azurecaf_naming_convention-Project-law-replace = replace("${var.env}CLD-${var.group}-${var.project}", "_", "-")
+  azurecaf_naming_convention-Project-law-regex  = regex("[0-9A-Za-z-]+", local.azurecaf_naming_convention-Project-law-replace)
+  azurecaf_naming_convention-Project-law-54     = substr(local.azurecaf_naming_convention-Project-law-regex, 0, 54)
+  azurecaf_naming_convention-Project-law-59     = substr("${local.azurecaf_naming_convention-Project-law-54}-${local.unique_Logs}", 0, 59)
+  azurecaf_naming_convention-Project-law-result = "${local.azurecaf_naming_convention-Project-law-59}-law"
 }
 
 //Can't have a "_" in the name, only "-"
 resource "azurerm_log_analytics_workspace" "Project-law" {
-  name                = azurecaf_naming_convention.Project-law.result
+  # name                = azurecaf_naming_convention.Project-law.result
+  name                = local.azurecaf_naming_convention-Project-law-result
   location            = azurerm_resource_group.Logs-rg.location
   resource_group_name = azurerm_resource_group.Logs-rg.name
   sku                 = "PerGB2018"

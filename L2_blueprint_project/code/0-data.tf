@@ -28,19 +28,30 @@ data azurerm_subnet Project_MAZ-snet {
   resource_group_name  = data.azurerm_resource_group.Network-rg.name
 }
 
+/*
 resource azurecaf_naming_convention Project-law {  
-  name    = "${var.env}CLD-${var.group}-${var.project}-${local.unique_Logs}-Project-law"
+  name    = "${var.env}CLD-${var.group}-${var.project}-${local.unique_Logs}"
   resource_type    = "la"
+  postfix = "law"
   convention  = "passthrough"
+}
+*/
+
+locals {
+  azurecaf_naming_convention-Project-law-replace = replace("${var.env}CLD-${var.group}-${var.project}", "_", "-")
+  azurecaf_naming_convention-Project-law-regex  = regex("[0-9A-Za-z-]+", local.azurecaf_naming_convention-Project-law-replace)
+  azurecaf_naming_convention-Project-law-54     = substr(local.azurecaf_naming_convention-Project-law-regex, 0, 54)
+  azurecaf_naming_convention-Project-law-59     = substr("${local.azurecaf_naming_convention-Project-law-54}-${local.unique_Logs}", 0, 59)
+  azurecaf_naming_convention-Project-law-result = "${local.azurecaf_naming_convention-Project-law-59}-law"
 }
 
 data azurerm_log_analytics_workspace Project-law {
-  name                = azurecaf_naming_convention.Project-law.result
+  name                = local.azurecaf_naming_convention-Project-law-result
   resource_group_name = data.azurerm_resource_group.Logs-rg.name
 }
 
 resource azurecaf_naming_convention Project_law-sa {  
-  name    = "${lower(var.env)}${lower(var.group)}${lower(substr(var.project, 0, 4))}law${local.unique_Logs}stg"
+  name    = "${local.env_short}${local.group_short}${local.project_short}law${local.unique_Logs}"
   resource_type    = "st"
   convention  = "passthrough"
 }
