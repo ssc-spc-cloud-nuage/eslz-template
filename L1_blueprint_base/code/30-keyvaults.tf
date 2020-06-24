@@ -1,9 +1,11 @@
+/*
 resource azurecaf_naming_convention Project-kv {
   name          = substr("${local.env_short}CKV-${local.group_short}-${local.project_short}-${local.unique_Keyvault}", 0, 21)
   resource_type = "kv"
   postfix       = "kv"
   convention    = "passthrough"
 }
+*/
 
 locals {
   azurecaf_naming_convention-Project-kv-16     = substr("${local.env_short}CKV-${local.group_short}-${local.project_short}", 0, 16)

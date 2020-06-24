@@ -11,10 +11,10 @@ resource azurecaf_naming_convention Project-law {
 
 locals {
   azurecaf_naming_convention-Project-law-replace = replace("${var.env}CLD-${var.group}-${var.project}", "_", "-")
-  azurecaf_naming_convention-Project-law-regex  = regex("[0-9A-Za-z-]+", local.azurecaf_naming_convention-Project-law-replace)
-  azurecaf_naming_convention-Project-law-54     = substr(local.azurecaf_naming_convention-Project-law-regex, 0, 54)
-  azurecaf_naming_convention-Project-law-59     = substr("${local.azurecaf_naming_convention-Project-law-54}-${local.unique_Logs}", 0, 59)
-  azurecaf_naming_convention-Project-law-result = "${local.azurecaf_naming_convention-Project-law-59}-law"
+  azurecaf_naming_convention-Project-law-regex   = regex("[0-9A-Za-z-]+", local.azurecaf_naming_convention-Project-law-replace)
+  azurecaf_naming_convention-Project-law-54      = substr(local.azurecaf_naming_convention-Project-law-regex, 0, 54)
+  azurecaf_naming_convention-Project-law-59      = substr("${local.azurecaf_naming_convention-Project-law-54}-${local.unique_Logs}", 0, 59)
+  azurecaf_naming_convention-Project-law-result  = "${local.azurecaf_naming_convention-Project-law-59}-law"
 }
 
 //Can't have a "_" in the name, only "-"

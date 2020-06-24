@@ -1,5 +1,12 @@
+locals {
+  Project-vnet-postfix = "-vnet"
+  Project-vnet-regex   = regex("[0-9A-Za-z-_.]+", "${var.env}CNR-${var.group}_${var.project}")
+  Project-vnet-substr  = substr(local.Project-vnet-regex, 0, 64 - length(local.Project-vnet-postfix))
+  Project-vnet-name    = "${local.Project-vnet-substr}${local.Project-vnet-postfix}"
+}
+
 resource azurerm_virtual_network Project-vnet {
-  name                = "${var.env}CNR-${var.group}_${var.project}-vnet"
+  name                = local.Project-vnet-name
   location            = azurerm_resource_group.Network-rg.location
   resource_group_name = azurerm_resource_group.Network-rg.name
   address_space       = var.network.vnet

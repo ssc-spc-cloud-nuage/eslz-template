@@ -1,5 +1,12 @@
+locals {
+  Project_MAZ-nsg-postfix = "_MAZ-nsg"
+  Project_MAZ-nsg-regex   = regex("[0-9A-Za-z-_.]+", "${var.env}CNR-${var.group}_${var.project}")
+  Project_MAZ-nsg-substr  = substr(local.Project_MAZ-nsg-regex, 0, 80 - length(local.Project_MAZ-nsg-postfix))
+  Project_MAZ-nsg-result  = "${local.Project_MAZ-nsg-substr}${local.Project_MAZ-nsg-postfix}"
+}
+
 resource "azurerm_network_security_group" "Project_MAZ-nsg" {
-  name                = "${var.env}CNR-${var.group}_${var.project}_MAZ-nsg"
+  name                = local.Project_MAZ-nsg-result
   location            = data.azurerm_resource_group.Network-rg.location
   resource_group_name = data.azurerm_resource_group.Network-rg.name
 

@@ -1,5 +1,12 @@
+locals {
+  Global-rt-postfix = "_Global-rt"
+  Global-rt-regex   = regex("[0-9A-Za-z-_.]+", "${var.env}CNR-${var.group}_${var.project}")
+  Global-rt-substr  = substr(local.Global-rt-regex, 0, 80 - length(local.Global-rt-postfix))
+  Global-rt-name    = "${local.Global-rt-substr}${local.Global-rt-postfix}"
+}
+
 resource azurerm_route_table Global-rt {
-  name                = "${var.env}CNR-${var.group}_${var.project}_Global-rt"
+  name                = local.Global-rt-name
   location            = azurerm_resource_group.Network-rg.location
   resource_group_name = azurerm_resource_group.Network-rg.name
 

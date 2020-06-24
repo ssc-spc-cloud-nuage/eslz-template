@@ -1,5 +1,12 @@
+locals {
+  Project_OZ-nsg-postfix = "_OZ-nsg"
+  Project_OZ-nsg-regex   = regex("[0-9A-Za-z-_.]+", "${var.env}CNR-${var.group}_${var.project}")
+  Project_OZ-nsg-substr  = substr(local.Project_OZ-nsg-regex, 0, 80 - length(local.Project_OZ-nsg-postfix))
+  Project_OZ-nsg-result  = "${local.Project_OZ-nsg-substr}${local.Project_OZ-nsg-postfix}"
+}
+
 resource "azurerm_network_security_group" "Project_OZ-nsg" {
-  name                = "${var.env}CNR-${var.group}_${var.project}_OZ-nsg"
+  name                = local.Project_OZ-nsg-result
   location            = data.azurerm_resource_group.Network-rg.location
   resource_group_name = data.azurerm_resource_group.Network-rg.name
 
@@ -26,13 +33,13 @@ resource "azurerm_network_security_group" "Project_OZ-nsg" {
     destination_address_prefix = "*"
   }
   security_rule {
-    name                       = "AllowAllOnMAZSubnet"
+    name                       = "AllowAllOnOZSubnet"
     access                     = "Allow"
     priority                   = "200"
     protocol                   = "*"
     direction                  = "Inbound"
     source_port_range          = "*"
-    source_address_prefixes    = data.azurerm_subnet.Project_MAZ-snet.address_prefixes
+    source_address_prefixes    = data.azurerm_subnet.Project_OZ-snet.address_prefixes
     destination_port_range     = "*"
     destination_address_prefix = "*" # Implicit local subnet destination
   }

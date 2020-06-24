@@ -1,7 +1,7 @@
-resource azurecaf_naming_convention Project-sa {  
-  name    = "${local.env_short}${local.group_short}${local.project_short}prj${local.unique_Logs}"
-  resource_type    = "st"
-  convention  = "passthrough"
+resource azurecaf_naming_convention Project-sa {
+  name          = "${local.env_short}${local.group_short}${local.project_short}prj${local.unique_Logs}"
+  resource_type = "st"
+  convention    = "passthrough"
 }
 
 resource "azurerm_storage_account" "Project-sa" {
