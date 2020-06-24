@@ -14,7 +14,7 @@ resource "azuread_group_member" "L2_Subscription_Contributors-Members" {
 }
 
 # Give access to SP (Enterprise App) to be able to manage resources via AAD group membership
-resource "azuread_group_member" "SP_L2_Subscription_Contributors-Members" {
+resource "azuread_group_member" "L2_Subscription_Contributors_Service_Principal-Members" {
   for_each = toset(var.L2_RBAC.contributorEnterpriseID)
 
   group_object_id  = data.azuread_group.L2_Subscription_Contributors.id

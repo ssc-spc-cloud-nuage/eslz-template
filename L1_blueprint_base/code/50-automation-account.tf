@@ -1,7 +1,8 @@
-resource "azurecaf_naming_convention" "Project-aa" {  
-  name    = "${local.prefix}-${var.project}"
-  resource_type    = "aaa"
-  convention  = "passthrough"
+resource "azurecaf_naming_convention" "Project-aa" {
+  name          = "${local.prefix}-${var.project}"
+  resource_type = "aaa"
+  postfix       = "aa"
+  convention    = "passthrough"
 }
 
 //Can't have a "_" in the name, only "-"

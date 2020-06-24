@@ -1,7 +1,7 @@
-resource "azurecaf_naming_convention" "SWJ-01" {  
-  name    = "${var.env}SWJ-${var.project}01"
-  resource_type    = "vmw"
-  convention  = "passthrough"
+resource "azurecaf_naming_convention" "SWJ-01" {
+  name          = "${var.env}${var.vmConfigs.SWJ-01.name}"
+  resource_type = "vmw"
+  convention    = "passthrough"
 }
 
 module "SWJ-01" {
