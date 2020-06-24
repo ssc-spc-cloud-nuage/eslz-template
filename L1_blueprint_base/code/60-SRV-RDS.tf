@@ -1,7 +1,13 @@
+resource "azurecaf_naming_convention" "SWJ-01" {  
+  name    = "${var.env}SWJ-${var.project}01"
+  resource_type    = "vmw"
+  convention  = "passthrough"
+}
+
 module "SWJ-01" {
   source                  = "github.com/canada-ca-terraform-modules/terraform-azurerm_windows_virtual_machine?ref=20200622.2"
   deploy                  = var.deployOptionalFeatures.jumpServer
-  name                    = "${var.env}SWJ-${var.project}01"
+  name                    = azurecaf_naming_convention.SWJ-01.result
   resource_group          = azurerm_resource_group.Management-rg
   location                = azurerm_resource_group.Management-rg.location
   nic_subnetName          = azurerm_subnet.Project_MAZ-snet.name

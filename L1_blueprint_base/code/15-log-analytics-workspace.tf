@@ -1,6 +1,12 @@
+resource azurecaf_naming_convention Project-law {  
+  name    = "${var.env}CLD-${var.group}-${var.project}-${local.unique_Logs}-Project-law"
+  resource_type    = "la"
+  convention  = "passthrough"
+}
+
 //Can't have a "_" in the name, only "-"
 resource "azurerm_log_analytics_workspace" "Project-law" {
-  name                = "${var.env}CLD-${var.group}-${var.project}-${local.unique_Logs}-Project-law"
+  name                = azurecaf_naming_convention.Project-law.result
   location            = azurerm_resource_group.Logs-rg.location
   resource_group_name = azurerm_resource_group.Logs-rg.name
   sku                 = "PerGB2018"

@@ -1,6 +1,12 @@
+resource azurecaf_naming_convention Project-kv {  
+  name    = "${substr("${var.env}CKV-${var.group}-${substr(var.project, 0, 4)}-${local.unique_Keyvault}", 0, 21)}-kv"
+  resource_type    = "kv"
+  convention  = "passthrough"
+}
+
 //Can't have a "_" in the name, only "-"
 resource "azurerm_key_vault" "Project-kv" {
-  name                            = "${substr("${var.env}CKV-${var.group}-${var.project}-${local.unique_Keyvault}", 0, 21)}-kv"
+  name                            = azurecaf_naming_convention.Project-kv.result
   location                        = azurerm_resource_group.Keyvault-rg.location
   resource_group_name             = azurerm_resource_group.Keyvault-rg.name
   sku_name                        = "standard"

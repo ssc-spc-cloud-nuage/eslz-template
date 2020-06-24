@@ -26,9 +26,11 @@ The following resources will be deployed by this blueprint:
 rover login
 ```
 
-4. Configure the level0.tfvars file with the desired values
+4. Configure the <envname>.envvars in the `../envvars` folder with the desired values. See the [README.md](../envvars/README.md) file in the folder for more information.
 
-5. Install the subscription launchpad. For example, to install the launchpad in a dev subscription do:
+5. Configure the <envname>.tfvars file in the `environments` folder with the desired values. See the [README.md](./environments/README.md) file in the folder for more information.
+
+6. Install the subscription launchpad. For example, to install the launchpad in a dev subscription do:
 
 ```
 cd L0_blueprint_launchpad

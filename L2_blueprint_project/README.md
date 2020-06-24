@@ -22,7 +22,7 @@ The following resources will be deployed by this blueprint:
 rover login
 ```
 
-3. Edit the content of the environment variable files located in the environments folder.
+3. Configure the <envname>.tfvars file in the `environments` folder with the desired values. See the [README.md](./environments/README.md) file in the folder for more information.
 
 4. Deploy the desired Landing Zone environment resources. For example, to deploy the `dev` environment use the following commands:
 
