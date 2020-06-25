@@ -62,3 +62,18 @@ vmConfigs = {
     priority       = "Spot"
   }
 }
+
+# Fill the section below with the values from the output of ./gorover.sh <env> validate. Look in the section
+# called Getting launchpad coordinates: It will look like:
+# Getting launchpad coordinates:
+#  - storage_account_name: scdccioeslztemplatestlev
+#  - resource_group: ScDc-CIO_ESLZ_Template-terraform-state
+#  - container: level0
+#  - tfstate file: launchpad_opensource_light.tfstate
+
+L1_terraform_remote_state_config = {
+    storage_account_name  = "<get the storage account name from the storage_account_name: output>"
+    resource_group_name   = "<get the storage account name from the resource_group: output>"
+    container_name        = "<set this value to the envronment name. Like dev, prod. The same you used for the command gorover.sh>"
+    key                   = "L1_blueprint_base.tfstate"
+}

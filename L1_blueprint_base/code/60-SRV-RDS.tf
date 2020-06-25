@@ -10,9 +10,9 @@ module "SWJ-01" {
   name                    = azurecaf_naming_convention.SWJ-01.result
   resource_group          = azurerm_resource_group.Management-rg
   location                = azurerm_resource_group.Management-rg.location
-  nic_subnetName          = azurerm_subnet.Project_MAZ-snet.name
-  nic_vnetName            = azurerm_virtual_network.Project-vnet.name
-  nic_resource_group_name = azurerm_resource_group.Network-rg.name
+  nic_subnetName          = module.Project_MAZ-snet.name
+  nic_vnetName            = module.Project_MAZ-snet.virtual_network_name
+  nic_resource_group_name = module.Project_MAZ-snet.resource_group_name
   priority                = try(var.vmConfigs.SWJ-01.priority, "Regular")
   admin_username          = "azureadmin"
   admin_password          = var.vmConfigs.SWJ-01.admin_password

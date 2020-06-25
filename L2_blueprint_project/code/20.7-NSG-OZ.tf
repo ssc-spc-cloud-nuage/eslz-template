@@ -39,7 +39,7 @@ resource "azurerm_network_security_group" "Project_OZ-nsg" {
     protocol                   = "*"
     direction                  = "Inbound"
     source_port_range          = "*"
-    source_address_prefixes    = data.azurerm_subnet.Project_OZ-snet.address_prefixes
+    source_address_prefixes    = local.Project_OZ-snet.address_prefixes
     destination_port_range     = "*"
     destination_address_prefix = "*" # Implicit local subnet destination
   }
@@ -50,7 +50,7 @@ resource "azurerm_network_security_group" "Project_OZ-nsg" {
     protocol                   = "*"
     direction                  = "Inbound"
     source_port_range          = "*"
-    source_address_prefixes    = data.azurerm_subnet.Project_PAZ-snet.address_prefixes
+    source_address_prefixes    = local.Project_PAZ-snet.address_prefixes
     destination_port_range     = "*"
     destination_address_prefix = "*"
   }
@@ -61,7 +61,7 @@ resource "azurerm_network_security_group" "Project_OZ-nsg" {
     protocol                   = "*"
     direction                  = "Inbound"
     source_port_range          = "*"
-    source_address_prefixes    = data.azurerm_subnet.Project_OZ-snet.address_prefixes
+    source_address_prefixes    = local.Project_OZ-snet.address_prefixes
     destination_port_range     = "*"
     destination_address_prefix = "*"
   }
@@ -72,7 +72,7 @@ resource "azurerm_network_security_group" "Project_OZ-nsg" {
     protocol                   = "*"
     direction                  = "Inbound"
     source_port_range          = "*"
-    source_address_prefixes    = data.azurerm_subnet.Project_RZ-snet.address_prefixes
+    source_address_prefixes    = local.Project_RZ-snet.address_prefixes
     destination_port_range     = "*"
     destination_address_prefix = "*"
   }
@@ -91,7 +91,7 @@ resource "azurerm_network_security_group" "Project_OZ-nsg" {
 }
 
 resource azurerm_subnet_network_security_group_association Project_OZ-nsg-Association {
-  subnet_id                 = data.azurerm_subnet.Project_OZ-snet.id
+  subnet_id                 = local.Project_OZ-snet.id
   network_security_group_id = azurerm_network_security_group.Project_OZ-nsg.id
 }
 
@@ -100,7 +100,7 @@ resource "azurerm_network_watcher_flow_log" "Network-Project_OZ-flow" {
   resource_group_name  = "NetworkWatcherRG"
 
   network_security_group_id = azurerm_network_security_group.Project_OZ-nsg.id
-  storage_account_id        = data.azurerm_storage_account.Project_law-sa.id
+  storage_account_id        = local.Project_law-sa.id
   enabled                   = true
 
   retention_policy {
@@ -110,9 +110,9 @@ resource "azurerm_network_watcher_flow_log" "Network-Project_OZ-flow" {
 
   traffic_analytics {
     enabled               = true
-    workspace_id          = data.azurerm_log_analytics_workspace.Project-law.workspace_id
-    workspace_region      = data.azurerm_log_analytics_workspace.Project-law.location
-    workspace_resource_id = data.azurerm_log_analytics_workspace.Project-law.id
+    workspace_id          = local.Project-law.workspace_id
+    workspace_region      = local.Project-law.location
+    workspace_resource_id = local.Project-law.id
     interval_in_minutes   = 10
   }
 }
@@ -120,7 +120,7 @@ resource "azurerm_network_watcher_flow_log" "Network-Project_OZ-flow" {
 resource "azurerm_monitor_diagnostic_setting" "Project_OZ-nsg-logs" {
   name                       = "${var.env}CNR-${var.group}_${var.project}_OZ-nsg-logs"
   target_resource_id         = azurerm_network_security_group.Project_OZ-nsg.id
-  log_analytics_workspace_id = data.azurerm_log_analytics_workspace.Project-law.id
+  log_analytics_workspace_id = local.Project-law.id
 
   log {
     category = "NetworkSecurityGroupEvent"

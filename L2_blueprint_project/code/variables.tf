@@ -13,3 +13,5 @@ variable "domain" {}
 variable "L2_RBAC" {}
 
 variable "vmConfigs" {}
+
+variable "L1_terraform_remote_state_config" {}
