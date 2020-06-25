@@ -15,7 +15,7 @@ resource "azurerm_monitor_diagnostic_setting" "Project_recovery_services_vault-l
   count                      = var.deployOptionalFeatures.recovery_services_vault ? 1 : 0
   name                       = "${azurerm_recovery_services_vault.Project-rv[0].name}-logs"
   target_resource_id         = azurerm_recovery_services_vault.Project-rv[0].id
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.Project-law.id
+  log_analytics_workspace_id = module.Project-law.id
 
   log {
     category = "AzureBackupReport"

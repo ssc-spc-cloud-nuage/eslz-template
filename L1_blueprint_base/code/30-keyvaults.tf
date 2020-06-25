@@ -32,7 +32,7 @@ resource "azurerm_key_vault" "Project-kv" {
 resource "azurerm_monitor_diagnostic_setting" "Project-kv-logs" {
   name                       = "${azurerm_key_vault.Project-kv.name}-logs"
   target_resource_id         = azurerm_key_vault.Project-kv.id
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.Project-law.id
+  log_analytics_workspace_id = module.Project-law.id
 
   log {
     category = "AuditEvent"

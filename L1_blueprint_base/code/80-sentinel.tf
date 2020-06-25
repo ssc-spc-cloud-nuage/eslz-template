@@ -4,8 +4,8 @@ resource "azurerm_log_analytics_solution" "sentinel" {
   solution_name         = "SecurityInsights"
   location              = azurerm_resource_group.Logs-rg.location
   resource_group_name   = azurerm_resource_group.Logs-rg.name
-  workspace_resource_id = azurerm_log_analytics_workspace.Project-law.id
-  workspace_name        = azurerm_log_analytics_workspace.Project-law.name
+  workspace_resource_id = module.Project-law.id
+  workspace_name        = module.Project-law.name
 
   plan {
     product   = "OMSGallery/SecurityInsights"

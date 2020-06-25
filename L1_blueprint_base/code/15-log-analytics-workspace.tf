@@ -8,7 +8,7 @@ resource azurecaf_naming_convention Project-law {
   convention  = "passthrough"
 }
 */
-
+/*
 locals {
   azurecaf_naming_convention-Project-law-replace = replace("${var.env}CLD-${var.group}-${var.project}", "_", "-")
   azurecaf_naming_convention-Project-law-regex   = regex("[0-9A-Za-z-]+", local.azurecaf_naming_convention-Project-law-replace)
@@ -26,13 +26,21 @@ resource "azurerm_log_analytics_workspace" "Project-law" {
   sku                 = "PerGB2018"
   tags                = var.tags
 }
+*/
+module "Project-law" {
+  source            = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-log_analytics_workspace?ref=v1.0.1"
+  userDefinedString = "${var.group}_${var.project}"
+  resource_group    = azurerm_resource_group.Logs-rg
+  env               = var.env
+  tags              = var.tags
+}
 
 resource "azurerm_log_analytics_solution" "ServiceMap" {
   solution_name         = "ServiceMap"
   location              = azurerm_resource_group.Logs-rg.location
   resource_group_name   = azurerm_resource_group.Logs-rg.name
-  workspace_resource_id = azurerm_log_analytics_workspace.Project-law.id
-  workspace_name        = azurerm_log_analytics_workspace.Project-law.name
+  workspace_resource_id = module.Project-law.id
+  workspace_name        = module.Project-law.name
   plan {
     publisher = "Microsoft"
     product   = "OMSGallery/ServiceMap"
@@ -43,8 +51,8 @@ resource "azurerm_log_analytics_solution" "AzureActivity" {
   solution_name         = "AzureActivity"
   location              = azurerm_resource_group.Logs-rg.location
   resource_group_name   = azurerm_resource_group.Logs-rg.name
-  workspace_resource_id = azurerm_log_analytics_workspace.Project-law.id
-  workspace_name        = azurerm_log_analytics_workspace.Project-law.name
+  workspace_resource_id = module.Project-law.id
+  workspace_name        = module.Project-law.name
   plan {
     publisher = "Microsoft"
     product   = "OMSGallery/AzureActivity"
@@ -55,8 +63,8 @@ resource "azurerm_log_analytics_solution" "AgentHealthAssessment" {
   solution_name         = "AgentHealthAssessment"
   location              = azurerm_resource_group.Logs-rg.location
   resource_group_name   = azurerm_resource_group.Logs-rg.name
-  workspace_resource_id = azurerm_log_analytics_workspace.Project-law.id
-  workspace_name        = azurerm_log_analytics_workspace.Project-law.name
+  workspace_resource_id = module.Project-law.id
+  workspace_name        = module.Project-law.name
   plan {
     publisher = "Microsoft"
     product   = "OMSGallery/AgentHealthAssessment"
@@ -67,8 +75,8 @@ resource "azurerm_log_analytics_solution" "DnsAnalytics" {
   solution_name         = "DnsAnalytics"
   location              = azurerm_resource_group.Logs-rg.location
   resource_group_name   = azurerm_resource_group.Logs-rg.name
-  workspace_resource_id = azurerm_log_analytics_workspace.Project-law.id
-  workspace_name        = azurerm_log_analytics_workspace.Project-law.name
+  workspace_resource_id = module.Project-law.id
+  workspace_name        = module.Project-law.name
   plan {
     publisher = "Microsoft"
     product   = "OMSGallery/DnsAnalytics"
@@ -79,8 +87,8 @@ resource "azurerm_log_analytics_solution" "KeyVaultAnalytics" {
   solution_name         = "KeyVaultAnalytics"
   location              = azurerm_resource_group.Logs-rg.location
   resource_group_name   = azurerm_resource_group.Logs-rg.name
-  workspace_resource_id = azurerm_log_analytics_workspace.Project-law.id
-  workspace_name        = azurerm_log_analytics_workspace.Project-law.name
+  workspace_resource_id = module.Project-law.id
+  workspace_name        = module.Project-law.name
   plan {
     publisher = "Microsoft"
     product   = "OMSGallery/KeyVaultAnalytics"
@@ -93,8 +101,8 @@ resource "azurerm_log_analytics_solution" "Updates" {
   solution_name         = "Updates"
   location              = azurerm_resource_group.Logs-rg.location
   resource_group_name   = azurerm_resource_group.Logs-rg.name
-  workspace_resource_id = azurerm_log_analytics_workspace.Project-law.id
-  workspace_name        = azurerm_log_analytics_workspace.Project-law.name
+  workspace_resource_id = module.Project-law.id
+  workspace_name        = module.Project-law.name
   plan {
     publisher = "Microsoft"
     product   = "OMSGallery/Updates"
@@ -107,8 +115,8 @@ resource "azurerm_log_analytics_solution" "ChangeTracking" {
   solution_name         = "ChangeTracking"
   location              = azurerm_resource_group.Logs-rg.location
   resource_group_name   = azurerm_resource_group.Logs-rg.name
-  workspace_resource_id = azurerm_log_analytics_workspace.Project-law.id
-  workspace_name        = azurerm_log_analytics_workspace.Project-law.name
+  workspace_resource_id = module.Project-law.id
+  workspace_name        = module.Project-law.name
   plan {
     publisher = "Microsoft"
     product   = "OMSGallery/ChangeTracking"
@@ -118,7 +126,7 @@ resource "azurerm_log_analytics_solution" "ChangeTracking" {
 resource "azurerm_log_analytics_datasource_windows_event" "windows_Application_event" {
   name                = "windows_Application_event"
   resource_group_name = azurerm_resource_group.Logs-rg.name
-  workspace_name      = azurerm_log_analytics_workspace.Project-law.name
+  workspace_name      = module.Project-law.name
   event_log_name      = "Application"
   event_types         = ["error", "warning"]
 }
@@ -126,7 +134,7 @@ resource "azurerm_log_analytics_datasource_windows_event" "windows_Application_e
 resource "azurerm_log_analytics_datasource_windows_event" "windows_System_event" {
   name                = "windows_System_event"
   resource_group_name = azurerm_resource_group.Logs-rg.name
-  workspace_name      = azurerm_log_analytics_workspace.Project-law.name
+  workspace_name      = module.Project-law.name
   event_log_name      = "System"
   event_types         = ["error", "warning"]
 }

@@ -17,7 +17,7 @@ resource "azurerm_automation_account" "Project-aa" {
 # Link automation account to a Log Analytics Workspace.
 resource "azurerm_log_analytics_linked_service" "law_link" {
   resource_group_name = azurerm_resource_group.Logs-rg.name
-  workspace_name      = azurerm_log_analytics_workspace.Project-law.name
+  workspace_name      = module.Project-law.name
   linked_service_name = "automation"
   resource_id         = azurerm_automation_account.Project-aa.id
 }
@@ -27,7 +27,7 @@ resource "azurerm_log_analytics_linked_service" "law_link" {
 resource "azurerm_monitor_diagnostic_setting" "Project_automation_account-logs" {
   name                       = "${azurerm_automation_account.Project-aa.name}-logs"
   target_resource_id         = azurerm_automation_account.Project-aa.id
-  log_analytics_workspace_id = azurerm_log_analytics_workspace.Project-law.id
+  log_analytics_workspace_id = module.Project-law.id
 
   log {
     category = "JobLogs"

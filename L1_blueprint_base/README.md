@@ -25,6 +25,11 @@ The following resources will be deployed by this blueprint:
 17. (Optional)Security Center
 18. (Optional)Sentinel
 
+## Requirements
+
+1. Azure Active Directory Global Admin )need to validate what lesser role would do) to create neded AAD Security groups
+2. Owner role on the subscription
+
 ## Deployment
 
 1. Launch the development workspace in a container following the instructions found at: https://github.com/Azure/caf-terraform-landingzones/blob/master/documentation/getting_started/getting_started.md
