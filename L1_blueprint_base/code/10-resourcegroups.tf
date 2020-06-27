@@ -1,43 +1,42 @@
 # Create a resource group
 
-resource azurerm_resource_group AutomationAccount-rg {
-  name     = "${local.prefix}_${var.project}_AutomationAccount-rg"
+/*
+Example structure for resource_groups map
+
+resource_groups = {
+    apim          = { 
+                    name     = "-apim-demo"
+    },
+    networking    = {    
+                    name     = "-networking-demo"
+    },
+    insights      = { 
+                    name     = "-insights-demo"
+                    location = "francecentral" 
+                    tags     = {
+                      special     = "France location needed"
+                      approver     = "Gunter"
+                    }   
+    },
+}
+*/
+
+module resource_groups {
+  source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-resource_groups?ref=v1.0.0"
+  resource_groups = {
+    AutomationAccount-rg = { userDefinedString = "${var.project}_AutomationAccount" },
+    Backups-rg           = { userDefinedString = "${var.project}_Backups" },
+    Network-rg           = { userDefinedString = "${var.project}_Network" },
+    Keyvault-rg          = { userDefinedString = "${var.project}_Keyvault" },
+    Logs-rg              = { userDefinedString = "${var.project}_Logs" },
+    DNS-rg               = { userDefinedString = "${var.project}_DNS" },
+    Management-rg        = { userDefinedString = "${var.project}_Management" },
+  }
+  env      = var.env
   location = var.location
   tags     = var.tags
 }
 
-resource azurerm_resource_group Backups-rg {
-  name     = "${local.prefix}_${var.project}_Backups-rg"
-  location = var.location
-  tags     = var.tags
-}
-
-resource azurerm_resource_group Network-rg {
-  name     = "${local.prefix}_${var.project}_Network-rg"
-  location = var.location
-  tags     = var.tags
-}
-
-resource azurerm_resource_group Keyvault-rg {
-  name     = "${local.prefix}_${var.project}_Keyvault-rg"
-  location = var.location
-  tags     = var.tags
-}
-
-resource azurerm_resource_group Logs-rg {
-  name     = "${local.prefix}_${var.project}_Logs-rg"
-  location = var.location
-  tags     = var.tags
-}
-
-resource azurerm_resource_group DNS-rg {
-  name     = "${local.prefix}_${var.project}_DNS-rg"
-  location = var.location
-  tags     = var.tags
-}
-
-resource azurerm_resource_group Management-rg {
-  name     = "${local.prefix}_${var.project}_Management-rg"
-  location = var.location
-  tags     = var.tags
+locals {
+  resource_groups = module.resource_groups.object
 }

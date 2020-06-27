@@ -1,111 +1,61 @@
 # Subnets
-/*
-locals {
-  Project_PAZ-snet-postfix = "_PAZ-snet"
-  Project_PAZ-snet-regex   = regex("[0-9A-Za-z-_.]+", "${var.env}CNR-${var.group}_${var.project}")
-  Project_PAZ-snet-substr  = substr(local.Project_PAZ-snet-regex, 0, 80 - length(local.Project_PAZ-snet-postfix))
-  Project_PAZ-snet-name    = "${local.Project_PAZ-snet-substr}${local.Project_PAZ-snet-postfix}"
+
+module Project-snet {
+  source          = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-subnet?ref=v1.0.1"
+  virtual_network = azurerm_virtual_network.Project-vnet
+  resource_group  = local.resource_groups.Network-rg
+  env             = var.env
+  subnets = {
+    PAZ = { address_prefixes = var.network.subnets.PAZ },
+    OZ  = { address_prefixes = var.network.subnets.OZ },
+    RZ  = { address_prefixes = var.network.subnets.RZ },
+    MAZ = { address_prefixes = var.network.subnets.MAZ }
+  }
+  route_tables = {
+    PAZ = { route_table = azurerm_route_table.Global-rt },
+    OZ  = { route_table = azurerm_route_table.Global-rt },
+    RZ  = { route_table = azurerm_route_table.Global-rt },
+    MAZ = { route_table = azurerm_route_table.Global-rt }
+  }
 }
 
-resource "azurerm_subnet" "Project_PAZ-snet" {
-  name                 = local.Project_PAZ-snet-name
-  virtual_network_name = azurerm_virtual_network.Project-vnet.name
-  resource_group_name  = azurerm_resource_group.Network-rg.name
-  address_prefixes     = var.network.subnets.PAZ
+locals {
+  subnets = module.Project-snet.object
 }
-*/
+/*
 module Project_PAZ-snet {
-  source               = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-subnet?ref=v1.0.0"
+  source               = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-subnet?ref=v1.0.1"
   virtual_network_name = azurerm_virtual_network.Project-vnet.name
-  resource_group_name  = azurerm_resource_group.Network-rg.name
+  resource_group_name  = local.resource_groups.Network-rg.name
   address_prefixes     = var.network.subnets.PAZ
   subnetShortName      = "PAZ"
+  route_table          = azurerm_route_table.Global-rt
 }
-
-resource azurerm_subnet_route_table_association Project_PAZ-rta {
-  subnet_id      = module.Project_PAZ-snet.id
-  route_table_id = azurerm_route_table.Global-rt.id
-}
-/*
-locals {
-  Project_OZ-snet-postfix = "_OZ-snet"
-  Project_OZ-snet-regex   = regex("[0-9A-Za-z-_.]+", "${var.env}CNR-${var.group}_${var.project}")
-  Project_OZ-snet-substr  = substr(local.Project_OZ-snet-regex, 0, 80 - length(local.Project_OZ-snet-postfix))
-  Project_OZ-snet-name    = "${local.Project_OZ-snet-substr}${local.Project_OZ-snet-postfix}"
-}
-
-resource "azurerm_subnet" "Project_OZ-snet" {
-  name                 = local.Project_OZ-snet-name
-  virtual_network_name = azurerm_virtual_network.Project-vnet.name
-  resource_group_name  = azurerm_resource_group.Network-rg.name
-  address_prefixes     = var.network.subnets.OZ
-}
-*/
 
 module Project_OZ-snet {
-  source               = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-subnet?ref=v1.0.0"
+  source               = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-subnet?ref=v1.0.1"
   virtual_network_name = azurerm_virtual_network.Project-vnet.name
-  resource_group_name  = azurerm_resource_group.Network-rg.name
+  resource_group_name  = local.resource_groups.Network-rg.name
   address_prefixes     = var.network.subnets.OZ
   subnetShortName      = "OZ"
+  route_table          = azurerm_route_table.Global-rt
 }
-
-resource azurerm_subnet_route_table_association Project_OZ-rta {
-  subnet_id      = module.Project_OZ-snet.id
-  route_table_id = azurerm_route_table.Global-rt.id
-}
-/*
-locals {
-  Project_RZ-snet-postfix = "_RZ-snet"
-  Project_RZ-snet-regex   = regex("[0-9A-Za-z-_.]+", "${var.env}CNR-${var.group}_${var.project}")
-  Project_RZ-snet-substr  = substr(local.Project_RZ-snet-regex, 0, 80 - length(local.Project_RZ-snet-postfix))
-  Project_RZ-snet-name    = "${local.Project_RZ-snet-substr}${local.Project_RZ-snet-postfix}"
-}
-
-resource "azurerm_subnet" "Project_RZ-snet" {
-  name                 = local.Project_RZ-snet-name
-  virtual_network_name = azurerm_virtual_network.Project-vnet.name
-  resource_group_name  = azurerm_resource_group.Network-rg.name
-  address_prefixes     = var.network.subnets.RZ
-}
-*/
 
 module Project_RZ-snet {
-  source               = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-subnet?ref=v1.0.0"
+  source               = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-subnet?ref=v1.0.1"
   virtual_network_name = azurerm_virtual_network.Project-vnet.name
-  resource_group_name  = azurerm_resource_group.Network-rg.name
+  resource_group_name  = local.resource_groups.Network-rg.name
   address_prefixes     = var.network.subnets.RZ
   subnetShortName      = "RZ"
+  route_table          = azurerm_route_table.Global-rt
 }
 
-resource azurerm_subnet_route_table_association Project_RZ-rta {
-  subnet_id      = module.Project_RZ-snet.id
-  route_table_id = azurerm_route_table.Global-rt.id
-}
-/*
-locals {
-  Project_MAZ-snet-postfix = "_MAZ-snet"
-  Project_MAZ-snet-regex   = regex("[0-9A-Za-z-_.]+", "${var.env}CNR-${var.group}_${var.project}")
-  Project_MAZ-snet-substr  = substr(local.Project_MAZ-snet-regex, 0, 80 - length(local.Project_MAZ-snet-postfix))
-  Project_MAZ-snet-name    = "${local.Project_MAZ-snet-substr}${local.Project_MAZ-snet-postfix}"
-}
-
-resource "azurerm_subnet" "Project_MAZ-snet" {
-  name                 = local.Project_MAZ-snet-name
-  virtual_network_name = azurerm_virtual_network.Project-vnet.name
-  resource_group_name  = azurerm_resource_group.Network-rg.name
-  address_prefixes     = var.network.subnets.MAZ
-}
-*/
 module Project_MAZ-snet {
-  source               = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-subnet?ref=v1.0.0"
+  source               = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-subnet?ref=v1.0.1"
   virtual_network_name = azurerm_virtual_network.Project-vnet.name
-  resource_group_name  = azurerm_resource_group.Network-rg.name
+  resource_group_name  = local.resource_groups.Network-rg.name
   address_prefixes     = var.network.subnets.MAZ
   subnetShortName      = "MAZ"
+  route_table          = azurerm_route_table.Global-rt
 }
-
-resource azurerm_subnet_route_table_association Project_MAZ-rta {
-  subnet_id      = module.Project_MAZ-snet.id
-  route_table_id = azurerm_route_table.Global-rt.id
-}
+*/

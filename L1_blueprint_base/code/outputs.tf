@@ -1,20 +1,10 @@
-output "Project_PAZ-snet" {
-  value     = module.Project_PAZ-snet.object
+output "resource_groups" {
+  value     = local.resource_groups
   sensitive = true
 }
 
-output "Project_OZ-snet" {
-  value     = module.Project_OZ-snet.object
-  sensitive = true
-}
-
-output "Project_RZ-snet" {
-  value     = module.Project_RZ-snet.object
-  sensitive = true
-}
-
-output "Project_MAZ-snet" {
-  value     = module.Project_MAZ-snet.object
+output "subnets" {
+  value     = local.subnets
   sensitive = true
 }
 
@@ -24,7 +14,7 @@ output "Project-law" {
 }
 
 output "Project_law-sa" {
-  value     = azurerm_storage_account.Project_law-sa
+  value     = module.Project_law-sa.object
   sensitive = true
 }
 

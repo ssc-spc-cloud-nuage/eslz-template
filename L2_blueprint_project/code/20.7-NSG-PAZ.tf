@@ -7,8 +7,8 @@ locals {
 
 resource "azurerm_network_security_group" "Project_PAZ-nsg" {
   name                = local.Project_PAZ-nsg-result
-  location            = data.azurerm_resource_group.Network-rg.location
-  resource_group_name = data.azurerm_resource_group.Network-rg.name
+  location            = local.resource_groups.Network-rg.location
+  resource_group_name = local.resource_groups.Network-rg.name
 
   security_rule {
     name                       = "AllowAzureResourceCommIP" # https://docs.microsoft.com/en-us/azure/virtual-network/what-is-ip-address-168-63-129-16
@@ -39,7 +39,7 @@ resource "azurerm_network_security_group" "Project_PAZ-nsg" {
     protocol                   = "*"
     direction                  = "Inbound"
     source_port_range          = "*"
-    source_address_prefixes    = local.Project_PAZ-snet.address_prefixes
+    source_address_prefixes    = local.subnets.PAZ.address_prefixes
     destination_port_range     = "*"
     destination_address_prefix = "*" # Implicit local subnet destination
   }
@@ -50,7 +50,7 @@ resource "azurerm_network_security_group" "Project_PAZ-nsg" {
     protocol                   = "*"
     direction                  = "Inbound"
     source_port_range          = "*"
-    source_address_prefixes    = local.Project_PAZ-snet.address_prefixes
+    source_address_prefixes    = local.subnets.PAZ.address_prefixes
     destination_port_range     = "*"
     destination_address_prefix = "*"
   }
@@ -61,7 +61,7 @@ resource "azurerm_network_security_group" "Project_PAZ-nsg" {
     protocol                   = "*"
     direction                  = "Inbound"
     source_port_range          = "*"
-    source_address_prefixes    = local.Project_OZ-snet.address_prefixes
+    source_address_prefixes    = local.subnets.OZ.address_prefixes
     destination_port_range     = "*"
     destination_address_prefix = "*"
   }
@@ -72,7 +72,7 @@ resource "azurerm_network_security_group" "Project_PAZ-nsg" {
     protocol                   = "*"
     direction                  = "Inbound"
     source_port_range          = "*"
-    source_address_prefixes    = local.Project_RZ-snet.address_prefixes
+    source_address_prefixes    = local.subnets.RZ.address_prefixes
     destination_port_range     = "*"
     destination_address_prefix = "*"
   }
@@ -91,7 +91,7 @@ resource "azurerm_network_security_group" "Project_PAZ-nsg" {
 }
 
 resource azurerm_subnet_network_security_group_association Project_PAZ-nsg-Association {
-  subnet_id                 = local.Project_PAZ-snet.id
+  subnet_id                 = local.subnets.PAZ.id
   network_security_group_id = azurerm_network_security_group.Project_PAZ-nsg.id
 }
 

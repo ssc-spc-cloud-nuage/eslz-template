@@ -26,7 +26,7 @@ module "linux-weekly-updates" {
   source                     = "github.com/canada-ca-terraform-modules/terraform-azurerm_update_management?ref=20200622.1"
   deploy                     = var.deployOptionalFeatures.update_management
   name                       = "${local.prefix}-${var.project}-${azurecaf_naming_convention.dtcafgen.result}-linux-weekly-updates"
-  resource_group_name        = azurerm_resource_group.AutomationAccount-rg.name
+  resource_group_name        = local.resource_groups.AutomationAccount-rg.name
   azurerm_automation_account = azurerm_automation_account.Project-aa
   operatingSystem            = "Linux"
   scope                      = [data.azurerm_subscription.primary.id]               # Whole subscription
@@ -38,7 +38,7 @@ module "windows-weekly-updates" {
   source                     = "github.com/canada-ca-terraform-modules/terraform-azurerm_update_management?ref=20200622.1"
   deploy                     = var.deployOptionalFeatures.update_management
   name                       = "${local.prefix}-${var.project}-${azurecaf_naming_convention.dtcafgen.result}-windows-weekly-updates"
-  resource_group_name        = azurerm_resource_group.AutomationAccount-rg.name
+  resource_group_name        = local.resource_groups.AutomationAccount-rg.name
   azurerm_automation_account = azurerm_automation_account.Project-aa
   operatingSystem            = "Windows"
   scope                      = [data.azurerm_subscription.primary.id]               # Whole subscription

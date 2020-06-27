@@ -7,8 +7,8 @@ locals {
 
 resource azurerm_route_table Global-rt {
   name                = local.Global-rt-name
-  location            = azurerm_resource_group.Network-rg.location
-  resource_group_name = azurerm_resource_group.Network-rg.name
+  location            = local.resource_groups.Network-rg.location
+  resource_group_name = local.resource_groups.Network-rg.name
 
   dynamic "route" {
     for_each = var.network.vnet

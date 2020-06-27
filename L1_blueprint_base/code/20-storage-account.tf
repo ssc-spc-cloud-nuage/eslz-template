@@ -1,13 +1,8 @@
-resource azurecaf_naming_convention Project_law-sa {
-  name          = "${local.env_short}${local.group_short}${local.project_short}law${local.unique_Logs}"
-  resource_type = "st"
-  convention    = "passthrough"
-}
-
-resource "azurerm_storage_account" "Project_law-sa" {
-  name                     = azurecaf_naming_convention.Project_law-sa.result
-  location                 = azurerm_resource_group.Logs-rg.location
-  resource_group_name      = azurerm_resource_group.Logs-rg.name
+module "Project_law-sa" {
+  source                   = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-storage_account?ref=v1.0.1"
+  env                      = var.env
+  userDefinedString        = "law${var.project}"
+  resource_group           = local.resource_groups.Logs-rg
   account_tier             = "Standard"
   account_kind             = "StorageV2"
   account_replication_type = "GRS"

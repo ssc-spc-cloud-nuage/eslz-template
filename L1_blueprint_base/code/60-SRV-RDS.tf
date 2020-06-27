@@ -1,27 +1,20 @@
-resource "azurecaf_naming_convention" "SWJ-01" {
-  name          = "${var.env}${var.vmConfigs.SWJ-01.name}"
-  resource_type = "vmw"
-  convention    = "passthrough"
-}
-
 module "SWJ-01" {
-  source            = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-windows_virtual_machine?ref=v1.0.1"
-  vm_depends_on     = [module.Project_MAZ-snet]
+  source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-windows_virtual_machine?ref=v1.0.1"
   deploy            = var.deployOptionalFeatures.jumpServer
   env               = var.env
   serverType        = "SWJ"
   userDefinedString = "RDSServer"
   postfix           = "01"
-  resource_group    = azurerm_resource_group.Management-rg
-  location          = azurerm_resource_group.Management-rg.location
-  subnet            = module.Project_MAZ-snet.object
-  priority          = try(var.vmConfigs.SWJ-01.priority, "Regular")
-  admin_username    = "azureadmin"
-  admin_password    = var.vmConfigs.SWJ-01.admin_password
-  vm_size           = var.vmConfigs.SWJ-01.vm_size
-  license_type      = "Windows_Server"
-  dependancyAgent   = false
-  tags              = var.tags
+  resource_group    = local.resource_groups.Management-rg
+  location          = local.resource_groups.Management-rg.location
+  subnet            = local.subnets.PAZ
+  priority        = try(var.vmConfigs.SWJ-01.priority, "Regular")
+  admin_username  = "azureadmin"
+  admin_password  = var.vmConfigs.SWJ-01.admin_password
+  vm_size         = var.vmConfigs.SWJ-01.vm_size
+  license_type    = "Windows_Server"
+  dependancyAgent = false
+  tags            = var.tags
 }
 
 # azurerm_monitor_diagnostic_setting is required for PBMM-Guardrails

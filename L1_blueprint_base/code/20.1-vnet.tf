@@ -7,8 +7,8 @@ locals {
 
 resource azurerm_virtual_network Project-vnet {
   name                = local.Project-vnet-name
-  location            = azurerm_resource_group.Network-rg.location
-  resource_group_name = azurerm_resource_group.Network-rg.name
+  location            = local.resource_groups.Network-rg.location
+  resource_group_name = local.resource_groups.Network-rg.name
   address_space       = var.network.vnet
   tags                = var.tags
 }

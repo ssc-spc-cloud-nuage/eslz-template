@@ -1,6 +1,6 @@
 resource azurerm_dns_zone zone1 {
   name                = var.domain.public.name
-  resource_group_name = azurerm_resource_group.DNS-rg.name
+  resource_group_name = local.resource_groups.DNS-rg.name
   tags                = var.tags
 }
 
@@ -12,7 +12,7 @@ resource azurerm_dns_zone zone1 {
 #     preference = 0
 #     exchange   = "${var.domain}.mail.protection.outlook.com"
 #   }
-#   resource_group_name = azurerm_resource_group.DNS-rg.name
+#   resource_group_name = local.resource_groups.DNS-rg.name
 #   tags                = var.tags
 # }
 
@@ -21,7 +21,7 @@ resource azurerm_dns_zone zone1 {
 #   zone_name           = azurerm_dns_zone.zone1.name
 #   ttl                 = "60"
 #   record              = "autodiscover.outlook.com"
-#   resource_group_name = azurerm_resource_group.DNS-rg.name
+#   resource_group_name = local.resource_groups.DNS-rg.name
 #   tags                = var.tags
 # }
 
@@ -35,7 +35,7 @@ resource azurerm_dns_zone zone1 {
 #   record {
 #     value = "v=spf1 include:spf.protection.outlook.com -all"
 #   }
-#   resource_group_name = azurerm_resource_group.DNS-rg.name
+#   resource_group_name = local.resource_groups.DNS-rg.name
 #   tags                = var.tags
 # }
 
@@ -48,6 +48,6 @@ resource "azurerm_dns_txt_record" "acme-zone1" {
   record {
     value = "5GI8Xhir8GDeCrfc7TtSdhZZByzHduSU3lNlgDXwjp0"
   }
-  resource_group_name = azurerm_resource_group.DNS-rg.name
+  resource_group_name = local.resource_groups.DNS-rg.name
   tags                = var.tags
 }
