@@ -4,7 +4,7 @@ module "SRV-linux-mgmt" {
   serverType        = "SLJ"
   userDefinedString = "Linux-MGMT"
   postfix           = "01"
-  resource_group    = local.resource_groups.Management-rg
+  resource_group    = local.resource_groups_L1.Management
   subnet            = local.subnets.MAZ
   priority          = try(var.vmConfigs.SRV-linux-mgmt.priority, "Regular")
   admin_username    = "azureadmin"

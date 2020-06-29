@@ -16,7 +16,7 @@ resource "azurerm_security_center_subscription_pricing" "sc" {
 resource "azurerm_security_center_workspace" "sc" {
   count        = var.deployOptionalFeatures.security_center ? 1 : 0
   scope        = data.azurerm_subscription.primary.id
-  workspace_id = module.Project-law.id
+  workspace_id = local.Project-law.id
 
   depends_on = [azurerm_security_center_subscription_pricing.sc]
 }

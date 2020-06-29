@@ -2,8 +2,8 @@
 resource azurerm_recovery_services_vault Project-rv {
   count               = var.deployOptionalFeatures.recovery_services_vault ? 1 : 0
   name                = "${var.env}CNR-${var.group}-${var.project}-rv"
-  location            = local.resource_groups.Backups-rg.location
-  resource_group_name = local.resource_groups.Backups-rg.name
+  location            = local.resource_groups_L1.Backups.location
+  resource_group_name = local.resource_groups_L1.Backups.name
   sku                 = try(var.optionalFeaturesConfig.recovery_services_vault.sku, "Standard")
   soft_delete_enabled = try(var.optionalFeaturesConfig.recovery_services_vault.soft_delete_enabled, true)
   tags                = var.tags
@@ -15,7 +15,7 @@ resource "azurerm_monitor_diagnostic_setting" "Project_recovery_services_vault-l
   count                      = var.deployOptionalFeatures.recovery_services_vault ? 1 : 0
   name                       = "${azurerm_recovery_services_vault.Project-rv[0].name}-logs"
   target_resource_id         = azurerm_recovery_services_vault.Project-rv[0].id
-  log_analytics_workspace_id = module.Project-law.id
+  log_analytics_workspace_id = local.Project-law.id
 
   log {
     category = "AzureBackupReport"

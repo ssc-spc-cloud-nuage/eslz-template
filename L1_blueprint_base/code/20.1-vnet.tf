@@ -7,8 +7,8 @@ locals {
 
 resource azurerm_virtual_network Project-vnet {
   name                = local.Project-vnet-name
-  location            = local.resource_groups.Network-rg.location
-  resource_group_name = local.resource_groups.Network-rg.name
+  location            = local.resource_groups_L1.Network.location
+  resource_group_name = local.resource_groups_L1.Network.name
   address_space       = var.network.vnet
   tags                = var.tags
 }
@@ -16,7 +16,7 @@ resource azurerm_virtual_network Project-vnet {
 resource "azurerm_monitor_diagnostic_setting" "Project-logs" {
   name                       = "${var.env}CNR-${var.group}_${var.project}-logs"
   target_resource_id         = azurerm_virtual_network.Project-vnet.id
-  log_analytics_workspace_id = module.Project-law.id
+  log_analytics_workspace_id = local.Project-law.id
 
   log {
     category = "VMProtectionAlerts"

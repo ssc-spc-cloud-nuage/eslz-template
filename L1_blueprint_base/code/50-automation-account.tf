@@ -8,7 +8,7 @@ resource "azurecaf_naming_convention" "Project-aa" {
 //Can't have a "_" in the name, only "-"
 resource "azurerm_automation_account" "Project-aa" {
   name                = azurecaf_naming_convention.Project-aa.result
-  resource_group_name = local.resource_groups.AutomationAccount-rg.name
+  resource_group_name = local.resource_groups_L1.AutomationAccount.name
   location            = var.location
   sku_name            = "Basic"
   tags                = var.tags
@@ -16,8 +16,8 @@ resource "azurerm_automation_account" "Project-aa" {
 
 # Link automation account to a Log Analytics Workspace.
 resource "azurerm_log_analytics_linked_service" "law_link" {
-  resource_group_name = local.resource_groups.Logs-rg.name
-  workspace_name      = module.Project-law.name
+  resource_group_name = local.resource_groups_L1.Logs.name
+  workspace_name      = local.Project-law.name
   linked_service_name = "automation"
   resource_id         = azurerm_automation_account.Project-aa.id
 }
@@ -27,7 +27,7 @@ resource "azurerm_log_analytics_linked_service" "law_link" {
 resource "azurerm_monitor_diagnostic_setting" "Project_automation_account-logs" {
   name                       = "${azurerm_automation_account.Project-aa.name}-logs"
   target_resource_id         = azurerm_automation_account.Project-aa.id
-  log_analytics_workspace_id = module.Project-law.id
+  log_analytics_workspace_id = local.Project-law.id
 
   log {
     category = "JobLogs"

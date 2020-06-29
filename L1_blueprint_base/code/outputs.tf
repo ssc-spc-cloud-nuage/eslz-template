@@ -1,5 +1,5 @@
-output "resource_groups" {
-  value     = local.resource_groups
+output "resource_groups_L1" {
+  value     = local.resource_groups_L1
   sensitive = true
 }
 
@@ -9,7 +9,7 @@ output "subnets" {
 }
 
 output "Project-law" {
-  value     = module.Project-law.object
+  value     = local.Project-law
   sensitive = true
 }
 
@@ -19,6 +19,21 @@ output "Project_law-sa" {
 }
 
 output "Project-kv" {
-  value     = azurerm_key_vault.Project-kv
+  value     = local.Project-kv
+  sensitive = true
+}
+
+output "L2_Subscription_Owners" {
+  value     = azuread_group.L2_Subscription_Owners
+  sensitive = true
+}
+
+output "L2_Subscription_Contributors" {
+  value     = azuread_group.L2_Subscription_Contributors
+  sensitive = true
+}
+
+output "L2_Subscription_Readers" {
+  value     = azuread_group.L2_Subscription_Readers
   sensitive = true
 }

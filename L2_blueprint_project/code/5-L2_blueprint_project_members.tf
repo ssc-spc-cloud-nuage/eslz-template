@@ -1,7 +1,3 @@
-data "azuread_group" "L2_Subscription_Contributors" {
-  name = "${local.prefix}_${var.project}_L2_Subscription_Contributors"
-}
-
 data "azuread_users" "L2_Subscription_Contributors" {
   user_principal_names = var.L2_RBAC.contributorNames
 }
@@ -9,7 +5,7 @@ data "azuread_users" "L2_Subscription_Contributors" {
 resource "azuread_group_member" "L2_Subscription_Contributors-Members" {
   for_each = toset(data.azuread_users.L2_Subscription_Contributors.object_ids)
 
-  group_object_id  = data.azuread_group.L2_Subscription_Contributors.id
+  group_object_id  = local.L2_Subscription_Contributors.id
   member_object_id = each.key
 }
 
@@ -17,12 +13,8 @@ resource "azuread_group_member" "L2_Subscription_Contributors-Members" {
 resource "azuread_group_member" "L2_Subscription_Contributors_Service_Principal-Members" {
   for_each = toset(var.L2_RBAC.contributorEnterpriseID)
 
-  group_object_id  = data.azuread_group.L2_Subscription_Contributors.id
+  group_object_id  = local.L2_Subscription_Contributors.id
   member_object_id = each.key
-}
-
-data "azuread_group" "L2_Subscription_Readers" {
-  name = "${local.prefix}_${var.project}_L2_Subscription_Readers"
 }
 
 data "azuread_users" "L2_Subscription_Readers" {
@@ -32,6 +24,6 @@ data "azuread_users" "L2_Subscription_Readers" {
 resource "azuread_group_member" "L2_Subscription_Readers-Members" {
   for_each = toset(data.azuread_users.L2_Subscription_Readers.object_ids)
 
-  group_object_id  = data.azuread_group.L2_Subscription_Readers.id
+  group_object_id  = local.L2_Subscription_Readers.id
   member_object_id = each.key
 }

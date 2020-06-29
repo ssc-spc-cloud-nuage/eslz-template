@@ -4,33 +4,47 @@
 Example structure for resource_groups map
 
 resource_groups = {
-    apim          = { 
-                    name     = "-apim-demo"
+    apim       = { 
+                    userDefinedString = "apim-demo"
     },
-    networking    = {    
-                    name     = "-networking-demo"
+    networking = {    
+                    userDefinedString = "networking-demo"
     },
-    insights      = { 
-                    name     = "-insights-demo"
-                    location = "francecentral" 
-                    tags     = {
+    insights   = { 
+                    userDefinedString = "insights-demo"
+                    location          = "francecentral" 
+                    tags = {
                       special     = "France location needed"
                       approver     = "Gunter"
-                    }   
+                }   
     },
 }
 */
 
-module resource_groups {
+module resource_groups_L1 {
   source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-resource_groups?ref=v1.0.0"
   resource_groups = {
-    AutomationAccount-rg = { userDefinedString = "${var.project}_AutomationAccount" },
-    Backups-rg           = { userDefinedString = "${var.project}_Backups" },
-    Network-rg           = { userDefinedString = "${var.project}_Network" },
-    Keyvault-rg          = { userDefinedString = "${var.project}_Keyvault" },
-    Logs-rg              = { userDefinedString = "${var.project}_Logs" },
-    DNS-rg               = { userDefinedString = "${var.project}_DNS" },
-    Management-rg        = { userDefinedString = "${var.project}_Management" },
+    AutomationAccount = { 
+      userDefinedString = "${local.userDefinedStringPrefix}_AutomationAccount"
+    },
+    Backups           = {
+      userDefinedString = "${local.userDefinedStringPrefix}_Backups"
+    },
+    Network           = {
+      userDefinedString = "${local.userDefinedStringPrefix}_Network"
+    },
+    Keyvault          = {
+      userDefinedString = "${local.userDefinedStringPrefix}_Keyvault"
+    },
+    Logs              = {
+      userDefinedString = "${local.userDefinedStringPrefix}_Logs"
+    },
+    DNS               = {
+      userDefinedString = "${local.userDefinedStringPrefix}_DNS"
+    },
+    Management        = {
+      userDefinedString = "${local.userDefinedStringPrefix}_Management"
+    },
   }
   env      = var.env
   location = var.location
@@ -38,5 +52,5 @@ module resource_groups {
 }
 
 locals {
-  resource_groups = module.resource_groups.object
+  resource_groups_L1 = module.resource_groups_L1.object
 }

@@ -3,7 +3,7 @@
 module Project-snet {
   source          = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-subnet?ref=v1.0.1"
   virtual_network = azurerm_virtual_network.Project-vnet
-  resource_group  = local.resource_groups.Network-rg
+  resource_group  = local.resource_groups_L1.Network
   env             = var.env
   subnets = {
     PAZ = { address_prefixes = var.network.subnets.PAZ },
@@ -22,40 +22,3 @@ module Project-snet {
 locals {
   subnets = module.Project-snet.object
 }
-/*
-module Project_PAZ-snet {
-  source               = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-subnet?ref=v1.0.1"
-  virtual_network_name = azurerm_virtual_network.Project-vnet.name
-  resource_group_name  = local.resource_groups.Network-rg.name
-  address_prefixes     = var.network.subnets.PAZ
-  subnetShortName      = "PAZ"
-  route_table          = azurerm_route_table.Global-rt
-}
-
-module Project_OZ-snet {
-  source               = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-subnet?ref=v1.0.1"
-  virtual_network_name = azurerm_virtual_network.Project-vnet.name
-  resource_group_name  = local.resource_groups.Network-rg.name
-  address_prefixes     = var.network.subnets.OZ
-  subnetShortName      = "OZ"
-  route_table          = azurerm_route_table.Global-rt
-}
-
-module Project_RZ-snet {
-  source               = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-subnet?ref=v1.0.1"
-  virtual_network_name = azurerm_virtual_network.Project-vnet.name
-  resource_group_name  = local.resource_groups.Network-rg.name
-  address_prefixes     = var.network.subnets.RZ
-  subnetShortName      = "RZ"
-  route_table          = azurerm_route_table.Global-rt
-}
-
-module Project_MAZ-snet {
-  source               = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-subnet?ref=v1.0.1"
-  virtual_network_name = azurerm_virtual_network.Project-vnet.name
-  resource_group_name  = local.resource_groups.Network-rg.name
-  address_prefixes     = var.network.subnets.MAZ
-  subnetShortName      = "MAZ"
-  route_table          = azurerm_route_table.Global-rt
-}
-*/

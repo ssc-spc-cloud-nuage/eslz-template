@@ -4,7 +4,7 @@
 module "Project-law" {
   source            = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-log_analytics_workspace?ref=v1.0.2"
   userDefinedString = "${var.group}_${var.project}"
-  resource_group    = local.resource_groups.Logs-rg
+  resource_group    = local.resource_groups_L1.Logs
   env               = var.env
   tags              = var.tags
 
@@ -49,4 +49,8 @@ module "Project-law" {
       event_types    = ["error", "warning"]
     }
   }
+}
+
+locals {
+  Project-law = module.Project-law.object
 }

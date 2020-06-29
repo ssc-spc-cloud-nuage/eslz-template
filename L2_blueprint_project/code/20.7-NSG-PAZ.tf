@@ -7,8 +7,8 @@ locals {
 
 resource "azurerm_network_security_group" "Project_PAZ-nsg" {
   name                = local.Project_PAZ-nsg-result
-  location            = local.resource_groups.Network-rg.location
-  resource_group_name = local.resource_groups.Network-rg.name
+  location            = local.resource_groups_L1.Network.location
+  resource_group_name = local.resource_groups_L1.Network.name
 
   security_rule {
     name                       = "AllowAzureResourceCommIP" # https://docs.microsoft.com/en-us/azure/virtual-network/what-is-ip-address-168-63-129-16
