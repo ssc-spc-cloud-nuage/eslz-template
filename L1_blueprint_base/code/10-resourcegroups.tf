@@ -24,25 +24,25 @@ resource_groups = {
 module resource_groups_L1 {
   source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-resource_groups?ref=v1.0.0"
   resource_groups = {
-    AutomationAccount = { 
+    AutomationAccount = {
       userDefinedString = "${local.userDefinedStringPrefix}_AutomationAccount"
     },
-    Backups           = {
+    Backups = {
       userDefinedString = "${local.userDefinedStringPrefix}_Backups"
     },
-    Network           = {
+    Network = {
       userDefinedString = "${local.userDefinedStringPrefix}_Network"
     },
-    Keyvault          = {
+    Keyvault = {
       userDefinedString = "${local.userDefinedStringPrefix}_Keyvault"
     },
-    Logs              = {
+    Logs = {
       userDefinedString = "${local.userDefinedStringPrefix}_Logs"
     },
-    DNS               = {
+    DNS = {
       userDefinedString = "${local.userDefinedStringPrefix}_DNS"
     },
-    Management        = {
+    Management = {
       userDefinedString = "${local.userDefinedStringPrefix}_Management"
     },
   }

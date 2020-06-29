@@ -1,5 +1,5 @@
 module "SWJ-01" {
-  source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-windows_virtual_machine?ref=v1.0.1"
+  source            = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-windows_virtual_machine?ref=v1.0.1"
   deploy            = var.deployOptionalFeatures.jumpServer
   env               = var.env
   serverType        = "SWJ"
@@ -8,13 +8,13 @@ module "SWJ-01" {
   resource_group    = local.resource_groups_L1.Management
   location          = local.resource_groups_L1.Management.location
   subnet            = module.Project-snet.object.PAZ
-  priority        = try(var.vmConfigs.SWJ-01.priority, "Regular")
-  admin_username  = "azureadmin"
-  admin_password  = var.vmConfigs.SWJ-01.admin_password
-  vm_size         = var.vmConfigs.SWJ-01.vm_size
-  license_type    = "Windows_Server"
-  dependancyAgent = false
-  tags            = var.tags
+  priority          = try(var.vmConfigs.SWJ-01.priority, "Regular")
+  admin_username    = "azureadmin"
+  admin_password    = var.vmConfigs.SWJ-01.admin_password
+  vm_size           = var.vmConfigs.SWJ-01.vm_size
+  license_type      = "Windows_Server"
+  dependancyAgent   = false
+  tags              = var.tags
 }
 
 # azurerm_monitor_diagnostic_setting is required for PBMM-Guardrails

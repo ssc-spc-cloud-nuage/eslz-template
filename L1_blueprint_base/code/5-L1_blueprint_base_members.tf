@@ -7,21 +7,21 @@
 resource "azuread_group_member" "L1_Subscription_Owners-Members" {
   for_each = toset(data.azuread_users.L1_Subscription_Owners.object_ids)
 
-  group_object_id  = azuread_group.L1_Subscription_Owners.id
+  group_object_id  = local.azuread_groups_L1.L1_Subscription_Owners.id
   member_object_id = each.key
 }
 
 resource "azuread_group_member" "L1_Subscription_Contributors-Members" {
   for_each = toset(data.azuread_users.L1_Subscription_Contributors.object_ids)
 
-  group_object_id  = azuread_group.L1_Subscription_Contributors.id
+  group_object_id  = local.azuread_groups_L1.L1_Subscription_Contributors.id
   member_object_id = each.key
 }
 
 resource "azuread_group_member" "L1_Subscription_Readers-Members" {
   for_each = toset(data.azuread_users.L1_Subscription_Readers.object_ids)
 
-  group_object_id  = azuread_group.L1_Subscription_Readers.id
+  group_object_id  = local.azuread_groups_L1.L1_Subscription_Readers.id
   member_object_id = each.key
 }
 
@@ -29,5 +29,5 @@ resource "azuread_group_member" "L1_Subscription_Readers-Members" {
 
 resource "azuread_group_member" "caf-level0-rover-developers-Members" {
   group_object_id  = data.azuread_group.caf-level0-rover-developers.id
-  member_object_id = azuread_group.L1_Subscription_Owners.id
+  member_object_id = local.azuread_groups_L1.L1_Subscription_Owners.id
 }

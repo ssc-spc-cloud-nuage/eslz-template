@@ -83,7 +83,7 @@ resource "azurerm_monitor_diagnostic_setting" "Project-kv-logs" {
 resource "azurerm_key_vault_access_policy" "L1_Subscription_Contributors_key_vault_access_policy" {
   key_vault_id = local.Project-kv.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
-  object_id    = azuread_group.L1_Subscription_Contributors.id
+  object_id    = local.azuread_groups_L1.L1_Subscription_Contributors.id
   key_permissions = [
     "Get",
     "List",
@@ -127,7 +127,7 @@ resource "azurerm_key_vault_access_policy" "L1_Subscription_Contributors_key_vau
 resource "azurerm_key_vault_access_policy" "L2_Subscription_Contributors_key_vault_access_policy" {
   key_vault_id = local.Project-kv.id
   tenant_id    = data.azurerm_client_config.current.tenant_id
-  object_id    = azuread_group.L2_Subscription_Contributors.id
+  object_id    = local.azuread_groups_L1.L2_Subscription_Contributors.id
   key_permissions = [
     "Get",
     "List",

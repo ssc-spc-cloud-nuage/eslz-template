@@ -1,21 +1,19 @@
-locals {
-  Project-vnet-postfix = "-vnet"
-  Project-vnet-regex   = regex("[0-9A-Za-z-_.]+", "${var.env}CNR-${var.group}_${var.project}")
-  Project-vnet-substr  = substr(local.Project-vnet-regex, 0, 64 - length(local.Project-vnet-postfix))
-  Project-vnet-name    = "${local.Project-vnet-substr}${local.Project-vnet-postfix}"
+module Project-vnet {
+  source            = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-virtual_network?ref=v1.0.0"
+  env               = var.env
+  userDefinedString = "${var.group}_${var.project}"
+  resource_group    = local.resource_groups_L1.Network
+  address_space     = var.network.vnet
+  tags              = var.tags
 }
 
-resource azurerm_virtual_network Project-vnet {
-  name                = local.Project-vnet-name
-  location            = local.resource_groups_L1.Network.location
-  resource_group_name = local.resource_groups_L1.Network.name
-  address_space       = var.network.vnet
-  tags                = var.tags
+locals {
+  Project-vnet = module.Project-vnet.virtual_network
 }
 
 resource "azurerm_monitor_diagnostic_setting" "Project-logs" {
-  name                       = "${var.env}CNR-${var.group}_${var.project}-logs"
-  target_resource_id         = azurerm_virtual_network.Project-vnet.id
+  name                       = "${local.Project-vnet.name}-logs"
+  target_resource_id         = local.Project-vnet.id
   log_analytics_workspace_id = local.Project-law.id
 
   log {

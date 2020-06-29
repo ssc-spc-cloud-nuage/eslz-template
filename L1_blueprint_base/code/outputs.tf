@@ -24,16 +24,16 @@ output "Project-kv" {
 }
 
 output "L2_Subscription_Owners" {
-  value     = azuread_group.L2_Subscription_Owners
+  value     = local.azuread_groups_L1.L2_Subscription_Owners
   sensitive = true
 }
 
 output "L2_Subscription_Contributors" {
-  value     = azuread_group.L2_Subscription_Contributors
+  value     = local.azuread_groups_L1.L2_Subscription_Contributors
   sensitive = true
 }
 
 output "L2_Subscription_Readers" {
-  value     = azuread_group.L2_Subscription_Readers
+  value     = local.azuread_groups_L1.L2_Subscription_Readers
   sensitive = true
 }
