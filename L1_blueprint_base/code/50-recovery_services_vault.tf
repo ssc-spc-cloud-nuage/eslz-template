@@ -1,20 +1,24 @@
-// Recovery Service Vault name must be 2 - 50 characters long, start with a letter, contain only letters, numbers and hyphens.
-resource azurerm_recovery_services_vault Project-rv {
-  count               = var.deployOptionalFeatures.recovery_services_vault ? 1 : 0
-  name                = "${var.env}CNR-${var.group}-${var.project}-rv"
-  location            = local.resource_groups_L1.Backups.location
-  resource_group_name = local.resource_groups_L1.Backups.name
+module Project-rsv {
+  source              = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-recovery_services_vault?ref=v1.0.0"
+  deploy              = var.deployOptionalFeatures.recovery_services_vault ? true : false
+  env                 = var.env
+  userDefinedString   = "${var.group}_${var.project}"
+  resource_group      = local.resource_groups_L1.Backups
   sku                 = try(var.optionalFeaturesConfig.recovery_services_vault.sku, "Standard")
   soft_delete_enabled = try(var.optionalFeaturesConfig.recovery_services_vault.soft_delete_enabled, true)
   tags                = var.tags
 }
 
+locals {
+  Project-rsv = module.Project-rsv.recovery_services_vault
+}
+
 # azurerm_monitor_diagnostic_setting is required for PBMM-Guardrails
 
 resource "azurerm_monitor_diagnostic_setting" "Project_recovery_services_vault-logs" {
-  count                      = var.deployOptionalFeatures.recovery_services_vault ? 1 : 0
-  name                       = "${azurerm_recovery_services_vault.Project-rv[0].name}-logs"
-  target_resource_id         = azurerm_recovery_services_vault.Project-rv[0].id
+  count = var.deployOptionalFeatures.recovery_services_vault ? 1 : 0
+  name                       = "${local.Project-rsv.name}-logs"
+  target_resource_id         = local.Project-rsv.id
   log_analytics_workspace_id = local.Project-law.id
 
   log {
