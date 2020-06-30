@@ -6,8 +6,7 @@ variable "project" {}
 
 variable "location" {}
 
-variable "Landing-Zone-Next-Hop" {}
-variable "RDS-Gateway" {}
+variable "RDS-Gateways" {}
 
 variable "domain" {}
 variable "L2_RBAC" {}

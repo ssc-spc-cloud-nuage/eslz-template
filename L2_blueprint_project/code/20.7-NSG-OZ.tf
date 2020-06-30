@@ -28,7 +28,7 @@ resource "azurerm_network_security_group" "Project_OZ-nsg" {
     protocol                   = "*"
     direction                  = "Inbound"
     source_port_range          = "*"
-    source_address_prefix      = var.RDS-Gateway
+    source_address_prefixes    = var.RDS-Gateways
     destination_port_range     = "*"
     destination_address_prefix = "*"
   }

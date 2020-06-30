@@ -14,8 +14,7 @@ project = "ESLZ"
 
 location = "canadacentral"
 
-Landing-Zone-Next-Hop = "172.168.3.22"
-RDS-Gateway           = "10.101.16.4"
+RDS-Gateways           = ["10.101.16.4"]
 
 domain = {
   public = {

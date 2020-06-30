@@ -10,7 +10,6 @@ variable "deployOptionalFeatures" {}
 
 variable "network" {}
 variable "Landing-Zone-Next-Hop" {}
-variable "RDS-Gateway" {}
 
 variable "domain" {}
 
