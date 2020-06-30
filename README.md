@@ -14,7 +14,7 @@ Next, using the [rover](https://github.com/aztfmod/rover) on the launchpad you w
 
 Finally, from this base, you can then start to work on various project and missions. (L2_blueprint_project).
 
-To communicate with earth (ground) from the landinzone base you need to relay communications through a spaceport (Shared VDC). The spaceport is the only way communicate from the base with earth can be established. The spaceport is built by a central authority that oversee and ensure all communication flow security. The L1_blueprint_spaceport is not part of this project.
+To communicate with earth (ground) from the landinzone base you need to relay communications through a spaceport (Shared VDC). The spaceport is the only way communication from the base with earth can be established. The spaceport is built by a central authority that oversee and ensure all communication flow security. The L1_blueprint_spaceport is not part of this client project.
 
 All those blueprints use [resources](https://www.terraform.io/docs/providers/azurerm/r/availability_set.html) found on the planet and/or pre-built [modules](https://github.com/canada-ca-terraform-modules/terraform-azurerm-active-directory-v2) to create the assembly.
 
