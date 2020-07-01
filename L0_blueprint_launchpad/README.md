@@ -16,21 +16,17 @@ The following resources will be deployed by this blueprint:
 
 ## Deployment
 
-1. If you have more than one subscription associated to your user, and even you don't, update the `global.envvars` file located in the `envvars` folder with the desired Azure subscription id. This way all commands used in the blueprint will automatically target this subscription.
+1. Launch the development workspace in a container following the instructions found at: https://github.com/Azure/caf-terraform-landingzones/blob/master/documentation/getting_started/getting_started.md
 
-2. Launch the development workspace in a container following the instructions found at: https://github.com/Azure/caf-terraform-landingzones/blob/master/documentation/getting_started/getting_started.md
+2. Copy the sample.tfvars file located in the `environments` folder and name it in a similar was as you did in step 0. For enample, for a `dev` environment you will name the file `dev.tfvars`. Update the `<env>.tfvars` file with the desired variables value. See the [README.md](../envvars/README.md) file in the folder for more information.
 
-3. If not already logged-in:
+2. If not already logged-in:
 
 ```
 rover login
 ```
 
-4. Configure the <envname>.envvars in the `../envvars` folder with the desired values. See the [README.md](../envvars/README.md) file in the folder for more information.
-
-5. Configure the <envname>.tfvars file in the `environments` folder with the desired values. See the [README.md](./environments/README.md) file in the folder for more information.
-
-6. Install the subscription launchpad. For example, to install the launchpad in a dev subscription do:
+4. Install the subscription launchpad. For example, to install the launchpad in a `dev` subscription do:
 
 ```
 cd L0_blueprint_launchpad
