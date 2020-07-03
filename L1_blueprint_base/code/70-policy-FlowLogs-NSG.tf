@@ -1,7 +1,7 @@
 # https://github.com/Azure/Enterprise-Scale/blob/main/docs/reference/contoso/e2e-landing-zone-vwan-orchestration.parameters.json
 
 resource "azurerm_policy_definition" "Deploy-NSG-FlowLogs" {
-  # count        = var.deployOptionalFeatures.deny_publicips_on_nics ? 1 : 0
+  count        = var.deployOptionalFeatures.flow_logs_policy ? 1 : 0
   name         = "Deploy-NSG-FlowLogs"
   policy_type  = "Custom"
   mode         = "All"
@@ -174,11 +174,11 @@ POLICY_RULE
 }
 
 resource "azurerm_policy_assignment" "Deploy-NSG-FlowLogs" {
-  # count                = var.deployOptionalFeatures.deny_publicips_on_nics ? 1 : 0
+  count                = var.deployOptionalFeatures.flow_logs_policy ? 1 : 0
   name                 = "Deploy-NSG-FlowLogs"
   location             = local.Project-law.location
   scope                = data.azurerm_subscription.primary.id
-  policy_definition_id = azurerm_policy_definition.Deploy-NSG-FlowLogs.id
+  policy_definition_id = azurerm_policy_definition.Deploy-NSG-FlowLogs[0].id
   display_name         = "Deploy-NSG-FlowLogs"
   description          = "Apply flow logs settings for Azure NSG"
   identity {
@@ -207,11 +207,3 @@ resource "azurerm_policy_assignment" "Deploy-NSG-FlowLogs" {
   }
 PARAMETERS
 }
-/*
-resource "azurerm_policy_remediation" "Deploy-NSG-FlowLogs" {
-  name                 = lower("Deploy-NSG-FlowLogs-policy-remediation")
-  scope                = azurerm_policy_assignment.Deploy-NSG-FlowLogs.scope
-  policy_assignment_id = azurerm_policy_assignment.Deploy-NSG-FlowLogs.id
-  # location_filters     = ["West Europe"]
-}
-*/

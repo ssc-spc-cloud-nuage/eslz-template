@@ -17,9 +17,9 @@ locals {
 }
 
 resource "azurecaf_naming_convention" "dtcafgen" {
-  name    = "${local.update_date}T${local.update_time}"
-  resource_type    = "gen"
-  convention  = "passthrough"
+  name          = "${local.update_date}T${local.update_time}"
+  resource_type = "gen"
+  convention    = "passthrough"
 }
 
 module "linux-weekly-updates" {

@@ -22,6 +22,8 @@ deployOptionalFeatures = {
   update_management          = true
   deny_publicip_subscription = true
   deny_publicips_on_nics     = true
+  diagnostics_policy         = true
+  flow_logs_policy           = true
   jumpServer                 = true
 }
 

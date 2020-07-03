@@ -171,9 +171,9 @@ resource "azurerm_key_vault_access_policy" "L2_Subscription_Contributors_key_vau
 # Adding access for L1 Owners to statefile keyvault
 
 resource "azurerm_key_vault_access_policy" "L0_key_vault_access_policy" {
-  key_vault_id = local.L0_keyvault.id
-  tenant_id    = data.azurerm_client_config.current.tenant_id
-  object_id    = local.azuread_groups_L1.L1_Subscription_Owners.id
+  key_vault_id    = local.L0_keyvault.id
+  tenant_id       = data.azurerm_client_config.current.tenant_id
+  object_id       = local.azuread_groups_L1.L1_Subscription_Owners.id
   key_permissions = []
   secret_permissions = [
     "Get",
