@@ -14,9 +14,9 @@ locals {
 }
 
 # azurerm_monitor_diagnostic_setting is required for PBMM-Guardrails
-
+/*
 resource "azurerm_monitor_diagnostic_setting" "Project_recovery_services_vault-logs" {
-  count = var.deployOptionalFeatures.recovery_services_vault ? 1 : 0
+  count                      = var.deployOptionalFeatures.recovery_services_vault ? 1 : 0
   name                       = "${local.Project-rsv.name}-logs"
   target_resource_id         = local.Project-rsv.id
   log_analytics_workspace_id = local.Project-law.id
@@ -161,3 +161,4 @@ resource "azurerm_monitor_diagnostic_setting" "Project_recovery_services_vault-l
     }
   }
 }
+*/

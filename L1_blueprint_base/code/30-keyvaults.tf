@@ -51,7 +51,7 @@ locals {
 }
 
 # azurerm_monitor_diagnostic_setting is required for PBMM-Guardrails
-
+/*
 resource "azurerm_monitor_diagnostic_setting" "Project-kv-logs" {
   name                       = "${local.Project-kv.name}-logs"
   target_resource_id         = local.Project-kv.id
@@ -77,7 +77,7 @@ resource "azurerm_monitor_diagnostic_setting" "Project-kv-logs" {
     }
   }
 }
-
+*/
 # Keyvault RBAC
 
 resource "azurerm_key_vault_access_policy" "L1_Subscription_Contributors_key_vault_access_policy" {

@@ -95,6 +95,7 @@ resource azurerm_subnet_network_security_group_association Project_RZ-nsg-Associ
   network_security_group_id = azurerm_network_security_group.Project_RZ-nsg.id
 }
 
+/*
 resource "azurerm_network_watcher_flow_log" "Network-Project_RZ-flow" {
   network_watcher_name = "NetworkWatcher_canadacentral"
   resource_group_name  = "NetworkWatcherRG"
@@ -140,3 +141,4 @@ resource "azurerm_monitor_diagnostic_setting" "Project_RZ-nsg-logs" {
     }
   }
 }
+*/

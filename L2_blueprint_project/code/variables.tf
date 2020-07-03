@@ -6,6 +6,9 @@ variable "project" {}
 
 variable "location" {}
 
+variable "deployOptionalFeatures" {}
+
+variable "Landing-Zone-Next-Hop" {}
 variable "RDS-Gateways" {}
 
 variable "domain" {}

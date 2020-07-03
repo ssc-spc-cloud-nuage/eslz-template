@@ -95,6 +95,7 @@ resource azurerm_subnet_network_security_group_association Project_PAZ-nsg-Assoc
   network_security_group_id = azurerm_network_security_group.Project_PAZ-nsg.id
 }
 
+/*
 resource "azurerm_network_watcher_flow_log" "Network-Project_PAZ-flow" {
   network_watcher_name = "NetworkWatcher_canadacentral"
   resource_group_name  = "NetworkWatcherRG"
@@ -140,3 +141,4 @@ resource "azurerm_monitor_diagnostic_setting" "Project_PAZ-nsg-logs" {
     }
   }
 }
+*/
