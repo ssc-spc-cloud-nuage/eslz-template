@@ -167,3 +167,24 @@ resource "azurerm_key_vault_access_policy" "L2_Subscription_Contributors_key_vau
     "DeleteIssuers",
   ]
 }
+
+# Adding access for L1 Owners to statefile keyvault
+
+data azurerm_key_vault L0 {
+  name                = var.L1_RBAC.L0_keyvault_name
+  resource_group_name = "${local.prefix}-launchpad"
+}
+
+resource "azurerm_key_vault_access_policy" "L0_key_vault_access_policy" {
+  key_vault_id = data.azurerm_key_vault.L0.id
+  tenant_id    = data.azurerm_client_config.current.tenant_id
+  object_id    = local.azuread_groups_L1.L1_Subscription_Owners.id
+  key_permissions = []
+  secret_permissions = [
+    "Get",
+    "List",
+    "Set",
+    "Delete"
+  ]
+  certificate_permissions = []
+}
