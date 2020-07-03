@@ -26,8 +26,9 @@ resource "azuread_group_member" "L1_Subscription_Readers-Members" {
 }
 
 # Add the L1_Subscription_Owners AAD Security group as a member of caf-level0-rover-developers (also assigned to Subscription Owner role)
-
+/*
 resource "azuread_group_member" "caf-level0-rover-developers-Members" {
   group_object_id  = data.azuread_group.caf-level0-rover-developers.id
   member_object_id = local.azuread_groups_L1.L1_Subscription_Owners.id
 }
+*/

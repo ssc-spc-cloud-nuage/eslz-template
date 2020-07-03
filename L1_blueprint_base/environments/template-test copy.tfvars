@@ -1,27 +1,27 @@
 tags = {
   "classification"    = "pbmm"
-  "contact"           = "user1@domain.ca; user1@domain.ca"
-  "costcentre"        = "56a54668sdfsf11"
-  "env"               = "dev"
-  "owner"             = "user1@domain.ca; user1@domain.ca"
+  "contact"           = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
+  "costcentre"        = "566811"
+  "env"               = "template-test"
+  "owner"             = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
   "cloudusageprofile" = "3"
   "branch"            = "CIO"
 }
 
-env     = "ScDc" # Derived from the 
+env     = "ScDc"
 group   = "CIO"
-project = "ESLZ"
+project = "ESLZ_Template"
 
 location = "canadacentral"
 
 deployOptionalFeatures = {
   ddos_protection_plan       = false
   recovery_services_vault    = false
-  security_center            = true
+  security_center            = false
   sentinel                   = false
   update_management          = false
-  deny_publicip_subscription = true
-  deny_publicips_on_nics     = true
+  deny_publicip_subscription = false
+  deny_publicips_on_nics     = false
   jumpServer                 = false
 }
 
@@ -48,7 +48,6 @@ network = {
   }
 }
 Landing-Zone-Next-Hop = "172.168.3.22"
-RDS-Gateway           = "10.101.16.4"
 
 domain = {
   public = {
@@ -62,17 +61,15 @@ domain = {
 
 L1_RBAC = {
   ownerNames = [
-    "user1@163dev.onmicrosoft.com",
-    "user1@163dev.onmicrosoft.com"
+    "john.nephin@163dev.onmicrosoft.com",
+    "bernard.maltais@163dev.onmicrosoft.com",
+    "louis-eric.tremblay@163dev.onmicrosoft.com",
+    "test-bernard.maltais@163dev.onmicrosoft.com"
   ]
 
-  contributorNames = [
-    "user3@163dev.onmicrosoft.com"
-  ]
+  contributorNames = []
 
-  readerNames = [
-    "user4@163dev.onmicrosoft.com"
-  ]
+  readerNames = []
 }
 
 vmConfigs = {
@@ -90,7 +87,8 @@ vmConfigs = {
   */
 
   SWJ-01 = {
-    admin_password = "tmp-53w45trdfg"
+    name           = "SWJ-Base01"
+    admin_password = "tmp-Canada123!"
     vm_size        = "Standard_D2s_v3"
     priority       = "Spot"
   }

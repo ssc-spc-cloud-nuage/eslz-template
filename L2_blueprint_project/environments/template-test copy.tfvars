@@ -1,20 +1,21 @@
 tags = {
   "classification"    = "pbmm"
-  "contact"           = "user1@domain.ca; user1@domain.ca"
-  "costcentre"        = "56a54668sdfsf11"
-  "env"               = "dev"
-  "owner"             = "user1@domain.ca; user1@domain.ca"
+  "contact"           = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
+  "costcentre"        = "566811"
+  "env"               = "template-test"
+  "owner"             = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
   "cloudusageprofile" = "3"
   "branch"            = "CIO"
 }
 
 env     = "ScDc"
 group   = "CIO"
-project = "ESLZ"
+project = "ESLZ_Template"
 
 location = "canadacentral"
 
-RDS-Gateways           = ["10.101.16.4"]
+Landing-Zone-Next-Hop = "100.96.185.8"
+RDS-Gateway           = ["10.101.16.4"]
 
 domain = {
   public = {
@@ -27,18 +28,19 @@ domain = {
 }
 
 L2_RBAC = {
-  ownerNames = [
-    "user1@163dev.onmicrosoft.com",
-    "user1@163dev.onmicrosoft.com"
-  ]
-
   contributorNames = [
-    "user3@163dev.onmicrosoft.com"
+    "john.nephin@163dev.onmicrosoft.com",
+    "bernard.maltais@163dev.onmicrosoft.com",
+    "louis-eric.tremblay@163dev.onmicrosoft.com",
+    "test-bernard.maltais@163dev.onmicrosoft.com"
   ]
 
-  readerNames = [
-    "user4@163dev.onmicrosoft.com"
+  contributorEnterpriseID = [
+    "bb294f5d-fece-4d3a-a187-7f98cb64e478", # Bernard Maltais SP
+    "2000c7f5-0f8d-4a45-a65d-d70dc3edcac3"  # John Nephin SP
   ]
+
+  readerNames = []
 }
 
 vmConfigs = {
@@ -56,23 +58,15 @@ vmConfigs = {
   */
 
   SRV-linux-mgmt = {
-    admin_password = "tmp-e4d5rtc!"
+    admin_password = "tmp-canada123!"
     vm_size        = "Standard_D2s_v3"
     priority       = "Spot"
   }
 }
 
-# Fill the section below with the values from the output of ./gorover.sh <env> validate. Look in the section
-# called Getting launchpad coordinates: It will look like:
-# Getting launchpad coordinates:
-#  - storage_account_name: scdccioeslztemplatestlev
-#  - resource_group: ScDc-CIO_ESLZ_Template-terraform-state
-#  - container: level0
-#  - tfstate file: launchpad_opensource_light.tfstate
-
 L1_terraform_remote_state_config = {
-    storage_account_name  = "<get the storage account name from the storage_account_name: output>"
-    resource_group_name   = "<get the storage account name from the resource_group: output>"
-    container_name        = "<set this value to the envronment name. Like dev, prod. The same you used for the command gorover.sh>"
+    storage_account_name  = "scdccioeslztemplatestlev"
+    container_name        = "template-test"
     key                   = "L1_blueprint_base.tfstate"
+    resource_group_name   = "ScDc-CIO_ESLZ_Template-terraform-state"
 }

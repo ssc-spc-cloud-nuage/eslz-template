@@ -21,7 +21,7 @@ resource "azurerm_log_analytics_linked_service" "law_link" {
   linked_service_name = "automation"
   resource_id         = azurerm_automation_account.Project-aa.id
 }
-
+/*
 # azurerm_monitor_diagnostic_setting is required for PBMM-Guardrails
 
 resource "azurerm_monitor_diagnostic_setting" "Project_automation_account-logs" {
@@ -69,3 +69,4 @@ resource "azurerm_monitor_diagnostic_setting" "Project_automation_account-logs" 
     }
   }
 }
+*/

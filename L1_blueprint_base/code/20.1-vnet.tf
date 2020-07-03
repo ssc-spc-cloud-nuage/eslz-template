@@ -10,29 +10,3 @@ module Project-vnet {
 locals {
   Project-vnet = module.Project-vnet.virtual_network
 }
-
-resource "azurerm_monitor_diagnostic_setting" "Project-logs" {
-  name                       = "${local.Project-vnet.name}-logs"
-  target_resource_id         = local.Project-vnet.id
-  log_analytics_workspace_id = local.Project-law.id
-
-  log {
-    category = "VMProtectionAlerts"
-    enabled  = true
-
-    retention_policy {
-      enabled = true
-      days    = 30
-    }
-  }
-
-  metric {
-    category = "AllMetrics"
-    enabled  = true
-
-    retention_policy {
-      enabled = true
-      days    = 30
-    }
-  }
-}

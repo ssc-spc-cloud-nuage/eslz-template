@@ -1,27 +1,27 @@
 #!/usr/bin/bash
-# command can be plan, apply, destroy
+# command can be plan, apply, destroy or validate
 env=${1}
 command=${2}
 blueprint="L0_blueprint_launchpad"
 
 if [[ -z ${env} || -z ${command} ]]; then
   echo 'one or more script variables are undefined'
-  echo "expecting: ./golaunchpad.sh <environment name> <plan|apply|destroy>"
+  echo "expecting: ./gorover.sh <environment name> <plan|apply|destroy|validate>"
   echo ""
   exit 1
 fi
 
-if [[ ${#1} < 3 ]]; then
-  echo "environment name must be 3 characters or greater"
-  echo ""
-  exit 1
-fi
+#if [[ ${#1} < 3 ]]; then
+#  echo "environment name must be 3 characters or greater"
+#  echo ""
+#  exit 1
+#fi
 
 case "${command}" in
-  plan|apply|destroy)
+  plan|apply|destroy|validate)
     ;;
   *)
-    echo "Accepted command is one of: plan, apply or destroy"
+    echo "Accepted command is one of: plan, apply, destroy or validate"
     echo ""
     exit 1
     ;;
@@ -50,4 +50,7 @@ if [[ ! -f "/tf/caf/${blueprint}/environments/${env}.tfvars" ]]; then
   exit 1
 fi
 
-/tf/rover/launchpad.sh /tf/launchpads/launchpad_opensource_light $command -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"
+# /tf/rover/launchpad.sh workspace create ${env}
+
+#/tf/rover/rover.sh /tf/caf/${blueprint}/code $command -parallelism=30 -w ${env} -tfstate ${blueprint} -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"
+/tf/rover/rover.sh /tf/caf/${blueprint}/code $command -launchpad -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"

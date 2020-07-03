@@ -28,7 +28,7 @@ resource "azurerm_network_security_group" "Project_MAZ-nsg" {
     protocol                   = "*"
     direction                  = "Inbound"
     source_port_range          = "*"
-    source_address_prefix      = var.RDS-Gateway
+    source_address_prefixes    = var.RDS-Gateways
     destination_port_range     = "*"
     destination_address_prefix = "*"
   }
@@ -61,7 +61,7 @@ resource azurerm_subnet_network_security_group_association Project_MAZ-nsg-Assoc
   subnet_id                 = local.subnets.MAZ.id
   network_security_group_id = azurerm_network_security_group.Project_MAZ-nsg.id
 }
-
+/*
 resource "azurerm_network_watcher_flow_log" "Network-Project_MAZ-flow" {
   network_watcher_name = "NetworkWatcher_canadacentral"
   resource_group_name  = "NetworkWatcherRG"
@@ -83,7 +83,8 @@ resource "azurerm_network_watcher_flow_log" "Network-Project_MAZ-flow" {
     interval_in_minutes   = 10
   }
 }
-
+*/
+/*
 resource "azurerm_monitor_diagnostic_setting" "Project_MAZ-nsg-logs" {
   name                       = "${var.env}CNR-${var.group}_${var.project}_MAZ-nsg-logs"
   target_resource_id         = azurerm_network_security_group.Project_MAZ-nsg.id
@@ -107,3 +108,4 @@ resource "azurerm_monitor_diagnostic_setting" "Project_MAZ-nsg-logs" {
     }
   }
 }
+*/

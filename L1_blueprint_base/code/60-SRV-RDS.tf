@@ -7,18 +7,22 @@ module "SWJ-01" {
   postfix           = "01"
   resource_group    = local.resource_groups_L1.Management
   location          = local.resource_groups_L1.Management.location
-  subnet            = module.Project-snet.object.PAZ
-  priority          = try(var.vmConfigs.SWJ-01.priority, "Regular")
-  admin_username    = "azureadmin"
-  admin_password    = var.vmConfigs.SWJ-01.admin_password
-  vm_size           = var.vmConfigs.SWJ-01.vm_size
-  license_type      = "Windows_Server"
-  dependancyAgent   = false
-  tags              = var.tags
+  subnet            = module.Project-snet.object.MAZ
+  nic_ip_configuration = {
+    private_ip_address            = ["10.101.240.100"]
+    private_ip_address_allocation = ["Static"]
+  }
+  priority        = try(var.vmConfigs.SWJ-01.priority, "Regular")
+  admin_username  = "azureadmin"
+  admin_password  = var.vmConfigs.SWJ-01.admin_password
+  vm_size         = var.vmConfigs.SWJ-01.vm_size
+  license_type    = "Windows_Server"
+  dependancyAgent = false
+  tags            = var.tags
 }
 
 # azurerm_monitor_diagnostic_setting is required for PBMM-Guardrails
-
+/*
 resource "azurerm_monitor_diagnostic_setting" "SWJ-01-logs" {
   count                      = var.deployOptionalFeatures.jumpServer ? 1 : 0
   name                       = "${var.env}SWJ-${var.project}01-logs"
@@ -35,3 +39,4 @@ resource "azurerm_monitor_diagnostic_setting" "SWJ-01-logs" {
     }
   }
 }
+*/
