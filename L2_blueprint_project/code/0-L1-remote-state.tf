@@ -1,8 +1,18 @@
 # Reading the L1 terraform state
-
+/*
 data "terraform_remote_state" "L1" {
   backend = "azurerm"
   config  = var.L1_terraform_remote_state_config
+}
+*/
+data "terraform_remote_state" "L1" {
+  backend = "azurerm"
+  config = {
+    storage_account_name  = var.lowerlevel_storage_account_name
+    container_name        = "sandpit"
+    key                   = var.L1_terraform_remote_state_config.key
+    resource_group_name   = var.lowerlevel_resource_group_name
+  }
 }
 
 # Mapping needed outputs from L1 statefile to locals for easy access
