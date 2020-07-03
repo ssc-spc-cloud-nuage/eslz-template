@@ -3,3 +3,7 @@
 *.stackdump
 errored.tfstate
 template-test.*
+dev.tfvars
+test_dev.tfvars
+dev.envvars
+test_dev.envvars

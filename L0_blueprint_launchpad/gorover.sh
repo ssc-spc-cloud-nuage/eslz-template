@@ -50,5 +50,5 @@ if [[ ! -f "/tf/caf/${blueprint}/environments/${env}.tfvars" ]]; then
   exit 1
 fi
 
-# /tf/rover/rover.sh /tf/caf/${blueprint}/code $command -launchpad -env ${env} -tfstate launchpad_${env} -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"
-/tf/rover/rover.sh /tf/caf/${blueprint}/code $command -launchpad -tfstate ${blueprint} -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"
+/tf/rover/rover.sh /tf/caf/${blueprint}/code $command -launchpad -env ${env} -tfstate "${blueprint}_${env}" -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"
+# /tf/rover/rover.sh /tf/caf/${blueprint}/code $command -launchpad -tfstate ${blueprint} -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"

@@ -1,7 +1,0 @@
-# Uncomment and set the environment variable below to the subscription id you wish to deploy the
-# launchpad into
-
-# LAUNCHPAD_SUBSCRIPTION=""
-
-# ducourier MSDN1
-LAUNCHPAD_SUBSCRIPTION="f2ee79ec-c0c9-4652-a4c8-084a28442e9f"

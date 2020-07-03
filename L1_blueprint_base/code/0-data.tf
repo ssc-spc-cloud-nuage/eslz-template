@@ -26,4 +26,5 @@ data "terraform_remote_state" "launchpad" {
 
 locals {
   L0_keyvault = data.terraform_remote_state.launchpad.outputs.keyvaults.launchpad
+  #L0_storageaccount = data.terraform_remote_state.launchpad.outputs.
 }

@@ -169,12 +169,6 @@ resource "azurerm_key_vault_access_policy" "L2_Subscription_Contributors_key_vau
 }
 
 # Adding access for L1 Owners to statefile keyvault
-/*
-data azurerm_key_vault L0 {
-  name                = var.L1_RBAC.L0_keyvault_name
-  resource_group_name = "${local.prefix}-launchpad"
-}
-*/
 
 resource "azurerm_key_vault_access_policy" "L0_key_vault_access_policy" {
   key_vault_id = local.L0_keyvault.id

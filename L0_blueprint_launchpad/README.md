@@ -30,7 +30,7 @@ rover login
 
 ```
 cd L0_blueprint_launchpad
-./golaunchpad.sh dev apply
+./gorover.sh dev apply
 ```
 
 ## Managing access to the launchpad

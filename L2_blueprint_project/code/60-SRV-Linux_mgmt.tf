@@ -1,6 +1,6 @@
 module "SRV-linux-mgmt" {
   source            = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-linux_virtual_machine?ref=v1.0.0"
-  deploy            = var.deployOptionalFeatures.linuxJumpServer
+  # deploy            = var.deployOptionalFeatures.linuxJumpServer
   env               = var.env
   serverType        = "SLJ"
   userDefinedString = "Linux-MGMT"
