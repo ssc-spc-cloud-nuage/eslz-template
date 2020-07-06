@@ -1,5 +1,5 @@
 module Project-Diagnostic-Policy {
-  source                  = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-diagnostic_policy_set?ref=v0.1.5"
+  source                  = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-diagnostic_policy_set?ref=v0.1.7"
   deploy                  = var.deployOptionalFeatures.diagnostics_policy
   env                     = var.env
   userDefinedString       = local.prefix
