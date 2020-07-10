@@ -45,8 +45,7 @@ jobs:
             -launchpad \
             -env sample \
             '-tfstate "L0_blueprint_launchpad_sample"' \
-            '-var-file "/tf/caf/L0_blueprint_launchpad/environments/sample.tfvars"' \
-            -auto-approve
+            '-var-file "/tf/caf/L0_blueprint_launchpad/environments/sample.tfvars"'
 
   launchpad_destroy:
     name: launchpad_destroy
@@ -76,5 +75,4 @@ jobs:
             -launchpad \
             -env sample \
             '-tfstate "L0_blueprint_launchpad_sample"' \
-            '-var-file "/tf/caf/L0_blueprint_launchpad/environments/sample.tfvars"' \
-            -auto-approve
+            '-var-file "/tf/caf/L0_blueprint_launchpad/environments/sample.tfvars"'
