@@ -1,0 +1,80 @@
+name: launchpad
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+
+env:
+  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+
+jobs:
+  launchpad:
+    name: launchpad
+    runs-on: ubuntu-latest
+
+    container:
+      image: aztfmod/rover:2007.0108
+      options: --user 0
+
+    strategy:
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login azure
+        run: |
+          az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
+          az account set -s  ${{ env.ARM_SUBSCRIPTION_ID }}
+
+      - name:  Setup context
+        id: context
+        run: |
+          ln -s ${GITHUB_WORKSPACE} /tf/caf
+          echo "ls /tf/caf" && ls -lsa /tf/caf
+          ls -lsa /tmp
+
+      - name: Create launchpad
+        run: |
+          /tf/rover/rover.sh /tf/caf/L0_blueprint_launchpad/code apply \
+            -launchpad \
+            -env sample \
+            -tfstate "L0_blueprint_launchpad_sample" \
+            -var-file="/tf/caf/L0_blueprint_launchpad/environments/sample.tfvars" \
+            -auto-approve
+
+  launchpad_destroy:
+    name: launchpad_destroy
+    runs-on: ubuntu-latest
+    if: always()
+    needs: launchpad
+
+    strategy:
+      fail-fast: false
+
+    container:
+      image: aztfmod/rover:2007.0108
+      options: --user 0
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login azure
+        run: |
+          az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
+          az account set -s  ${{ env.ARM_SUBSCRIPTION_ID }}
+
+      - name: Destroy launchpad
+        run: |
+          ln -s ${GITHUB_WORKSPACE} /tf/caf
+          /tf/rover/rover.sh /tf/caf/L0_blueprint_launchpad/code destroy \
+            -launchpad \
+            -env sample \
+            -tfstate "L0_blueprint_launchpad_sample" \
+            -var-file="/tf/caf/L0_blueprint_launchpad/environments/sample.tfvars" \
+            -auto-approve
