@@ -1,0 +1,25 @@
+name: Terraform deploy
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  plan:
+    name: Terraform plan
+    runs-on: ubuntu-latest
+    container:
+      image: aztfmod/rover:2007.0108
+      options: --user root
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    # - name: Terraform plan
+    #   run: ./L0_blueprint_launchpad/gorover.sh dev plan
