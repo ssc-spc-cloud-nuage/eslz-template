@@ -44,8 +44,8 @@ jobs:
           /tf/rover/rover.sh /tf/caf/L0_blueprint_launchpad/code apply \
             -launchpad \
             -env sample \
-            -tfstate "L0_blueprint_launchpad_sample" \
-            -var-file="/tf/caf/L0_blueprint_launchpad/environments/sample.tfvars" \
+            '-tfstate "L0_blueprint_launchpad_sample"' \
+            '-var-file "/tf/caf/L0_blueprint_launchpad/environments/sample.tfvars"' \
             -auto-approve
 
   launchpad_destroy:
@@ -75,6 +75,6 @@ jobs:
           /tf/rover/rover.sh /tf/caf/L0_blueprint_launchpad/code destroy \
             -launchpad \
             -env sample \
-            -tfstate "L0_blueprint_launchpad_sample" \
-            -var-file="/tf/caf/L0_blueprint_launchpad/environments/sample.tfvars" \
+            '-tfstate "L0_blueprint_launchpad_sample"' \
+            '-var-file "/tf/caf/L0_blueprint_launchpad/environments/sample.tfvars"' \
             -auto-approve
