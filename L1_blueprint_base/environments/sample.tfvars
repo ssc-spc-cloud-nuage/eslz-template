@@ -16,6 +16,7 @@ location = "canadacentral"
 
 deployOptionalFeatures = {
   ddos_protection_plan       = false
+  defaultRoute               = true
   recovery_services_vault    = false
   security_center            = false
   sentinel                   = false

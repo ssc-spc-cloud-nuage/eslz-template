@@ -1,5 +1,5 @@
 module Project-Diagnostic-Policy {
-  source                  = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-diagnostic_policy_set?ref=v0.1.8"
+  source                  = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-diagnostic_policy_set?ref=v0.1.9"
   deploy                  = var.deployOptionalFeatures.diagnostics_policy
   env                     = var.env
   userDefinedString       = local.prefix
@@ -7,12 +7,12 @@ module Project-Diagnostic-Policy {
 }
 
 module Management-Diagnostic-Policy {
-  source                  = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-diagnostic_policy_set?ref=v0.1.8"
+  source                  = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-diagnostic_policy_set?ref=v0.1.9"
   deploy                  = var.deployOptionalFeatures.diagnostics_policy
   env                     = var.env
   userDefinedString       = local.prefix
   log_analytics_workspace = local.Project-law
-  management_group_name = "PBMM_VDC"
+  management_group_name   = "PBMM_VDC"
 }
 
 locals {
