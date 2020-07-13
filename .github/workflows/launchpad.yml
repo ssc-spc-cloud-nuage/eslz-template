@@ -15,8 +15,8 @@ env:
   TFVARS_PATH: '/tf/caf/environments'
 
 jobs:
-  launchpad:
-    name: launchpad
+  deploy:
+    name: deploy
     runs-on: ubuntu-latest
 
     container:
@@ -35,11 +35,8 @@ jobs:
           az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
 
       - name:  Setup context
-        id: context
         run: |
           ln -s ${GITHUB_WORKSPACE} /tf/caf
-          echo "ls /tf/caf" && ls -lsa /tf/caf
-          ls -lsa /tmp
 
       - name: Create launchpad
         run: |
@@ -49,11 +46,27 @@ jobs:
             -tfstate "L0_blueprint_launchpad_sample" \
             -var-file="/tf/caf/L0_blueprint_launchpad/environments/sample.tfvars"
 
-  launchpad_destroy:
-    name: launchpad_destroy
+      - name: Create base
+        run: |
+          /tf/rover/rover.sh /tf/caf/L1_blueprint_base/code apply \
+            -launchpad \
+            -env sample \
+            -tfstate "L1_blueprint_base_sample" \
+            -var-file="/tf/caf/L1_blueprint_base/environments/sample.tfvars"
+
+      - name: Create project
+        run: |
+          /tf/rover/rover.sh /tf/caf/L2_blueprint_project/code apply \
+            -launchpad \
+            -env sample \
+            -tfstate "L2_blueprint_project_sample" \
+            -var-file="/tf/caf/L2_blueprint_project/environments/sample.tfvars"
+
+  destroy:
+    name: destroy
     runs-on: ubuntu-latest
     if: always()
-    needs: launchpad
+    needs: deploy
 
     strategy:
       fail-fast: false
@@ -70,9 +83,30 @@ jobs:
           az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
           az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
 
-      - name: Destroy launchpad
+      - name:  Setup context
         run: |
           ln -s ${GITHUB_WORKSPACE} /tf/caf
+
+      - name: Destroy project
+        run: |
+          /tf/rover/rover.sh /tf/caf/L2_blueprint_project/code destroy \
+            -launchpad \
+            -env sample \
+            -tfstate "L2_blueprint_project_sample" \
+            -var-file="/tf/caf/L2_blueprint_project/environments/sample.tfvars" \
+            -auto-approve
+
+      - name: Destroy base
+        run: |
+          /tf/rover/rover.sh /tf/caf/L1_blueprint_base/code destroy \
+            -launchpad \
+            -env sample \
+            -tfstate "L1_blueprint_base_sample" \
+            -var-file="/tf/caf/L1_blueprint_base/environments/sample.tfvars" \
+            -auto-approve
+
+      - name: Destroy launchpad
+        run: |
           /tf/rover/rover.sh /tf/caf/L0_blueprint_launchpad/code destroy \
             -launchpad \
             -env sample \
