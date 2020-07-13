@@ -11,6 +11,7 @@ env:
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+  TF_CLI_ARGS_destroy: '-auto-approve -refresh=false'
   TFVARS_PATH: '/tf/caf/environments'
 
 jobs:
@@ -76,4 +77,5 @@ jobs:
             -launchpad \
             -env sample \
             -tfstate "L0_blueprint_launchpad_sample" \
-            -var-file="/tf/caf/L0_blueprint_launchpad/environments/sample.tfvars"
+            -var-file="/tf/caf/L0_blueprint_launchpad/environments/sample.tfvars" \
+            -auto-approve
