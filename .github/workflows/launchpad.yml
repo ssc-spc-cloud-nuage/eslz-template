@@ -32,7 +32,7 @@ jobs:
       - name: Login azure
         run: |
           az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
-          az account set -s  ${{ env.ARM_SUBSCRIPTION_ID }}
+          az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
 
       - name:  Setup context
         id: context
@@ -68,7 +68,7 @@ jobs:
       - name: Login azure
         run: |
           az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
-          az account set -s  ${{ env.ARM_SUBSCRIPTION_ID }}
+          az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
 
       - name: Destroy launchpad
         run: |
