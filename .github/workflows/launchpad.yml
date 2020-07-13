@@ -15,29 +15,23 @@ env:
   TFVARS_PATH: '/tf/caf/environments'
 
 jobs:
-  deploy:
-    name: deploy
+  launchpad_deploy:
+    name: launchpad_deploy
     runs-on: ubuntu-latest
-
     container:
       image: aztfmod/rover:2007.0108
       options: --user 0
-
     strategy:
       fail-fast: false
-
     steps:
-      - uses: actions/checkout@v2
-
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Login azure
         run: |
           az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
           az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
-
       - name:  Setup context
-        run: |
-          ln -s ${GITHUB_WORKSPACE} /tf/caf
-
+        run: ln -s ${GITHUB_WORKSPACE} /tf/caf
       - name: Create launchpad
         run: |
           /tf/rover/rover.sh /tf/caf/L0_blueprint_launchpad/code apply \
@@ -46,6 +40,24 @@ jobs:
             -tfstate "L0_blueprint_launchpad_sample" \
             -var-file="/tf/caf/L0_blueprint_launchpad/environments/sample.tfvars"
 
+  base_deploy:
+    name: base_deploy
+    needs: launchpad_deploy
+    runs-on: ubuntu-latest
+    container:
+      image: aztfmod/rover:2007.0108
+      options: --user 0
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Login azure
+        run: |
+          az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
+          az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
+      - name:  Setup context
+        run: ln -s ${GITHUB_WORKSPACE} /tf/caf
       - name: Create base
         run: |
           /tf/rover/rover.sh /tf/caf/L1_blueprint_base/code apply \
@@ -54,48 +66,25 @@ jobs:
             -tfstate "L1_blueprint_base_sample" \
             -var-file="/tf/caf/L1_blueprint_base/environments/sample.tfvars"
 
-      - name: Create project
-        run: |
-          /tf/rover/rover.sh /tf/caf/L2_blueprint_project/code apply \
-            -launchpad \
-            -env sample \
-            -tfstate "L2_blueprint_project_sample" \
-            -var-file="/tf/caf/L2_blueprint_project/environments/sample.tfvars"
-
-  destroy:
-    name: destroy
+  base_destroy:
+    name: base_destroy
+    needs: base_deploy
     runs-on: ubuntu-latest
     if: always()
-    needs: deploy
-
     strategy:
       fail-fast: false
-
     container:
       image: aztfmod/rover:2007.0108
       options: --user 0
-
     steps:
-      - uses: actions/checkout@v2
-
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Login azure
         run: |
           az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
           az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
-
       - name:  Setup context
-        run: |
-          ln -s ${GITHUB_WORKSPACE} /tf/caf
-
-      - name: Destroy project
-        run: |
-          /tf/rover/rover.sh /tf/caf/L2_blueprint_project/code destroy \
-            -launchpad \
-            -env sample \
-            -tfstate "L2_blueprint_project_sample" \
-            -var-file="/tf/caf/L2_blueprint_project/environments/sample.tfvars" \
-            -auto-approve
-
+        run: ln -s ${GITHUB_WORKSPACE} /tf/caf
       - name: Destroy base
         run: |
           /tf/rover/rover.sh /tf/caf/L1_blueprint_base/code destroy \
@@ -105,6 +94,25 @@ jobs:
             -var-file="/tf/caf/L1_blueprint_base/environments/sample.tfvars" \
             -auto-approve
 
+  launchpad_destroy:
+    name: launchpad_destroy
+    needs: base_destroy
+    runs-on: ubuntu-latest
+    if: always()
+    strategy:
+      fail-fast: false
+    container:
+      image: aztfmod/rover:2007.0108
+      options: --user 0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Login azure
+        run: |
+          az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
+          az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
+      - name:  Setup context
+        run: ln -s ${GITHUB_WORKSPACE} /tf/caf
       - name: Destroy launchpad
         run: |
           /tf/rover/rover.sh /tf/caf/L0_blueprint_launchpad/code destroy \
