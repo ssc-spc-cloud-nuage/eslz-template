@@ -36,9 +36,9 @@ jobs:
         run: |
           /tf/rover/rover.sh /tf/caf/L0_blueprint_launchpad/code apply \
             -launchpad \
-            -env sample \
-            -tfstate "L0_blueprint_launchpad_sample" \
-            -var-file="/tf/caf/L0_blueprint_launchpad/environments/sample.tfvars"
+            -env cicd \
+            -tfstate "L0_blueprint_launchpad_cicd" \
+            -var-file="/tf/caf/L0_blueprint_launchpad/environments/cicd.tfvars"
 
   base_deploy:
     name: base_deploy
@@ -62,9 +62,9 @@ jobs:
         run: |
           /tf/rover/rover.sh /tf/caf/L1_blueprint_base/code apply \
             -launchpad \
-            -env sample \
-            -tfstate "L1_blueprint_base_sample" \
-            -var-file="/tf/caf/L1_blueprint_base/environments/sample.tfvars"
+            -env cicd \
+            -tfstate "L1_blueprint_base_cicd" \
+            -var-file="/tf/caf/L1_blueprint_base/environments/cicd.tfvars"
 
   base_destroy:
     name: base_destroy
@@ -89,9 +89,9 @@ jobs:
         run: |
           /tf/rover/rover.sh /tf/caf/L1_blueprint_base/code destroy \
             -launchpad \
-            -env sample \
-            -tfstate "L1_blueprint_base_sample" \
-            -var-file="/tf/caf/L1_blueprint_base/environments/sample.tfvars" \
+            -env cicd \
+            -tfstate "L1_blueprint_base_cicd" \
+            -var-file="/tf/caf/L1_blueprint_base/environments/cicd.tfvars" \
             -auto-approve
 
   launchpad_destroy:
@@ -117,7 +117,7 @@ jobs:
         run: |
           /tf/rover/rover.sh /tf/caf/L0_blueprint_launchpad/code destroy \
             -launchpad \
-            -env sample \
-            -tfstate "L0_blueprint_launchpad_sample" \
-            -var-file="/tf/caf/L0_blueprint_launchpad/environments/sample.tfvars" \
+            -env cicd \
+            -tfstate "L0_blueprint_launchpad_cicd" \
+            -var-file="/tf/caf/L0_blueprint_launchpad/environments/cicd.tfvars" \
             -auto-approve
