@@ -19,12 +19,12 @@ deployOptionalFeatures = {
   recovery_services_vault    = false
   security_center            = false
   sentinel                   = false
-  update_management          = true
-  deny_publicip_subscription = true
-  deny_publicips_on_nics     = true
-  diagnostics_policy         = true
-  flow_logs_policy           = true
-  jumpServer                 = true
+  update_management          = false
+  deny_publicip_subscription = false
+  deny_publicips_on_nics     = false
+  diagnostics_policy         = false
+  flow_logs_policy           = false
+  jumpServer                 = false
 }
 
 ## Optional Features variables ##
