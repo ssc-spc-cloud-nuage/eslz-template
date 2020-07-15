@@ -1,30 +1,30 @@
 tags = {
   "classification"    = "pbmm"
-  "contact"           = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
+  "contact"           = "<some email>; <some email>; etc"
   "costcentre"        = "566811"
   "env"               = "dev"
-  "owner"             = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
+  "owner"             = "<some email>; <some email>; etc"
   "cloudusageprofile" = "3"
-  "branch"            = "CIO"
+  "branch"            = "<branch name>"
 }
 
-env     = "ScDc"
-group   = "CIO"
-project = "ESLZ"
+env     = "<4 chard env>"
+group   = "<group name, keep it short>"
+project = "<project name, keep it short>"
 
 location = "canadacentral"
 
 deployOptionalFeatures = {
   ddos_protection_plan       = false
+  defaultRoute               = false
   recovery_services_vault    = false
   security_center            = false
   sentinel                   = false
-  update_management          = true
-  deny_publicip_subscription = true
-  deny_publicips_on_nics     = true
-  diagnostics_policy         = true
-  flow_logs_policy           = true
-  jumpServer                 = true
+  update_management          = false
+  deny_publicip_policy       = false
+  diagnostics_policy         = false
+  flow_logs_policy           = false
+  jumpServer                 = false
 }
 
 ## Optional Features variables ##
@@ -41,37 +41,41 @@ optionalFeaturesConfig = {
 }
 
 network = {
-  vnet = ["10.101.240.0/24"]
+  vnet = ["10.10.10.0/24"]
   subnets = {
-    PAZ = ["10.101.240.0/27"]
-    OZ  = ["10.101.240.32/27"]
-    RZ  = ["10.101.240.64/27"]
-    MAZ = ["10.101.240.96/27"]
+    PAZ = ["10.10.10.0/27"]
+    OZ  = ["10.10.10.32/27"]
+    RZ  = ["10.10.10.64/27"]
+    MAZ = ["10.10.10.96/27"]
   }
 }
-Landing-Zone-Next-Hop = "172.168.3.22"
+Landing-Zone-Next-Hop = "10.10.20.10"
 
 domain = {
   public = {
-    name = "eslz.dev.ciso.ssc-spc.gc.ca"
+    name = "some.domain.com"
   }
   private = {
-    name                 = "eslz.dev.local"
+    name                 = "some.domain.local"
     registration_enabled = true # Set to true if auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled?
   }
 }
 
 L1_RBAC = {
   ownerNames = [
-    "john.nephin@163dev.onmicrosoft.com",
-    "bernard.maltais@163dev.onmicrosoft.com",
-    "louis-eric.tremblay@163dev.onmicrosoft.com",
-    "test-bernard.maltais@163dev.onmicrosoft.com"
+    "some@aad.user.email",
+    "some@aad.user.email2"
   ]
 
-  contributorNames = []
+  contributorNames = [
+    "some@aad.user.email",
+    "some@aad.user.email2"
+  ]
 
-  readerNames = []
+  readerNames = [
+    "some@aad.user.email",
+    "some@aad.user.email2"
+  ]
 }
 
 vmConfigs = {

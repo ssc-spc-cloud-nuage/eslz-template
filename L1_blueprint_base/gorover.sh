@@ -10,11 +10,17 @@ if [[ -z ${env} || -z ${command} ]]; then
   exit 1
 fi
 
-#if [[ ${#1} < 3 ]]; then
-#  echo "environment name must be 3 characters or greater"
-#  echo ""
-#  exit 1
-#fi
+if [[ ${1} = *-* ]]; then
+  echo "environment name must not contain -. Use _ instead"
+  echo ""
+  exit 1
+fi
+
+if [[ ${#1} < 3 ]]; then
+  echo "environment name must be 3 characters or greater"
+  echo ""
+  exit 1
+fi
 
 case "${command}" in
   plan|apply|destroy|validate)
@@ -51,4 +57,4 @@ fi
 
 #/tf/rover/launchpad.sh workspace create ${env}
 #/tf/rover/rover.sh /tf/caf/${blueprint}/code $command -parallelism=30 -w ${env} -tfstate ${blueprint} -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"
-/tf/rover/rover.sh /tf/caf/${blueprint}/code $command -env ${env} -parallelism=30 -tfstate "${blueprint}_${env}" -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"
+/tf/rover/rover.sh /tf/caf/${blueprint}/code $command -env ${env} -tfstate "${blueprint}_${env}" -parallelism=30 -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"
