@@ -14,6 +14,8 @@ project = "CICDTest"
 
 location = "canadacentral"
 
+Landing-Zone-Next-Hop = "172.168.3.22"
+
 RDS-Gateways           = ["10.101.16.4"]
 
 domain = {
@@ -27,18 +29,20 @@ domain = {
 }
 
 L2_RBAC = {
+
+  contributorEnterpriseID = []
+
   ownerNames = [
     "john.nephin@163dev.onmicrosoft.com",
     "bernard.maltais@163dev.onmicrosoft.com",
+    "pat.heard@163dev.onmicrosoft.com"
   ]
 
   contributorNames = [
     "louis-eric.tremblay@163dev.onmicrosoft.com"
   ]
 
-  readerNames = [
-    "pat.heard@163dev.onmicrosoft.com"
-  ]
+  readerNames = []
 }
 
 vmConfigs = {
@@ -65,14 +69,8 @@ vmConfigs = {
 # Fill the section below with the values from the output of ./gorover.sh <env> validate. Look in the section
 # called Getting launchpad coordinates: It will look like:
 # Getting launchpad coordinates:
-#  - storage_account_name: scdccioeslztemplatestlev
-#  - resource_group: ScDc-CIO_ESLZ_Template-terraform-state
-#  - container: level0
 #  - tfstate file: launchpad_opensource_light.tfstate
 
 L1_terraform_remote_state_config = {
-    storage_account_name  = "<get the storage account name from the storage_account_name: output>"
-    resource_group_name   = "<get the storage account name from the resource_group: output>"
-    container_name        = "cicd"
     key                   = "L1_blueprint_base_cicd.tfstate"
 }

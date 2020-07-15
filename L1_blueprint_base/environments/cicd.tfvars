@@ -65,15 +65,14 @@ L1_RBAC = {
   ownerNames = [
     "john.nephin@163dev.onmicrosoft.com",
     "bernard.maltais@163dev.onmicrosoft.com",
+    "pat.heard@163dev.onmicrosoft.com"
   ]
 
   contributorNames = [
     "louis-eric.tremblay@163dev.onmicrosoft.com"
   ]
 
-  readerNames = [
-    "pat.heard@163dev.onmicrosoft.com"
-  ]
+  readerNames = []
 }
 
 vmConfigs = {
