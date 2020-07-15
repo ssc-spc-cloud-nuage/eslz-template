@@ -3,9 +3,9 @@
 #
 # Hope a future update to the rover can address this in the future.
 
-env     = "ScDc"
-group   = "CIO"
-project = "ESLZ"
+env     = "<4 chard env>"
+group   = "<group name, keep it short>"
+project = "<project name, keep it short>"
 
 convention = "passthrough"
 enable_collaboration = true

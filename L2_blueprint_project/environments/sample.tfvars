@@ -1,43 +1,46 @@
 tags = {
   "classification"    = "pbmm"
-  "contact"           = "user1@domain.ca; user1@domain.ca"
-  "costcentre"        = "56a54668sdfsf11"
+  "contact"           = "<some email>; <some email>; etc"
+  "costcentre"        = "566811"
   "env"               = "dev"
-  "owner"             = "user1@domain.ca; user1@domain.ca"
+  "owner"             = "<some email>; <some email>; etc"
   "cloudusageprofile" = "3"
-  "branch"            = "CIO"
+  "branch"            = "<branch name>"
 }
 
-env     = "ScDc"
-group   = "CIO"
-project = "ESLZ"
+env     = "<4 chard env>"
+group   = "<group name, keep it short>"
+project = "<project name, keep it short>"
 
 location = "canadacentral"
 
-RDS-Gateways           = ["10.101.16.4"]
+Landing-Zone-Next-Hop = "10.10.20.20"
+RDS-Gateways           = ["100.96.185.4", "100.96.185.5"]
 
 domain = {
   public = {
-    name = "eslz.dev.ciso.ssc-spc.gc.ca"
+    name = "some.domain.com"
   }
   private = {
-    name                 = "eslz.dev.local"
+    name                 = "some.domain.local"
     registration_enabled = true # Set to true if auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled?
   }
 }
 
 L2_RBAC = {
-  ownerNames = [
-    "user1@163dev.onmicrosoft.com",
-    "user1@163dev.onmicrosoft.com"
+  contributorNames = [
+    "some@aad.user.email",
+    "some@aad.user.email2"
   ]
 
-  contributorNames = [
-    "user3@163dev.onmicrosoft.com"
+  contributorEnterpriseID = [
+    "bb294f5d-fece-4d3a-a187-7f98cb64e478", # Some user SP
+    "2000c7f5-0f8d-4a45-a65d-d70dc3edcac3"  # Some user2 SP
   ]
 
   readerNames = [
-    "user4@163dev.onmicrosoft.com"
+    "some@aad.user.email",
+    "some@aad.user.email2"
   ]
 }
 
@@ -56,20 +59,12 @@ vmConfigs = {
   */
 
   SRV-linux-mgmt = {
-    admin_password = "tmp-e4d5rtc!"
+    admin_password = "canada123!"
     vm_size        = "Standard_D2s_v3"
     priority       = "Spot"
   }
 }
 
-# Fill the section below with the values from the output of ./gorover.sh <env> validate. Look in the section
-# called Getting launchpad coordinates: It will look like:
-# Getting launchpad coordinates:
-#  - storage_account_name: scdccioeslztemplatestlev
-#  - resource_group: ScDc-CIO_ESLZ_Template-terraform-state
-#  - container: level0
-#  - tfstate file: launchpad_opensource_light.tfstate
-
 L1_terraform_remote_state_config = {
-    key                   = "L1_blueprint_base.tfstate"
+    key = "L1_blueprint_base_<env name>.tfstate" # <------------ DOn't forget to set the env name!!!
 }
