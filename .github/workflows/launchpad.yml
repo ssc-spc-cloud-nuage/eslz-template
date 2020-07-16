@@ -33,7 +33,7 @@ jobs:
       - name:  Setup context
         run: ln -s ${GITHUB_WORKSPACE} /tf/caf
       - name: Create launchpad
-        run: /tf/rover/rover.sh /tf/caf/L0_blueprint_launchpad/code apply -launchpad -env cicd -tfstate L0_blueprint_launchpad_cicd -var-file=/tf/caf/L0_blueprint_launchpad/environments/cicd.tfvars
+        run: /tf/rover/rover.sh /tf/caf/L0_blueprint_launchpad/code apply -launchpad -env cicd -tfstate L0_blueprint_launchpad_cicd '-var-file=/tf/caf/L0_blueprint_launchpad/environments/cicd.tfvars'
 
   base_deploy:
     name: base_deploy
@@ -54,7 +54,7 @@ jobs:
       - name:  Setup context
         run: ln -s ${GITHUB_WORKSPACE} /tf/caf
       - name: Create base
-        run: /tf/rover/rover.sh /tf/caf/L1_blueprint_base/code apply -env cicd -parallelism=30 -tfstate L1_blueprint_base_cicd -var-file=/tf/caf/L1_blueprint_base/environments/cicd.tfvars
+        run: /tf/rover/rover.sh /tf/caf/L1_blueprint_base/code apply -env cicd -parallelism=30 -tfstate L1_blueprint_base_cicd '-var-file=/tf/caf/L1_blueprint_base/environments/cicd.tfvars'
 
   project_deploy:
     name: project_deploy
@@ -75,4 +75,4 @@ jobs:
       - name:  Setup context
         run: ln -s ${GITHUB_WORKSPACE} /tf/caf
       - name: Create project
-        run: /tf/rover/rover.sh /tf/caf/L2_blueprint_project/code apply -env cicd -parallelism=30 -tfstate L2_blueprint_project_cicd -var-file=/tf/caf/L2_blueprint_project/environments/cicd.tfvars
+        run: /tf/rover/rover.sh /tf/caf/L2_blueprint_project/code apply -env cicd -parallelism=30 -tfstate L2_blueprint_project_cicd '-var-file=/tf/caf/L2_blueprint_project/environments/cicd.tfvars'
