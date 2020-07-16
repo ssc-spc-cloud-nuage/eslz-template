@@ -66,17 +66,15 @@ jobs:
             -tfstate L1_blueprint_base_cicd \
             -var-file=/tf/caf/L1_blueprint_base/environments/cicd.tfvars
 
-  base_destroy:
-    name: base_destroy
+  project_deploy:
+    name: project_deploy
     needs: base_deploy
     runs-on: ubuntu-latest
-    if: always()
-    continue-on-error: true
-    strategy:
-      fail-fast: false
     container:
       image: aztfmod/rover:2007.0108
       options: --user 0
+    strategy:
+      fail-fast: false
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -86,39 +84,10 @@ jobs:
           az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
       - name:  Setup context
         run: ln -s ${GITHUB_WORKSPACE} /tf/caf
-      - name: Destroy base
+      - name: Create project
         run: |
-          /tf/rover/rover.sh /tf/caf/L1_blueprint_base/code destroy \
+          /tf/rover/rover.sh /tf/caf/L2_blueprint_project/code apply \
             -env cicd \
             -parallelism=30 \
-            -tfstate L1_blueprint_base_cicd \
-            -var-file=/tf/caf/L1_blueprint_base/environments/cicd.tfvars \
-            -auto-approve
-
-  launchpad_destroy:
-    name: launchpad_destroy
-    needs: base_destroy
-    runs-on: ubuntu-latest
-    if: always()
-    strategy:
-      fail-fast: false
-    container:
-      image: aztfmod/rover:2007.0108
-      options: --user 0
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Login azure
-        run: |
-          az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
-          az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
-      - name:  Setup context
-        run: ln -s ${GITHUB_WORKSPACE} /tf/caf
-      - name: Destroy launchpad
-        run: |
-          /tf/rover/rover.sh /tf/caf/L0_blueprint_launchpad/code destroy \
-            -launchpad \
-            -env cicd \
-            -tfstate L0_blueprint_launchpad_cicd \
-            -var-file=/tf/caf/L0_blueprint_launchpad/environments/cicd.tfvars \
-            -auto-approve
+            -tfstate L2_blueprint_project_cicd \
+            -var-file=/tf/caf/L2_blueprint_project/environments/cicd.tfvars
