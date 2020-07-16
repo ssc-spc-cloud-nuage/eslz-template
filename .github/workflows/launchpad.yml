@@ -34,26 +34,140 @@ jobs:
           az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
           az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
 
-      - name:  Setup context
-        id: context
-        run: |
-          ln -s ${GITHUB_WORKSPACE} /tf/caf
-          echo "ls /tf/caf" && ls -lsa /tf/caf
-          ls -lsa /tmp
-
       - name: Create launchpad
         run: |
+          ln -s ${GITHUB_WORKSPACE} /tf/caf
           /tf/rover/rover.sh /tf/caf/L0_blueprint_launchpad/code apply \
             -launchpad \
-            -env sample \
-            -tfstate "L0_blueprint_launchpad_sample" \
-            -var-file="/tf/caf/L0_blueprint_launchpad/environments/sample.tfvars"
+            -env cicd \
+            -tfstate "L0_blueprint_launchpad_cicd" \
+            -var-file="/tf/caf/L0_blueprint_launchpad/environments/cicd.tfvars"
+
+  base:
+    name: base
+    runs-on: ubuntu-latest
+    needs: launchpad
+
+    container:
+      image: aztfmod/rover:2007.0108
+      options: --user 0
+
+    strategy:
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login azure
+        run: |
+          az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
+          az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
+
+      - name: Create base
+        run: |
+          ln -s ${GITHUB_WORKSPACE} /tf/caf
+          /tf/rover/rover.sh /tf/caf/L1_blueprint_base/code apply \
+            -parallelism=30
+            -env cicd \
+            -tfstate "L1_blueprint_base_cicd" \
+            -var-file="/tf/caf/L1_blueprint_base/environments/cicd.tfvars"
+
+  project:
+    name: project
+    runs-on: ubuntu-latest
+    needs: base
+
+    container:
+      image: aztfmod/rover:2007.0108
+      options: --user 0
+
+    strategy:
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login azure
+        run: |
+          az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
+          az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
+
+      - name: Create project
+        run: |
+          ln -s ${GITHUB_WORKSPACE} /tf/caf
+          /tf/rover/rover.sh /tf/caf/L2_blueprint_project/code apply \
+            -parallelism=30
+            -env cicd \
+            -tfstate "L2_blueprint_project_cicd" \
+            -var-file="/tf/caf/L2_blueprint_project/environments/cicd.tfvars"
+
+  project_destroy:
+    name: project_destroy
+    runs-on: ubuntu-latest
+    if: always()
+    needs: project
+
+    strategy:
+      fail-fast: false
+
+    container:
+      image: aztfmod/rover:2007.0108
+      options: --user 0
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login azure
+        run: |
+          az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
+          az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
+
+      - name: Destroy project
+        run: |
+          ln -s ${GITHUB_WORKSPACE} /tf/caf
+          /tf/rover/rover.sh /tf/caf/L2_blueprint_project/code destroy \
+            -parallelism=30 \
+            -env cicd \
+            -tfstate L2_blueprint_project_cicd" \
+            -var-file="/tf/caf/L2_blueprint_project/environments/cicd.tfvars" \
+            -auto-approve
+
+  base_destroy:
+    name: base_destroy
+    runs-on: ubuntu-latest
+    if: always()
+    needs: project_destroy
+
+    strategy:
+      fail-fast: false
+
+    container:
+      image: aztfmod/rover:2007.0108
+      options: --user 0
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login azure
+        run: |
+          az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
+          az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
+
+      - name: Destroy base
+        run: |
+          ln -s ${GITHUB_WORKSPACE} /tf/caf
+          /tf/rover/rover.sh /tf/caf/L1_blueprint_base/code destroy \
+            -parallelism=30 \
+            -env cicd \
+            -tfstate "L1_blueprint_base_cicd" \
+            -var-file="/tf/caf/L1_blueprint_base/environments/cicd.tfvars" \
+            -auto-approve
 
   launchpad_destroy:
     name: launchpad_destroy
     runs-on: ubuntu-latest
     if: always()
-    needs: launchpad
+    needs: base_destroy
 
     strategy:
       fail-fast: false
@@ -75,7 +189,7 @@ jobs:
           ln -s ${GITHUB_WORKSPACE} /tf/caf
           /tf/rover/rover.sh /tf/caf/L0_blueprint_launchpad/code destroy \
             -launchpad \
-            -env sample \
-            -tfstate "L0_blueprint_launchpad_sample" \
-            -var-file="/tf/caf/L0_blueprint_launchpad/environments/sample.tfvars" \
+            -env cicd \
+            -tfstate "L0_blueprint_launchpad_cicd" \
+            -var-file="/tf/caf/L0_blueprint_launchpad/environments/cicd.tfvars" \
             -auto-approve
