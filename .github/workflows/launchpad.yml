@@ -12,103 +12,113 @@ env:
   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
   TF_CLI_ARGS_destroy: '-auto-approve -refresh=false'
-  TFVARS_PATH: '/tf/caf/environments'
+  L0_BLUEPRINT: 'L0_blueprint_launchpad'
+  L1_BLUEPRINT: 'L1_blueprint_base'
+  L2_BLUEPRINT: 'L2_blueprint_project'
+  ENV_NAME: 'cicd'
 
 jobs:
-  launchpad:
-    name: launchpad
+  launchpad_deploy:
+    name: launchpad_deploy
     runs-on: ubuntu-latest
-
     container:
       image: aztfmod/rover:2007.0108
       options: --user 0
 
-    strategy:
-      fail-fast: false
-
     steps:
       - uses: actions/checkout@v2
+
+      - name: Setup context
+        id: context
+        run: |
+          ln -s ${GITHUB_WORKSPACE} /tf/caf
+          echo "ls /tf/caf" && ls -lsa /tf/caf
+          ls -lsa /tmp
 
       - name: Login azure
         run: |
           az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
           az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
+          echo "local user: $(whoami)"
 
-      - name: Create launchpad
+      - name: Troubleshooting
         run: |
-          ln -s ${GITHUB_WORKSPACE} /tf/caf
-          /tf/rover/rover.sh /tf/caf/L0_blueprint_launchpad/code apply \
+          cat /tf/caf/${{ env.L0_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars
+
+      - name: Deploy launchpad
+        run: |
+          /tf/rover/rover.sh /tf/caf/${{ env.L0_BLUEPRINT }}/code apply \
             -launchpad \
-            -env cicd \
-            -tfstate "L0_blueprint_launchpad_cicd" \
-            -var-file="/tf/caf/L0_blueprint_launchpad/environments/cicd.tfvars"
+            -env ${{ env.ENV_NAME }} \
+            -tfstate ${{ env.L0_BLUEPRINT }}_${{ env.ENV_NAME }} \
+            -var-file=/tf/caf/${{ env.L0_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars
 
-  base:
-    name: base
+  base_deploy:
+    name: base_deploy
+    needs: launchpad_deploy
     runs-on: ubuntu-latest
-    needs: launchpad
-
     container:
       image: aztfmod/rover:2007.0108
       options: --user 0
 
-    strategy:
-      fail-fast: false
-
     steps:
       - uses: actions/checkout@v2
+
+      - name: Setup context
+        id: context
+        run: |
+          ln -s ${GITHUB_WORKSPACE} /tf/caf
+          echo "ls /tf/caf" && ls -lsa /tf/caf
+          ls -lsa /tmp
 
       - name: Login azure
         run: |
           az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
           az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
 
-      - name: Create base
+      - name: Deploy base
         run: |
-          ln -s ${GITHUB_WORKSPACE} /tf/caf
-          /tf/rover/rover.sh /tf/caf/L1_blueprint_base/code apply \
-            -parallelism=30
-            -env cicd \
-            -tfstate "L1_blueprint_base_cicd" \
-            -var-file="/tf/caf/L1_blueprint_base/environments/cicd.tfvars"
+          /tf/rover/rover.sh /tf/caf/${{ env.L1_BLUEPRINT }}/code apply \
+            -env ${{ env.ENV_NAME }} \
+            -tfstate ${{ env.L1_BLUEPRINT }}_${{ env.ENV_NAME }} \
+            -var-file=/tf/caf/${{ env.L1_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars
 
-  project:
-    name: project
+  project_deploy:
+    name: project_deploy
+    needs: base_deploy
     runs-on: ubuntu-latest
-    needs: base
 
     container:
       image: aztfmod/rover:2007.0108
       options: --user 0
 
-    strategy:
-      fail-fast: false
-
     steps:
       - uses: actions/checkout@v2
+
+      - name: Setup context
+        id: context
+        run: |
+          ln -s ${GITHUB_WORKSPACE} /tf/caf
+          echo "ls /tf/caf" && ls -lsa /tf/caf
+          ls -lsa /tmp
 
       - name: Login azure
         run: |
           az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
           az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
 
-      - name: Create project
+      - name: Deploy project
         run: |
-          ln -s ${GITHUB_WORKSPACE} /tf/caf
-          /tf/rover/rover.sh /tf/caf/L2_blueprint_project/code apply \
-            -parallelism=30
-            -env cicd \
-            -tfstate "L2_blueprint_project_cicd" \
-            -var-file="/tf/caf/L2_blueprint_project/environments/cicd.tfvars"
+          /tf/rover/rover.sh /tf/caf/${{ env.L2_BLUEPRINT }}/code apply \
+            -env ${{ env.ENV_NAME }} \
+            -tfstate ${{ env.L2_BLUEPRINT }}_${{ env.ENV_NAME }} \
+            -var-file=/tf/caf/${{ env.L2_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars
 
   project_destroy:
     name: project_destroy
+    needs: project_deploy
     runs-on: ubuntu-latest
     if: always()
-    needs: project
-
-    strategy:
-      fail-fast: false
 
     container:
       image: aztfmod/rover:2007.0108
@@ -116,6 +126,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Setup context
+        id: context
+        run: |
+          ln -s ${GITHUB_WORKSPACE} /tf/caf
+          echo "ls /tf/caf" && ls -lsa /tf/caf
+          ls -lsa /tmp
 
       - name: Login azure
         run: |
@@ -124,22 +141,17 @@ jobs:
 
       - name: Destroy project
         run: |
-          ln -s ${GITHUB_WORKSPACE} /tf/caf
-          /tf/rover/rover.sh /tf/caf/L2_blueprint_project/code destroy \
-            -parallelism=30 \
-            -env cicd \
-            -tfstate L2_blueprint_project_cicd" \
-            -var-file="/tf/caf/L2_blueprint_project/environments/cicd.tfvars" \
+          /tf/rover/rover.sh /tf/caf/${{ env.L2_BLUEPRINT }}/code destroy \
+            -env ${{ env.ENV_NAME }} \
+            -tfstate ${{ env.L2_BLUEPRINT }}_${{ env.ENV_NAME }} \
+            -var-file=/tf/caf/${{ env.L2_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars \
             -auto-approve
 
   base_destroy:
     name: base_destroy
+    needs: project_destroy
     runs-on: ubuntu-latest
     if: always()
-    needs: project_destroy
-
-    strategy:
-      fail-fast: false
 
     container:
       image: aztfmod/rover:2007.0108
@@ -147,6 +159,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
+      - name: Setup context
+        id: context
+        run: |
+          ln -s ${GITHUB_WORKSPACE} /tf/caf
+          echo "ls /tf/caf" && ls -lsa /tf/caf
+          ls -lsa /tmp
 
       - name: Login azure
         run: |
@@ -155,22 +174,17 @@ jobs:
 
       - name: Destroy base
         run: |
-          ln -s ${GITHUB_WORKSPACE} /tf/caf
-          /tf/rover/rover.sh /tf/caf/L1_blueprint_base/code destroy \
-            -parallelism=30 \
-            -env cicd \
-            -tfstate "L1_blueprint_base_cicd" \
-            -var-file="/tf/caf/L1_blueprint_base/environments/cicd.tfvars" \
+          /tf/rover/rover.sh /tf/caf/${{ env.L1_BLUEPRINT }}/code destroy \
+            -env ${{ env.ENV_NAME }} \
+            -tfstate ${{ env.L1_BLUEPRINT }}_${{ env.ENV_NAME }} \
+            -var-file=/tf/caf/${{ env.L1_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars \
             -auto-approve
 
   launchpad_destroy:
     name: launchpad_destroy
+    needs: base_destroy
     runs-on: ubuntu-latest
     if: always()
-    needs: base_destroy
-
-    strategy:
-      fail-fast: false
 
     container:
       image: aztfmod/rover:2007.0108
@@ -179,6 +193,13 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Setup context
+        id: context
+        run: |
+          ln -s ${GITHUB_WORKSPACE} /tf/caf
+          echo "ls /tf/caf" && ls -lsa /tf/caf
+          ls -lsa /tmp
+
       - name: Login azure
         run: |
           az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
@@ -186,10 +207,9 @@ jobs:
 
       - name: Destroy launchpad
         run: |
-          ln -s ${GITHUB_WORKSPACE} /tf/caf
-          /tf/rover/rover.sh /tf/caf/L0_blueprint_launchpad/code destroy \
+          /tf/rover/rover.sh /tf/caf/${{ env.L0_BLUEPRINT }}/code destroy \
             -launchpad \
-            -env cicd \
-            -tfstate "L0_blueprint_launchpad_cicd" \
-            -var-file="/tf/caf/L0_blueprint_launchpad/environments/cicd.tfvars" \
+            -env ${{ env.ENV_NAME }} \
+            -tfstate ${{ env.L0_BLUEPRINT }}_${{ env.ENV_NAME }} \
+            -var-file=/tf/caf/${{ env.L0_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars \
             -auto-approve
