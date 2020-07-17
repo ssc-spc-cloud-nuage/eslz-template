@@ -68,9 +68,7 @@ L1_RBAC = {
     "pat.heard@163dev.onmicrosoft.com"
   ]
 
-  contributorNames = [
-    "louis-eric.tremblay@163dev.onmicrosoft.com"
-  ]
+  contributorNames = []
 
   readerNames = []
 }

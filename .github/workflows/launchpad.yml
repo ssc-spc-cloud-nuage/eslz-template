@@ -11,7 +11,8 @@ env:
   ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
   ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-  TF_CLI_ARGS_destroy: '-auto-approve -refresh=false'
+  TF_CLI_ARGS_apply: '-parallelism=30'
+  TF_CLI_ARGS_destroy: '-parallelism=30 -auto-approve -refresh=false'
   L0_BLUEPRINT: 'L0_blueprint_launchpad'
   L1_BLUEPRINT: 'L1_blueprint_base'
   L2_BLUEPRINT: 'L2_blueprint_project'
@@ -40,10 +41,6 @@ jobs:
           az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
           az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
           echo "local user: $(whoami)"
-
-      - name: Troubleshooting
-        run: |
-          cat /tf/caf/${{ env.L0_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars
 
       - name: Deploy launchpad
         run: |
@@ -144,8 +141,7 @@ jobs:
           /tf/rover/rover.sh /tf/caf/${{ env.L2_BLUEPRINT }}/code destroy \
             -env ${{ env.ENV_NAME }} \
             -tfstate ${{ env.L2_BLUEPRINT }}_${{ env.ENV_NAME }} \
-            -var-file=/tf/caf/${{ env.L2_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars \
-            -auto-approve
+            -var-file=/tf/caf/${{ env.L2_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars
 
   base_destroy:
     name: base_destroy
@@ -177,8 +173,7 @@ jobs:
           /tf/rover/rover.sh /tf/caf/${{ env.L1_BLUEPRINT }}/code destroy \
             -env ${{ env.ENV_NAME }} \
             -tfstate ${{ env.L1_BLUEPRINT }}_${{ env.ENV_NAME }} \
-            -var-file=/tf/caf/${{ env.L1_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars \
-            -auto-approve
+            -var-file=/tf/caf/${{ env.L1_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars
 
   launchpad_destroy:
     name: launchpad_destroy
@@ -211,5 +206,4 @@ jobs:
             -launchpad \
             -env ${{ env.ENV_NAME }} \
             -tfstate ${{ env.L0_BLUEPRINT }}_${{ env.ENV_NAME }} \
-            -var-file=/tf/caf/${{ env.L0_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars \
-            -auto-approve
+            -var-file=/tf/caf/${{ env.L0_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars
