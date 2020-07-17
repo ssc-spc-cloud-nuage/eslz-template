@@ -32,10 +32,7 @@ jobs:
 
       - name: Setup context
         id: context
-        run: |
-          ln -s ${GITHUB_WORKSPACE} /tf/caf
-          echo "ls /tf/caf" && ls -lsa /tf/caf
-          ls -lsa /tmp
+        run: ln -s ${GITHUB_WORKSPACE} /tf/caf
 
       - name: Login azure
         run: |
@@ -64,23 +61,22 @@ jobs:
 
       - name: Setup context
         id: context
-        run: |
-          ln -s ${GITHUB_WORKSPACE} /tf/caf
-          echo "ls /tf/caf" && ls -lsa /tf/caf
-          ls -lsa /tmp
+        run: ln -s ${GITHUB_WORKSPACE} /tf/caf
 
       - name: Login azure
         run: |
           az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
           az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
 
+      - name: Update RBAC ownerNames
+        run: sed -i 's/ownerNames = \[\]/ownerNames = \["'${{ env.RBAC_OWNER_NAME }}'"\]/' /tf/caf/${{ env.L1_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars
+
       - name: Deploy base
         run: |
           /tf/rover/rover.sh /tf/caf/${{ env.L1_BLUEPRINT }}/code apply \
             -env ${{ env.ENV_NAME }} \
             -tfstate ${{ env.L1_BLUEPRINT }}_${{ env.ENV_NAME }} \
-            -var-file=/tf/caf/${{ env.L1_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars \
-            -var='L1_RBAC.ownerNames=["${{ env.RBAC_OWNER_NAME }}"]'
+            -var-file=/tf/caf/${{ env.L1_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars
 
   project_deploy:
     name: project_deploy
@@ -96,23 +92,22 @@ jobs:
 
       - name: Setup context
         id: context
-        run: |
-          ln -s ${GITHUB_WORKSPACE} /tf/caf
-          echo "ls /tf/caf" && ls -lsa /tf/caf
-          ls -lsa /tmp
+        run: ln -s ${GITHUB_WORKSPACE} /tf/caf
 
       - name: Login azure
         run: |
           az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
           az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
 
+      - name: Update RBAC ownerNames
+        run: sed -i 's/ownerNames = \[\]/ownerNames = \["'${{ env.RBAC_OWNER_NAME }}'"\]/' /tf/caf/${{ env.L2_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars
+
       - name: Deploy project
         run: |
           /tf/rover/rover.sh /tf/caf/${{ env.L2_BLUEPRINT }}/code apply \
             -env ${{ env.ENV_NAME }} \
             -tfstate ${{ env.L2_BLUEPRINT }}_${{ env.ENV_NAME }} \
-            -var-file=/tf/caf/${{ env.L2_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars \
-            -var='L2_RBAC.ownerNames=["${{ env.RBAC_OWNER_NAME }}"]'
+            -var-file=/tf/caf/${{ env.L2_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars
 
   destroy_all:
     name: destroy_all
@@ -129,23 +124,24 @@ jobs:
 
       - name: Setup context
         id: context
-        run: |
-          ln -s ${GITHUB_WORKSPACE} /tf/caf
-          echo "ls /tf/caf" && ls -lsa /tf/caf
-          ls -lsa /tmp
+        run: ln -s ${GITHUB_WORKSPACE} /tf/caf
 
       - name: Login azure
         run: |
           az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
           az account set --subscription ${{ env.ARM_SUBSCRIPTION_ID }}
 
+      - name: Update RBAC ownerNames
+        run: |
+          sed -i 's/ownerNames = \[\]/ownerNames = \["'${{ env.RBAC_OWNER_NAME }}'"\]/' /tf/caf/${{ env.L1_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars
+          sed -i 's/ownerNames = \[\]/ownerNames = \["'${{ env.RBAC_OWNER_NAME }}'"\]/' /tf/caf/${{ env.L2_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars
+
       - name: Destroy project
         run: |
           /tf/rover/rover.sh /tf/caf/${{ env.L2_BLUEPRINT }}/code destroy \
             -env ${{ env.ENV_NAME }} \
             -tfstate ${{ env.L2_BLUEPRINT }}_${{ env.ENV_NAME }} \
-            -var-file=/tf/caf/${{ env.L2_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars \
-            -var='L2_RBAC.ownerNames=["${{ env.RBAC_OWNER_NAME }}"]'
+            -var-file=/tf/caf/${{ env.L2_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars
 
       - name: Destroy base
         if: ${{ always() }}
@@ -153,8 +149,7 @@ jobs:
           /tf/rover/rover.sh /tf/caf/${{ env.L1_BLUEPRINT }}/code destroy \
             -env ${{ env.ENV_NAME }} \
             -tfstate ${{ env.L1_BLUEPRINT }}_${{ env.ENV_NAME }} \
-            -var-file=/tf/caf/${{ env.L1_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars \
-            -var='L1_RBAC.ownerNames=["${{ env.RBAC_OWNER_NAME }}"]'
+            -var-file=/tf/caf/${{ env.L1_BLUEPRINT }}/environments/${{ env.ENV_NAME }}.tfvars
 
       - name: Destroy launchpad
         if: ${{ always() }}
