@@ -1,8 +1,8 @@
 tags = {
   "classification"    = "pbmm"
   "contact"           = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
-  "costcentre"        = "566811"
-  "env"               = "dev"
+  "costcentre"        = "123456"
+  "env"               = "cicd"
   "owner"             = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
   "cloudusageprofile" = "3"
   "branch"            = "CIO"
@@ -62,14 +62,8 @@ domain = {
 }
 
 L1_RBAC = {
-  ownerNames = [
-    "john.nephin@163dev.onmicrosoft.com",
-    "bernard.maltais@163dev.onmicrosoft.com",
-    "pat.heard@163dev.onmicrosoft.com"
-  ]
-
+  ownerNames = []
   contributorNames = []
-
   readerNames = []
 }
 
