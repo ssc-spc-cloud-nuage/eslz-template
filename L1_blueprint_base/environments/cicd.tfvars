@@ -16,12 +16,11 @@ location = "canadacentral"
 
 deployOptionalFeatures = {
   ddos_protection_plan       = false
+  defaultRoute               = false
   recovery_services_vault    = false
   security_center            = false
   sentinel                   = false
   update_management          = false
-  deny_publicip_subscription = false
-  deny_publicips_on_nics     = false
   deny_publicip_policy       = false
   diagnostics_policy         = false
   flow_logs_policy           = false
