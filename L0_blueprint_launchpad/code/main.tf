@@ -1,27 +1,12 @@
 terraform {
+  experiments = [variable_validation]
+
   required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "~> 2.19.0"
-    }
-    azuread = {
-      source  = "hashicorp/azuread"
-      version = "~> 0.10.0"
-    }
-    random = {
-      source  = "hashicorp/random"
-      version = "~> 2.2.1"
-    }
-    null = {
-      source  = "hashicorp/null"
-      version = "~> 2.1.0"
-    }
-    azurecaf = {
-      source = "aztfmod/azurecaf"
-      version = "~>0.4.3"
-    }
+    azurerm = "~> 2.17.0"
+    azuread = "~> 0.10.0"
+    random  = "~> 2.2.1"
+    null    = "~> 2.1.0"
   }
-  required_version = ">= 0.13"
 }
 
 

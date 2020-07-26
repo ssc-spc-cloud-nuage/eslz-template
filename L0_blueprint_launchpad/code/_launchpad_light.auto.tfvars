@@ -3,6 +3,7 @@ level           = "level0"
 launchpad_key_names = {
   keyvault    = "launchpad"
   aad_app     = "caf_launchpad_level0"
+  networking  = "networking_gitops"
 }
 
 resource_groups = {
@@ -19,6 +20,11 @@ resource_groups = {
   }
   gitops      = {
     name        = "launchpad-devops-agents"
+    useprefix   = true
+    max_length  = 40
+  }
+  networking  = {
+    name        = "launchpad-networking"
     useprefix   = true
     max_length  = 40
   }
@@ -79,4 +85,41 @@ log_analytics = {
   }
 }
 
-networking = {}
+networking = {
+  networking_gitops = {
+    resource_group_key  = "networking"
+
+    vnet = {
+      name                = "gitops-vnet"
+      address_space       = ["192.168.100.0/24"] 
+      dns                 = []
+    }
+
+    specialsubnets     = {}
+
+    subnets = {
+      level0        = {
+        name                = "level0"
+        cidr                = "192.168.100.16/29"
+        service_endpoints   = []
+        nsg_inbound         = [
+          # {"Name", "Priority", "Direction", "Action", "Protocol", "source_port_range", "destination_port_range", "source_address_prefix", "destination_address_prefix" }, 
+          ["ssh_internet", "150", "Inbound", "Allow", "*", "*", "22", "*", "*"],       # Temp until bastion + vwan in place.
+          ["ssh", "200", "Inbound", "Allow", "*", "*", "22", "192.168.200.8/29", "*"],
+        ]
+        nsg_outbound        = []
+      }
+    }
+
+    diags = {
+      log = [
+        # ["Category name", "Diagnostics Enabled(true/false)", "Retention Enabled(true/false)", Retention_period] 
+        ["VMProtectionAlerts", true, true, 5],
+      ]
+      metric = [
+        #["Category name", "Diagnostics Enabled(true/false)", "Retention Enabled(true/false)", Retention_period] 
+        ["AllMetrics", true, true, 2],
+      ]
+    }
+  }
+}
