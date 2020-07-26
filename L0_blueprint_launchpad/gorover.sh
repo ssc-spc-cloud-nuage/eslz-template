@@ -17,11 +17,11 @@ if [[ ${1} = *-* ]]; then
   exit 1
 fi
 
-if [[ ${#1} < 3 ]]; then
-  echo "environment name must be 3 characters or greater"
-  echo ""
-  exit 1
-fi
+#if [[ ${#1} < 3 ]]; then
+#  echo "environment name must be 3 characters or greater"
+#  echo ""
+#  exit 1
+#fi
 
 case "${command}" in
   plan|apply|destroy|validate)
@@ -56,5 +56,4 @@ if [[ ! -f "/tf/caf/${blueprint}/environments/${env}.tfvars" ]]; then
   exit 1
 fi
 
-/tf/rover/rover.sh /tf/caf/${blueprint}/code $command -launchpad -env ${env} -tfstate "${blueprint}_${env}" -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"
-# /tf/rover/rover.sh /tf/caf/${blueprint}/code $command -launchpad -tfstate ${blueprint} -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"
+/tf/rover/rover.sh -lz /tf/caf/${blueprint}/code -a $command -launchpad -env ${env} -tfstate "${blueprint}_${env}.tfstate" -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"

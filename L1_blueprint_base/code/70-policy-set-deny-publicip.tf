@@ -5,7 +5,7 @@ module Project-Deny-PublicIP-Policy {
   userDefinedString       = local.prefix
   log_analytics_workspace = local.Project-law
 }
-
+/*
 module Management-Deny-PublicIP-Policy {
   source                  = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-deny-publicip_policy_set?ref=v0.1.1"
   deploy                  = var.deployOptionalFeatures.deny_publicip_policy
@@ -14,7 +14,7 @@ module Management-Deny-PublicIP-Policy {
   log_analytics_workspace = local.Project-law
   management_group_name   = "PBMM_VDC"
 }
-
+*/
 locals {
   deny_publicip_policy_set_name = substr("${var.env}-${local.prefix} deny public ip policy set", 0, 64)
 }
