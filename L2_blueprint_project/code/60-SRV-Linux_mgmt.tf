@@ -8,7 +8,7 @@ module "SRV-linux-mgmt" {
   resource_group    = local.resource_groups_L1.Management
   subnet            = local.subnets.MAZ
   nic_ip_configuration = {
-    private_ip_address            = ["10.101.240.101"]
+    private_ip_address            = var.vmConfigs.SRV-linux-mgmt.private_ip_address
     private_ip_address_allocation = ["Static"]
   }
   priority       = try(var.vmConfigs.SRV-linux-mgmt.priority, "Regular")

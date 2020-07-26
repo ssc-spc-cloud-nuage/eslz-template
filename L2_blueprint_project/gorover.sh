@@ -3,6 +3,10 @@ env=${1}
 command=${2}
 blueprint="L2_blueprint_project"
 
+# echo "env=${1}"
+# echo "command=${2}"
+# echo blueprint="L2_blueprint_project"
+
 if [[ -z ${env} || -z ${command} ]]; then
   echo 'one or more script variables are undefined'
   echo "expecting: ./gorover.sh <environment name> <plan|apply|destroy|validate>"
@@ -16,11 +20,11 @@ if [[ ${1} = *-* ]]; then
   exit 1
 fi
 
-if [[ ${#1} < 3 ]]; then
-  echo "environment name must be 3 characters or greater"
-  echo ""
-  exit 1
-fi
+#if [[ ${#1} > 2 ]]; then
+#  echo "environment name must be 3 characters or greater"
+#  echo ""
+#  exit 1
+#fi
 
 case "${command}" in
   plan|apply|destroy|validate)
@@ -55,7 +59,4 @@ if [[ ! -f "/tf/caf/${blueprint}/environments/${env}.tfvars" ]]; then
   exit 1
 fi
 
-#/tf/rover/launchpad.sh workspace create ${env}
-
-# /tf/rover/rover.sh /tf/caf/${blueprint}/code $command -parallelism=30 -w ${env} -tfstate ${blueprint} -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"
-/tf/rover/rover.sh /tf/caf/${blueprint}/code $command -env ${env} -parallelism=30 -tfstate "${blueprint}_${env}" -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"
+/tf/rover/rover.sh -lz /tf/caf/${blueprint}/code -a $command -env ${env} -tfstate "${blueprint}_${env}.tfstate" -parallelism=30 -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"

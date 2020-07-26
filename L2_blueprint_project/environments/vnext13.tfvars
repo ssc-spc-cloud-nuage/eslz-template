@@ -1,38 +1,41 @@
 tags = {
   "classification"    = "pbmm"
-  "contact"           = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
-  "costcentre"        = "123456"
-  "env"               = "cicd"
-  "owner"             = "bernard.maltais@canada.ca; john.nephin@canada.ca; louis-eric.tremblay@canada.ca"
+  "contact"           = "<some email>; <some email>; etc"
+  "costcentre"        = "566811"
+  "env"               = "dev"
+  "owner"             = "<some email>; <some email>; etc"
   "cloudusageprofile" = "3"
-  "branch"            = "CIO"
+  "branch"            = "<branch name>"
 }
 
-env     = "ScDc"
+env     = "ScSc"
 group   = "CIO"
-project = "CICDTest"
+project = "ESLZ_vnext13"
 
 location = "canadacentral"
 
-Landing-Zone-Next-Hop = "172.168.3.22"
-
-RDS-Gateways           = ["10.101.16.4"]
+Landing-Zone-Next-Hop = "10.10.20.20"
+RDS-Gateways           = ["100.96.185.4", "100.96.185.5"]
 
 domain = {
   public = {
-    name = "eslz.dev.ciso.ssc-spc.gc.ca"
+    name = "vnext13.domain.com"
   }
   private = {
-    name                 = "eslz.dev.local"
+    name                 = "vnext13.domain.local"
     registration_enabled = true # Set to true if auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled?
   }
 }
 
 L2_RBAC = {
-  contributorEnterpriseID = []
-  ownerNames = []
-  contributorNames = []
-  readerNames = []
+  contributorNames = [
+  ]
+
+  contributorEnterpriseID = [
+  ]
+
+  readerNames = [
+  ]
 }
 
 vmConfigs = {
@@ -50,17 +53,13 @@ vmConfigs = {
   */
 
   SRV-linux-mgmt = {
-    admin_password = "tmp-e4d5rtc!"
+    admin_password = "canada123!"
     vm_size        = "Standard_D2s_v3"
     priority       = "Spot"
+    private_ip_address = ["10.10.10.100"]
   }
 }
 
-# Fill the section below with the values from the output of ./gorover.sh <env> validate. Look in the section
-# called Getting launchpad coordinates: It will look like:
-# Getting launchpad coordinates:
-#  - tfstate file: launchpad_opensource_light.tfstate
-
 L1_terraform_remote_state_config = {
-    key                   = "L1_blueprint_base_cicd.tfstate"
+    key = "L1_blueprint_base_vnext13.tfstate" # <------------ DOn't forget to set the env name!!!
 }

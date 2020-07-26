@@ -10,7 +10,7 @@ tags = {
 
 env     = "ScSc"
 group   = "CIO"
-project = "ESLZ_vnext"
+project = "ESLZ_vnext13"
 
 location = "canadacentral"
 
@@ -53,10 +53,10 @@ Landing-Zone-Next-Hop = "10.10.20.10"
 
 domain = {
   public = {
-    name = "some.domain.com"
+    name = "vnext13.domain.com"
   }
   private = {
-    name                 = "some.domain.local"
+    name                 = "vnext13.domain.local"
     registration_enabled = true # Set to true if auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled?
   }
 }
@@ -92,4 +92,3 @@ vmConfigs = {
     priority       = "Spot"
   }
 }
-

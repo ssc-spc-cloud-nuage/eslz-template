@@ -3,6 +3,10 @@ env=${1}
 command=${2}
 blueprint="L1_blueprint_base"
 
+# echo "env = ${env}"
+# echo "command=${command}"
+# echo blueprint=${blueprint}"
+
 if [[ -z ${env} || -z ${command} ]]; then
   echo 'one or more script variables are undefined'
   echo "expecting: ./gorover.sh <environment name> <plan|apply|destroy|validate>"

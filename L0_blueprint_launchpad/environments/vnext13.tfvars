@@ -5,7 +5,7 @@
 
 env     = "ScSc"
 group   = "CIO"
-project = "ESLZ_newvervnext"
+project = "ESLZ_vnext13"
 
 convention = "passthrough"
 enable_collaboration = true

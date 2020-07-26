@@ -1,18 +1,23 @@
 terraform {
-  required_version = ">= 0.12.1"
-  backend "azurerm" {
-    #storage_account_name = var.storage_account_name
-    #container_name       = var.container_name
-    #key                  = var.key
-    #access_key           = var.access_key
+  required_providers {
+    azuread = {
+      source = "hashicorp/azuread"
+    }
+    azurecaf = {
+      source  = "aztfmod/azurecaf"
+      version = "~>0.4.3"
+    }
+    azurerm = {
+      source = "hashicorp/azurerm"
+    }
+    time = {
+      source = "hashicorp/time"
+    }
   }
+  required_version = ">= 0.13"
+  backend "azurerm" {}
 }
 
 provider "azurerm" {
-  version = ">=2.1.0"
   features {}
-}
-
-provider "azuread" {
-  version = ">=0.8.0"
 }
