@@ -1,16 +1,16 @@
 module "SRV-linux-mgmt" {
-  source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-linux_virtual_machine?ref=v1.0.0"
-  # deploy            = var.deployOptionalFeatures.linuxJumpServer
+  source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-linux_virtual_machine?ref=v1.0.2"
+  deploy            = var.vmConfigs.SRV-linux-mgmt.deploy
   env               = var.env
   serverType        = "SLJ"
   userDefinedString = "Linux-MGMT"
   postfix           = "01"
   resource_group    = local.resource_groups_L1.Management
   subnet            = local.subnets.MAZ
-  nic_ip_configuration = {
-    private_ip_address            = ["10.101.240.101"]
-    private_ip_address_allocation = ["Static"]
-  }
+  #nic_ip_configuration = {
+  #  private_ip_address            = ["10.101.240.101"]
+  #  private_ip_address_allocation = ["Static"]
+  #}
   priority       = try(var.vmConfigs.SRV-linux-mgmt.priority, "Regular")
   admin_username = "azureadmin"
   admin_password = var.vmConfigs.SRV-linux-mgmt.admin_password

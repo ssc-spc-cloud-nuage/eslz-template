@@ -59,12 +59,13 @@ vmConfigs = {
   */
 
   SRV-linux-mgmt = {
-    admin_password = "canada123!"
+    deploy         = false
+    admin_password = "tmp-e4d5rtc!"
     vm_size        = "Standard_D2s_v3"
     priority       = "Spot"
   }
 }
 
 L1_terraform_remote_state_config = {
-    key = "L1_blueprint_base_<env name>.tfstate" # <------------ DOn't forget to set the env name!!!
+    key = "L1_blueprint_base_<env name>.tfstate" # <------------ Don't forget to set the env name!!!
 }

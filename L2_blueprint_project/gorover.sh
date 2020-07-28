@@ -55,7 +55,4 @@ if [[ ! -f "/tf/caf/${blueprint}/environments/${env}.tfvars" ]]; then
   exit 1
 fi
 
-#/tf/rover/launchpad.sh workspace create ${env}
-
-# /tf/rover/rover.sh /tf/caf/${blueprint}/code $command -parallelism=30 -w ${env} -tfstate ${blueprint} -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"
-/tf/rover/rover.sh /tf/caf/${blueprint}/code $command -env ${env} -parallelism=30 -tfstate "${blueprint}_${env}" -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"
+/tf/rover/rover.sh -lz /tf/caf/${blueprint}/code -a $command -env ${env} -tfstate "${blueprint}_${env}.tfstate" -parallelism=30 -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"

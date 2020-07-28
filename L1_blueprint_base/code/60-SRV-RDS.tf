@@ -1,5 +1,5 @@
 module "SWJ-01" {
-  source            = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-windows_virtual_machine?ref=v1.0.1"
+  source            = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-windows_virtual_machine?ref=v1.0.4"
   deploy            = var.deployOptionalFeatures.jumpServer
   env               = var.env
   serverType        = "SWJ"
