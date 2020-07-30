@@ -39,7 +39,7 @@ resource "azurerm_network_security_group" "Project_PAZ-nsg" {
     protocol                   = "*"
     direction                  = "Inbound"
     source_port_range          = "*"
-    source_address_prefixes    = local.subnets.PAZ.address_prefixes
+    source_address_prefixes    = local.subnets.MAZ.address_prefixes
     destination_port_range     = "*"
     destination_address_prefix = "*" # Implicit local subnet destination
   }
