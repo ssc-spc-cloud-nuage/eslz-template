@@ -25,7 +25,7 @@ resource "azurecaf_naming_convention" "dtcafgen" {
 module "linux-weekly-updates" {
   source                     = "github.com/canada-ca-terraform-modules/terraform-azurerm_update_management?ref=20200622.1"
   deploy                     = var.deployOptionalFeatures.update_management
-  name                       = "${local.prefix}-${var.project}-${azurecaf_naming_convention.dtcafgen.result}-linux-weekly-updates"
+  name                       = substr("${local.prefix}-${var.project}-${azurecaf_naming_convention.dtcafgen.result}-linux-weekly-updates", 0, 64)
   resource_group_name        = local.resource_groups_L1.AutomationAccount.name
   azurerm_automation_account = azurerm_automation_account.Project-aa
   operatingSystem            = "Linux"
@@ -37,7 +37,7 @@ module "linux-weekly-updates" {
 module "windows-weekly-updates" {
   source                     = "github.com/canada-ca-terraform-modules/terraform-azurerm_update_management?ref=20200622.1"
   deploy                     = var.deployOptionalFeatures.update_management
-  name                       = "${local.prefix}-${var.project}-${azurecaf_naming_convention.dtcafgen.result}-windows-weekly-updates"
+  name                       = substr("${local.prefix}-${var.project}-${azurecaf_naming_convention.dtcafgen.result}-windows-weekly-updates", 0, 64)
   resource_group_name        = local.resource_groups_L1.AutomationAccount.name
   azurerm_automation_account = azurerm_automation_account.Project-aa
   operatingSystem            = "Windows"

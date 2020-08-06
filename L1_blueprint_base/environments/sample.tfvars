@@ -98,4 +98,3 @@ vmConfigs = {
     priority       = "Spot"
   }
 }
-
