@@ -1,5 +1,5 @@
 module Project-Deny-PublicIP-Policy {
-  source                  = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-deny-publicip_policy_set?ref=v0.1.1"
+  source                  = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-deny-publicip_policy_set?ref=v0.2.0"
   deploy                  = var.deployOptionalFeatures.deny_publicip_policy
   env                     = var.env
   userDefinedString       = local.prefix
@@ -7,7 +7,7 @@ module Project-Deny-PublicIP-Policy {
 }
 /*
 module Management-Deny-PublicIP-Policy {
-  source                  = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-deny-publicip_policy_set?ref=v0.1.1"
+  source                  = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-deny-publicip_policy_set?ref=v0.2.0"
   deploy                  = var.deployOptionalFeatures.deny_publicip_policy
   env                     = var.env
   userDefinedString       = local.prefix

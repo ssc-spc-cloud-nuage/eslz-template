@@ -2,7 +2,7 @@
 # command can be plan, apply, destroy or validate
 env=${1}
 command=${2}
-blueprint="L0_blueprint_launchpad"
+blueprint=${PWD##*/}
 
 if [[ -z ${env} || -z ${command} ]]; then
   echo 'one or more script variables are undefined'
