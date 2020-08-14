@@ -20,10 +20,8 @@ resource_groups = {
     },
 }
 */
-
-module resource_groups_L1 {
-  source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-resource_groups?ref=v1.0.0"
-  resource_groups = {
+locals {
+  rglist = {
     AutomationAccount = {
       userDefinedString = "${local.userDefinedStringPrefix}_AutomationAccount"
     },
@@ -46,11 +44,18 @@ module resource_groups_L1 {
       userDefinedString = "${local.userDefinedStringPrefix}_Management"
     },
   }
-  env      = var.env
-  location = var.location
-  tags     = var.tags
+}
+
+module resource_groups_L1 {
+  source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-resource_groups?ref=v1.1.0"
+  for_each = local.rglist
+
+  userDefinedString = each.value.userDefinedString
+  env = var.env
+  location = lookup(each.value, "location", var.location)
+  tags     = merge(lookup(each.value, "tags", {}), var.tags)
 }
 
 locals {
-  resource_groups_L1 = module.resource_groups_L1.object
+  resource_groups_L1 = module.resource_groups_L1
 }

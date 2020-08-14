@@ -1,6 +1,6 @@
 module "SRV-linux-mgmt" {
-  source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-linux_virtual_machine?ref=v1.0.2"
-  deploy            = var.vmConfigs.SRV-linux-mgmt.deploy
+  source            = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-linux_virtual_machine?ref=v1.1.0"
+  count             = var.vmConfigs.SRV-linux-mgmt.deploy ? 1 : 0
   env               = var.env
   serverType        = "SLJ"
   userDefinedString = "Linux-MGMT"

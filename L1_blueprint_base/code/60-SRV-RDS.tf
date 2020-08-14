@@ -1,6 +1,6 @@
 module "SWJ-01" {
-  source            = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-windows_virtual_machine?ref=v1.0.4"
-  deploy            = var.deployOptionalFeatures.jumpServer
+  source            = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-windows_virtual_machine?ref=v1.1.0"
+  count             = var.deployOptionalFeatures.jumpServer ? 1 : 0
   env               = var.env
   serverType        = "SWJ"
   userDefinedString = "RDSServer"
@@ -9,7 +9,7 @@ module "SWJ-01" {
   location          = local.resource_groups_L1.Management.location
   subnet            = module.Project-snet.object.MAZ
   nic_ip_configuration = {
-    private_ip_address            = ["10.101.240.100"]
+    private_ip_address            = [local.SWJ-01_IP]
     private_ip_address_allocation = ["Static"]
   }
   priority        = try(var.vmConfigs.SWJ-01.priority, "Regular")
