@@ -9,6 +9,6 @@ data "terraform_remote_state" "launchpad" {
 }
 
 locals {
-  L0_keyvault        = data.terraform_remote_state.launchpad.outputs.keyvaults
+  L0_keyvaults       = data.terraform_remote_state.launchpad.outputs.keyvaults
   L0_resource_groups = data.terraform_remote_state.launchpad.outputs.resource_groups
 }

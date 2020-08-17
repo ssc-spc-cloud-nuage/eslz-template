@@ -9,4 +9,6 @@ locals {
   project_short                 = substr(var.project, 0, 4)
   userDefinedStringPrefix_short = "${local.group_short}_${local.project_short}"
   prefix_short                  = "${local.env_short}-${local.userDefinedStringPrefix_short}"
+  
+  SWJ-01_IP = cidrhost(local.subnets.MAZ.address_prefix, 4)
 }

@@ -20,7 +20,7 @@ resource azurerm_route_table Global-rt {
   }
 
   dynamic "route" {
-    for_each = var.deployOptionalFeatures.defaultRoute ? ["default-route"] : [] 
+    for_each = var.deployOptionalFeatures.defaultRoute ? ["default-route"] : []
     content {
       name                   = "default-route"
       address_prefix         = "0.0.0.0/0"

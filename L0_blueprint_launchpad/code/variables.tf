@@ -1,7 +1,7 @@
 variable launchpad_mode {
   default = "launchpad_light"
-  type = string
-  
+  type    = string
+
   validation {
     condition     = contains(["launchpad_light", "launchpad"], var.launchpad_mode)
     error_message = "Allowed values are launchpad_light or launchpad."
@@ -10,7 +10,7 @@ variable launchpad_mode {
 
 variable level {
   default = "level0"
-  type = string
+  type    = string
 
   validation {
     condition     = contains(["level0", "level1", "level2", "level3", "level4"], var.level)
@@ -38,13 +38,13 @@ variable prefix {
 # Do not change the default value to be able to upgrade to the standard launchpad
 variable tf_name {
   description = "Name of the terraform state in the blob storage (Does not include the extension .tfstate)"
-  default     = "launchpad.tfstate"
+  default     = "launchpad"
 }
 
 variable resource_groups {}
 
 variable storage_account_name {
-  type    = string
+  type = string
 }
 
 variable keyvaults {}

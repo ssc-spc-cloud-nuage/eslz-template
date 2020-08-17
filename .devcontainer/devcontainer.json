@@ -18,7 +18,7 @@
         "files.eol": "\n",
         "terminal.integrated.shell.linux": "/bin/bash",
         "editor.tabSize": 2,
-        "terminal.integrated.scrollback": 2000,
+        "terminal.integrated.scrollback": 8000,
     },
  
     // Uncomment the next line if you want start specific services in your Docker Compose config.
@@ -33,8 +33,10 @@
     // Add the IDs of extensions you want installed when the container is created in the array below.
     "extensions": [
         "4ops.terraform",
+        "hashicorp.terraform",
         "mutantdino.resourcemonitor",
         "ms-azure-devops.azure-pipelines",
-        "omartawfik.github-actions-vscode"
+        "omartawfik.github-actions-vscode",
+        "yzhang.markdown-all-in-one"
     ]
 }

@@ -13,9 +13,7 @@
   }
   */
 
-module azuread_groups_L1 {
-  source = "github.com/canada-ca-terraform-modules/terraform-azuread-caf-azuread_group?ref=v1.0.0"
-  env    = var.env
+locals {
   azuread_groupsMap = {
     L1_Subscription_Owners = {
       userDefinedString = "${var.group}_${var.project}_L1_Subscription_Owners"
@@ -44,6 +42,15 @@ module azuread_groups_L1 {
   }
 }
 
+module azuread_groups_L1 {
+  source = "github.com/canada-ca-terraform-modules/terraform-azuread-caf-azuread_group?ref=v1.1.0"
+  for_each = local.azuread_groupsMap
+
+  env    = var.env
+  userDefinedString = each.value.userDefinedString
+  owners = each.value.owners
+}
+
 locals {
-  azuread_groups_L1 = module.azuread_groups_L1.azuread_groups
+  azuread_groups_L1 = module.azuread_groups_L1
 }

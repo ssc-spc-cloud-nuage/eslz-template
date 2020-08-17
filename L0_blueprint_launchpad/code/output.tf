@@ -6,7 +6,7 @@ output aad_apps {
 
 output global_settings {
   sensitive = true
-  value = local.global_settings
+  value     = local.global_settings
 }
 
 output resource_groups {
@@ -16,12 +16,12 @@ output resource_groups {
 
 output log_analytics {
   sensitive = true
-  value = module.log_analytics.object
+  value     = module.log_analytics.object
 }
 
 output diagnostics_map {
   sensitive = true
-  value = module.diagnostics.diagnostics_map
+  value     = module.diagnostics.diagnostics_map
 }
 
 # output azure_devops_user_admin {
@@ -51,7 +51,7 @@ output keyvaults {
 
 output networking {
   sensitive = true
-  value = module.virtual_network
+  value     = module.virtual_network
 }
 
 output github_token_keyvault {

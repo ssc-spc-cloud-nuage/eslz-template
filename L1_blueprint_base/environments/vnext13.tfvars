@@ -10,13 +10,46 @@ tags = {
 
 env     = "ScSc"
 group   = "CIO"
-project = "ESLZ_vnext"
+project = "ESLZ_vnext13"
 
 location = "canadacentral"
 
-Landing-Zone-Next-Hop = "172.168.3.22"
+deployOptionalFeatures = {
+  ddos_protection_plan       = false
+  defaultRoute               = false
+  recovery_services_vault    = false
+  security_center            = false
+  sentinel                   = false
+  update_management          = false
+  deny_publicip_policy       = false
+  diagnostics_policy         = false
+  flow_logs_policy           = false
+  jumpServer                 = true
+}
 
-RDS-Gateways           = ["10.101.16.4"]
+## Optional Features variables ##
+
+optionalFeaturesConfig = {
+  recovery_services_vault = {
+    sku                 = "Standard" # Sets the vault's SKU. Possible values include: Standard, RS0
+    soft_delete_enabled = true       # Is soft delete enable for this Vault?
+  }
+  security_center = {
+    email = "some@test.com"
+    phone = "123-456-7890"
+  }
+}
+
+network = {
+  vnet = ["10.10.10.0/24"]
+  subnets = {
+    PAZ = ["10.10.10.0/27"]
+    OZ  = ["10.10.10.32/27"]
+    RZ  = ["10.10.10.64/27"]
+    MAZ = ["10.10.10.96/27"]
+  }
+}
+Landing-Zone-Next-Hop = "10.10.20.10"
 
 domain = {
   public = {
@@ -28,11 +61,15 @@ domain = {
   }
 }
 
-L2_RBAC = {
-  contributorEnterpriseID = []
-  ownerNames = []
-  contributorNames = []
-  readerNames = []
+L1_RBAC = {
+  ownerNames = [
+  ]
+
+  contributorNames = [
+  ]
+
+  readerNames = [
+  ]
 }
 
 vmConfigs = {
@@ -49,19 +86,10 @@ vmConfigs = {
   }
   */
 
-  SRV-linux-mgmt = {
-    deploy         = false
-    admin_password = "tmp-e4d5rtc!"
+  SWJ-01 = {
+    admin_password = "tmp-Canada123!"
     vm_size        = "Standard_D2s_v3"
     priority       = "Spot"
   }
 }
 
-# Fill the section below with the values from the output of ./gorover.sh <env> validate. Look in the section
-# called Getting launchpad coordinates: It will look like:
-# Getting launchpad coordinates:
-#  - tfstate file: launchpad_opensource_light.tfstate
-
-L1_terraform_remote_state_config = {
-    key                   = "L1_blueprint_base_vnext.tfstate"
-}
