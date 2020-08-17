@@ -17,9 +17,9 @@ The following resources will be deployed by this blueprint:
 9. Keyvault
 10. Private DNS
 11. Public DNS
-12. Automation Account
+12. (Optional)Automation Account
 13. (Optional)Recovery Services Vault
-14. Update Management Schedules for Linux and Windows VMs
+14. (Optional)Update Management Schedules for Linux and Windows VMs
 15. (Optional)Jump Server
 16. (Optional)Azure policies
 17. (Optional)Security Center
@@ -27,7 +27,7 @@ The following resources will be deployed by this blueprint:
 
 ## Requirements
 
-1. Azure Active Directory Global Admin )need to validate what lesser role would do) to create neded AAD Security groups
+1. Azure Active Directory Global Admin (need to validate what lesser role would do) to create neded AAD Security groups
 2. Owner role on the subscription
 
 ## Deployment
