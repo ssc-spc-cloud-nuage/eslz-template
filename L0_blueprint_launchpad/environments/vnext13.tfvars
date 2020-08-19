@@ -8,5 +8,5 @@ group   = "CIO"
 project = "ESLZ_vnext13"
 
 convention = "passthrough"
-enable_collaboration = true
+# enable_collaboration = true
 location = "canadacentral"
