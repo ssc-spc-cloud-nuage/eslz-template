@@ -28,7 +28,7 @@ terraform {
 provider "azurerm" {
   features {}
 }
-
+/*
 
 data "azurerm_subscription" "primary" {}
 data "azurerm_client_config" "current" {}
@@ -47,12 +47,12 @@ resource "random_string" "alpha1" {
   upper   = false
   number  = false
 }
-
+*/
 # Define variables used by profile
 variable "env" {}
 variable "group" {}
 variable "project" {}
-
+/*
 locals {
   landingzone_tag = {
     landingzone = var.launchpad_mode
@@ -70,6 +70,7 @@ locals {
   prefix_with_hyphen = local.prefix == "" ? "" : "${local.prefix}-"
   prefix_start_alpha = local.prefix == "" ? "" : "${random_string.alpha1.result}${local.prefix}"
 }
+*/
 
 module "L0_Launchpad" {
   source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-l0-launchpad"
