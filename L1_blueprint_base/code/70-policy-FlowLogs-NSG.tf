@@ -2,10 +2,10 @@
 
 resource "azurerm_policy_definition" "Deploy-NSG-FlowLogs" {
   count        = var.deployOptionalFeatures.flow_logs_policy ? 1 : 0
-  name         = "Deploy-NSG-FlowLogs"
+  name         = "${local.prefix} Deploy NSG FlowLogs"
   policy_type  = "Custom"
   mode         = "All"
-  display_name = "Deploy-NSG-FlowLogs"
+  display_name = "${local.prefix} Deploy NSG FlowLogs"
   description  = "Apply diagnostic settings for Azure Automation Accounts - Log Analytics"
   parameters   = <<PARAMETERS
   {
@@ -175,11 +175,11 @@ POLICY_RULE
 
 resource "azurerm_policy_assignment" "Deploy-NSG-FlowLogs" {
   count                = var.deployOptionalFeatures.flow_logs_policy ? 1 : 0
-  name                 = "Deploy-NSG-FlowLogs"
+  name                 = "${local.prefix} Deploy NSG FlowLogs"
   location             = local.Project-law.location
   scope                = data.azurerm_subscription.primary.id
   policy_definition_id = azurerm_policy_definition.Deploy-NSG-FlowLogs[0].id
-  display_name         = "Deploy-NSG-FlowLogs"
+  display_name         = "${local.prefix} Deploy NSG FlowLogs"
   description          = "Apply flow logs settings for Azure NSG"
   identity {
     type = "SystemAssigned"

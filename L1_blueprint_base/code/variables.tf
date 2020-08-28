@@ -15,9 +15,9 @@ variable "domain" {}
 
 variable "L1_RBAC" {}
 
-variable "vmConfigs" {}
-
 variable "optionalFeaturesConfig" {}
+
+variable "windows_VMs" {}
 
 #
 

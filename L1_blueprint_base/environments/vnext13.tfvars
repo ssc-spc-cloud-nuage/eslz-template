@@ -24,7 +24,6 @@ deployOptionalFeatures = {
   deny_publicip_policy       = false
   diagnostics_policy         = false
   flow_logs_policy           = false
-  jumpServer                 = true
 }
 
 ## Optional Features variables ##
@@ -72,7 +71,7 @@ L1_RBAC = {
   ]
 }
 
-vmConfigs = {
+windows_VMs = [
   /*
   # Template for Linux server variables
 
@@ -86,10 +85,25 @@ vmConfigs = {
   }
   */
 
-  SWJ-01 = {
-    admin_password = "tmp-Canada123!"
-    vm_size        = "Standard_D2s_v3"
-    priority       = "Spot"
+  {
+    deploy                  = true
+    serverType              = "SWJ"
+    userDefinedString       = "RDS"
+    postfix                 = "01"
+    resource_group          = "Management"
+    subnet                  = "MAZ"
+    public_ip               = false
+    private_ip_address_host = 4
+    admin_username          = "azureadmin"
+    admin_password          = "Canada123!"
+    os_managed_disk_type    = "StandardSSD_LRS"
+    vm_size                 = "Standard_D4s_v3"
+    priority                = "Spot"
+    storage_image_reference = {
+      publisher = "MicrosoftWindowsServer"
+      offer     = "WindowsServer"
+      sku       = "2019-Datacenter"
+      version   = "latest"
+    }
   }
-}
-
+]
