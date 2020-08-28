@@ -1,4 +1,4 @@
-
+/*
 resource "azurerm_security_center_contact" "contact" {
   count = var.deployOptionalFeatures.security_center ? 1 : 0
   email = var.optionalFeaturesConfig.security_center.email
@@ -7,6 +7,7 @@ resource "azurerm_security_center_contact" "contact" {
   alert_notifications = true
   alerts_to_admins    = true
 }
+*/
 
 resource "azurerm_security_center_subscription_pricing" "sc" {
   count = var.deployOptionalFeatures.security_center ? 1 : 0

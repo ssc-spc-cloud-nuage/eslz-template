@@ -16,7 +16,7 @@ module Management-Diagnostic-Policy {
 }
 */
 locals {
-  policy_set_name = substr("${var.env}-${local.prefix} diagnostic policy set", 0, 64)
+  policy_set_name = substr("${local.prefix} diagnostic policy set", 0, 64)
 }
 
 resource "azurerm_policy_assignment" "policy_assignment" {

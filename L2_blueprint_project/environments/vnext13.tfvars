@@ -35,7 +35,7 @@ L2_RBAC = {
   readerNames = []
 }
 
-vmConfigs = {
+windows_VMs = [
   /*
   # Template for Linux server variables
 
@@ -49,13 +49,40 @@ vmConfigs = {
   }
   */
 
-  SRV-linux-mgmt = {
-    deploy         = true
-    admin_password = "tmp-e4d5rtc!"
-    vm_size        = "Standard_D2s_v3"
-    priority       = "Spot"
+  {
+    deploy                  = true
+    serverType              = "SWJ"
+    userDefinedString       = "maltdev"
+    postfix                 = "01"
+    resource_group          = "Management"
+    subnet                  = "MAZ"
+    public_ip               = false
+    private_ip_address_host = 6
+    admin_username          = "azureadmin"
+    admin_password          = "Canada123!"
+    # custom_data             = "scripts/wsl2.ps1"
+    os_managed_disk_type    = "StandardSSD_LRS"
+    vm_size                 = "Standard_D4s_v3"
+    priority                = "Spot"
+    storage_image_reference = {
+      publisher = "microsoft-hyperv"
+      offer     = "windows10preview"
+      sku       = "pro-preview"
+      version   = "19041.208.2004162051"
+    }
+    plan = {
+      name      = "pro-preview"
+      publisher = "microsoft-hyperv"
+      product   = "windows10preview"
+    }
+    shutdownConfig = {
+      autoShutdownStatus             = "Enabled"
+      autoShutdownTime               = "17:00"
+      autoShutdownTimeZone           = "Eastern Standard Time"
+      autoShutdownNotificationStatus = "Disabled"
+    }
   }
-}
+]
 
 # Fill the section below with the values from the output of ./gorover.sh <env> validate. Look in the section
 # called Getting launchpad coordinates: It will look like:

@@ -1,27 +1,27 @@
 
 output aad_apps {
   sensitive = true
-  value     = module.azure_applications.aad_apps
+  value     = module.L0_Launchpad.aad_apps
 }
 
 output global_settings {
   sensitive = true
-  value     = local.global_settings
+  value     = module.L0_Launchpad.global_settings
 }
 
 output resource_groups {
   sensitive = true
-  value     = azurerm_resource_group.rg
+  value     = module.L0_Launchpad.resource_groups
 }
 
 output log_analytics {
   sensitive = true
-  value     = module.log_analytics.object
+  value     = module.L0_Launchpad.log_analytics
 }
 
 output diagnostics_map {
   sensitive = true
-  value     = module.diagnostics.diagnostics_map
+  value     = module.L0_Launchpad.diagnostics_map
 }
 
 # output azure_devops_user_admin {
@@ -46,21 +46,17 @@ output azure_subscriptions {
 
 output keyvaults {
   sensitive = true
-  value     = azurerm_key_vault.keyvault
+  value     = module.L0_Launchpad.keyvaults
 }
 
 output networking {
   sensitive = true
-  value     = module.virtual_network
+  value     = module.L0_Launchpad.networking
 }
 
 output github_token_keyvault {
   sensitive = true
 
-  value = {
-    keyvault_secret_name = azurerm_key_vault_secret.github_pat.name
-    keyvault_name        = azurerm_key_vault.keyvault[var.launchpad_key_names.keyvault].name
-    keyvault_id          = azurerm_key_vault.keyvault[var.launchpad_key_names.keyvault].id
-  }
+  value = module.L0_Launchpad.github_token_keyvault
 }
 
