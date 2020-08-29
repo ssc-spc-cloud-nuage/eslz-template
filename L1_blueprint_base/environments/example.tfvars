@@ -14,9 +14,41 @@ project = "ESLZ_vnext13"
 
 location = "canadacentral"
 
-Landing-Zone-Next-Hop = "172.168.3.22"
+deployOptionalFeatures = {
+  ddos_protection_plan       = false
+  defaultRoute               = false
+  recovery_services_vault    = false
+  security_center            = false
+  sentinel                   = false
+  update_management          = false
+  deny_publicip_policy       = false
+  diagnostics_policy         = false
+  flow_logs_policy           = false
+}
 
-RDS-Gateways           = ["10.101.16.4"]
+## Optional Features variables ##
+
+optionalFeaturesConfig = {
+  recovery_services_vault = {
+    sku                 = "Standard" # Sets the vault's SKU. Possible values include: Standard, RS0
+    soft_delete_enabled = true       # Is soft delete enable for this Vault?
+  }
+  security_center = {
+    email = "some@test.com"
+    phone = "123-456-7890"
+  }
+}
+
+network = {
+  vnet = ["10.10.10.0/24"]
+  subnets = {
+    PAZ = ["10.10.10.0/27"]
+    OZ  = ["10.10.10.32/27"]
+    RZ  = ["10.10.10.64/27"]
+    MAZ = ["10.10.10.96/27"]
+  }
+}
+Landing-Zone-Next-Hop = "10.10.20.10"
 
 domain = {
   public = {
@@ -28,11 +60,15 @@ domain = {
   }
 }
 
-L2_RBAC = {
-  contributorEnterpriseID = []
-  ownerNames = []
-  contributorNames = []
-  readerNames = []
+L1_RBAC = {
+  ownerNames = [
+  ]
+
+  contributorNames = [
+  ]
+
+  readerNames = [
+  ]
 }
 
 windows_VMs = [
@@ -52,43 +88,22 @@ windows_VMs = [
   {
     deploy                  = true
     serverType              = "SWJ"
-    userDefinedString       = "maltdev"
+    userDefinedString       = "RDS"
     postfix                 = "01"
     resource_group          = "Management"
     subnet                  = "MAZ"
-    public_ip               = false
-    private_ip_address_host = 6
+    private_ip_address_host = 4
     admin_username          = "azureadmin"
     admin_password          = "Canada123!"
-    # custom_data             = "scripts/wsl2.ps1"
     os_managed_disk_type    = "StandardSSD_LRS"
     vm_size                 = "Standard_D4s_v3"
     priority                = "Spot"
     storage_image_reference = {
-      publisher = "microsoft-hyperv"
-      offer     = "windows10preview"
-      sku       = "pro-preview"
-      version   = "19041.208.2004162051"
+      publisher = "MicrosoftWindowsServer"
+      offer     = "WindowsServer"
+      sku       = "2019-Datacenter"
+      version   = "latest"
     }
-    plan = {
-      name      = "pro-preview"
-      publisher = "microsoft-hyperv"
-      product   = "windows10preview"
-    }
-    shutdownConfig = {
-      autoShutdownStatus             = "Enabled"
-      autoShutdownTime               = "17:00"
-      autoShutdownTimeZone           = "Eastern Standard Time"
-      autoShutdownNotificationStatus = "Disabled"
-    }
+    encryptDisks = true
   }
 ]
-
-# Fill the section below with the values from the output of ./gorover.sh <env> validate. Look in the section
-# called Getting launchpad coordinates: It will look like:
-# Getting launchpad coordinates:
-#  - tfstate file: launchpad_opensource_light.tfstate
-
-L1_terraform_remote_state_config = {
-    key                   = "L1_blueprint_base_vnext13.tfstate"
-}

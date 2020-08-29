@@ -12,7 +12,7 @@ locals {
 }
 
 module "windows_VMs" {
-  source   = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-windows_virtual_machine?ref=v1.1.1"
+  source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-windows_virtual_machine?ref=v1.1.1"
   # for_each = var.windows_VMs
   for_each = local.deployList
 
@@ -35,8 +35,12 @@ module "windows_VMs" {
   storage_image_reference = lookup(each.value, "storage_image_reference", local.storage_image_reference)
   plan                    = lookup(each.value, "plan", null)
   custom_data             = lookup(each.value, "custom_data", false) != false ? base64encode(file(each.value.custom_data)) : null
-  license_type            = lookup(each.value, "license_type", "Windows_Server")
-  dependancyAgent         = lookup(each.value, "dependancyAgent", false)
-  shutdownConfig          = lookup(each.value, "shutdownConfig", null)
-  tags                    = lookup(each.value, "tags", null) == null ? var.tags : merge(var.tags, each.value.tags)
+  encryptDisks = lookup(each.value, "encryptDisks", false) != false ? {
+    KeyVaultResourceId = local.Project-kv.id
+    KeyVaultURL        = local.Project-kv.vault_uri
+  } : null
+  license_type    = lookup(each.value, "license_type", "Windows_Server")
+  dependancyAgent = lookup(each.value, "dependancyAgent", false)
+  shutdownConfig  = lookup(each.value, "shutdownConfig", null)
+  tags            = lookup(each.value, "tags", null) == null ? var.tags : merge(var.tags, each.value.tags)
 }
