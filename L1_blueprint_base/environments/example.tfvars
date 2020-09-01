@@ -40,6 +40,17 @@ optionalFeaturesConfig = {
 }
 
 network = {
+  # Uncomment the route list block if you want to add specific route for the deployment
+  /*
+  routes = [
+    {
+      name = "toCore"
+      address_prefix = "10.144.0.0/20"
+      next_hop_type = "VirtualAppliance"
+      next_hop_in_ip_address = "10.144.4.10" # Optional only if you use VirtualAppliance. If not simply omit.
+    }
+  ]
+  */
   vnet = ["10.10.10.0/24"]
   subnets = {
     PAZ = ["10.10.10.0/27"]

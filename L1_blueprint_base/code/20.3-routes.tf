@@ -11,6 +11,16 @@ resource azurerm_route_table Global-rt {
   resource_group_name = local.resource_groups_L1.Network.name
 
   dynamic "route" {
+    for_each = lookup(var.network, "routes", [])
+    content {
+      name           = route.value.name
+      address_prefix = route.value.address_prefix
+      next_hop_type  = route.value.next_hop_type
+      next_hop_in_ip_address = lookup(route.value, "next_hop_in_ip_address", null)
+    }
+  }
+
+  dynamic "route" {
     for_each = var.network.vnet
     content {
       name           = "local_vnet-route-${route.key}"
