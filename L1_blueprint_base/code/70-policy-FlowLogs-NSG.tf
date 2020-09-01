@@ -207,3 +207,12 @@ resource "azurerm_policy_assignment" "Deploy-NSG-FlowLogs" {
   }
 PARAMETERS
 }
+
+# Giving the SystemAssigned identity the ability to enforce the policy
+
+resource "azurerm_role_assignment" "policy_assignment_NSG-FlowLogs_Contributor" {
+  count                = var.deployOptionalFeatures.diagnostics_policy ? 1 : 0
+  scope                = data.azurerm_subscription.primary.id
+  role_definition_name = "Contributor"
+  principal_id         = var.deployOptionalFeatures.diagnostics_policy ? azurerm_policy_assignment.Deploy-NSG-FlowLogs[0].identity[0].principal_id : null
+}

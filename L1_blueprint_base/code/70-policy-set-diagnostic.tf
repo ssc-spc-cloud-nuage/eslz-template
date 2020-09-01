@@ -41,3 +41,19 @@ resource "azurerm_policy_assignment" "policy_assignment" {
   }
 PARAMETERS
 }
+
+# Giving the SystemAssigned identity the ability to enforce the policy
+
+resource "azurerm_role_assignment" "policy_assignment_Diagnostic-Policy_Contributor" {
+  count                = var.deployOptionalFeatures.diagnostics_policy ? 1 : 0
+  scope                = data.azurerm_subscription.primary.id
+  role_definition_name = "Contributor"
+  principal_id         = var.deployOptionalFeatures.diagnostics_policy ? azurerm_policy_assignment.policy_assignment[0].identity[0].principal_id : null
+}
+
+resource "azurerm_role_assignment" "policy_assignment_Diagnostic-Policy_Owner" {
+  count                = var.deployOptionalFeatures.diagnostics_policy ? 1 : 0
+  scope                = data.azurerm_subscription.primary.id
+  role_definition_name = "Owner"
+  principal_id         = var.deployOptionalFeatures.diagnostics_policy ? azurerm_policy_assignment.policy_assignment[0].identity[0].principal_id : null
+}
