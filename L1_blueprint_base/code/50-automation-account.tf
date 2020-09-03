@@ -1,13 +1,6 @@
-resource "azurecaf_naming_convention" "Project-aa" {
-  name          = "${local.prefix}-${var.project}"
-  resource_type = "aaa"
-  postfix       = "aa"
-  convention    = "passthrough"
-}
-
 //Can't have a "_" in the name, only "-"
 resource "azurerm_automation_account" "Project-aa" {
-  name                = azurecaf_naming_convention.Project-aa.result
+  name                = replace(local.l0_prefix, "_", "-")
   resource_group_name = local.resource_groups_L1.AutomationAccount.name
   location            = var.location
   sku_name            = "Basic"
