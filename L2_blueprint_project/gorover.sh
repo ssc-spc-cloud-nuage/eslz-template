@@ -43,9 +43,10 @@ else
   exit 1
 fi
 
-TF_DATA_DIR=/home/vscode/.terraform.cache/${blueprint}
-if [[ ! -L cache ]] ; then
-  ln -s /home/vscode/.terraform.cache/L1_blueprint_base cache
+TF_DATA_DIR=/home/vscode/.terraform.cache/${blueprint}.${env}
+mkdir -p ${TF_DATA_DIR}
+if [[ ! -L cache.${env} ]] ; then
+  ln -s ${TF_DATA_DIR} cache.${env}
 fi
 
 set +o allexport

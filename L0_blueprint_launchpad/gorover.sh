@@ -1,8 +1,8 @@
-#!/usr/bin/bash
 # command can be plan, apply, destroy or validate
 env=${1}
 command=${2}
 blueprint=${PWD##*/}
+date=`date +%Y%m%d%H%M%S`
 
 if [[ -z ${env} || -z ${command} ]]; then
   echo 'one or more script variables are undefined'
@@ -43,6 +43,12 @@ else
   exit 1
 fi
 
+TF_DATA_DIR=/home/vscode/.terraform.cache/${blueprint}.${env}
+mkdir -p ${TF_DATA_DIR}
+if [[ ! -L cache.${env} ]] ; then
+  ln -s ${TF_DATA_DIR} cache.${env}
+fi
+
 set +o allexport
 
 if [[ ! -z "${LAUNCHPAD_SUBSCRIPTION}" ]]; then
@@ -54,6 +60,20 @@ if [[ ! -f "/tf/caf/${blueprint}/environments/${env}.tfvars" ]]; then
   echo "/tf/caf/${blueprint}/environments/${env}.tfvars file is missing. Please ensure it exist!"
   echo ""
   exit 1
+fi
+
+# Taking backup of statefile before applying if cache already exist
+
+if [[ ${command} == "apply" ]]; then
+  if [[ -d ${TF_DATA_DIR} ]]; then
+    current=${PWD}
+    cd code
+    echo "Taking backup of state file"
+    terraform state pull > ${TF_DATA_DIR}/terraform.state.${date}
+    cd ${current}
+  else
+    echo "cache does not yet exist, can't take backup."
+  fi
 fi
 
 /tf/rover/rover.sh -lz /tf/caf/${blueprint}/code -a $command -launchpad -env ${env} -tfstate "${blueprint}_${env}.tfstate" -var-file="/tf/caf/${blueprint}/environments/${env}.tfvars"
