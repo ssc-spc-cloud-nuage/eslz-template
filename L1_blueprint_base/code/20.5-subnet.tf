@@ -1,7 +1,7 @@
 # Subnets
 
 module Project-snet {
-  source          = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-subnet?ref=v1.0.1"
+  source          = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-subnet?ref=v1.1.1"
   virtual_network = local.Project-vnet
   resource_group  = local.resource_groups_L1.Network
   env             = var.env
