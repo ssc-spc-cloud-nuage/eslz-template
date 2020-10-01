@@ -1,5 +1,5 @@
 module Project_law-sa {
-  source                   = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-storage_account?ref=v1.0.1"
+  source                   = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-storage_account?ref=v1.0.3"
   env                      = var.env
   userDefinedString        = "law${var.project}"
   resource_group           = local.resource_groups_L1.Logs
