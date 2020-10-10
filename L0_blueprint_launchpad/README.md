@@ -52,4 +52,4 @@ L1_RBAC = {
 }
 ```
 
-You can add as many as you need. You can also remove them when needed and simple re-run the `rover-<environment>.sh` script to update the membership.
+You can add as many as you need. You can also remove them when needed and simple re-run `./gorover.sh <env> apply` to update the membership.
