@@ -1,0 +1,60 @@
+name: gorover execute
+
+on:
+  push:
+    #branches:
+    #  - dev
+    #  - master
+    tags:
+      - L1_blueprint_base_*
+      - L2_blueprint_test_backup_*
+      - L2_blueprint_project_*
+
+env:
+  ARM_CLIENT_SECRET: ${{ secrets.ARM_CLIENT_SECRET }}
+  ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+  ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+
+jobs:
+  blueprint_deploy:
+    if: contains(github.ref, '_blueprint_')
+    name: blueprint_deploy
+    runs-on: ubuntu-latest
+    container:
+      image: sscspccloudnuage/rover:2010.3008
+      options: --user 0
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup context
+        id: context
+        run: |
+          ln -s ${GITHUB_WORKSPACE} /tf/caf
+          echo ${{github.ref}}
+
+      - name: Login to azure
+        run: |
+          az login --service-principal -u '${{ env.ARM_CLIENT_ID }}' -p '${{ env.ARM_CLIENT_SECRET }}' --tenant '${{ env.ARM_TENANT_ID }}'
+          # echo "local user: $(whoami)"
+
+      - name: Apply L1_blueprint_base
+        if: contains(github.ref, 'L1_blueprint_base_')
+        run: |
+          cd /tf/caf/L1_blueprint_base
+          terraform version
+          .actions/cicdrun.sh
+
+      - name: Apply L2_blueprint_test_backup
+        if: contains(github.ref, 'L2_blueprint_test_backup_')
+        run: |
+          cd /tf/caf/L2_blueprint_test_backup
+          terraform version
+          .actions/cicdrun.sh
+
+      - name: Apply L2_blueprint_project
+        if: contains(github.ref, 'L2_blueprint_project_')
+        run: |
+          cd /tf/caf/L2_blueprint_project
+          terraform version
+          .actions/cicdrun.sh

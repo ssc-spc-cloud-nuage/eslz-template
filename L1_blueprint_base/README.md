@@ -42,9 +42,28 @@ rover login
 
 3. Configure the <envname>.tfvars file in the `environments` folder with the desired values. See the [README.md](./environments/README.md) file in the folder for more information.
 
-4. Deploy the desired Landing Zone environment resources. For example, to deploy the `dev` environment use the following commands:
+4. Deploy the desired Landing Zone environment resources. For example, to manually deploy the `dev` environment use the following commands:
 
 ```sh
-cd /tf/caf/L1_blueprint_project
-./gorover.sh dev apply
+cd /tf/caf/L1_blueprint_base
+gorover dev apply
 ```
+
+To deploy the same thing but using a CI/CD pipeline on github use the following commands:
+
+```sh
+cd /tf/caf/L1_blueprint_base
+runactions dev apply
+```
+
+Then check you github repo actions logs to look at the terraform deployment run.
+
+5. If you need to ever interact directly with the statefile for a given blueprint simply do it as follow:
+
+```sh
+cd /tf/caf/L1_blueprint_base
+goterraform <env> <command(s)>
+
+eg: goterraform dev state list
+```
+  

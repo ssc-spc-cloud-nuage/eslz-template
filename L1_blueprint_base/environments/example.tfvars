@@ -80,6 +80,10 @@ L1_RBAC = {
 
   readerNames = [
   ]
+
+  ownerObjectIDs = [
+    "f36e31cf-2fcf-4df2-a769-c74d77f9445a", # Some-Terraform-SP for CI/CI github actions pipeline execution
+  ]
 }
 
 windows_VMs = [

@@ -69,6 +69,9 @@ L1_RBAC = {
 
   readerNames = [
   ]
+
+  ownerObjectIDs = [
+  ]
 }
 
 windows_VMs = [

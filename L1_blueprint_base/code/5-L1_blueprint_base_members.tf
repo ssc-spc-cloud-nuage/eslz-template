@@ -11,6 +11,13 @@ resource "azuread_group_member" "L1_Subscription_Owners-Members" {
   member_object_id = each.key
 }
 
+resource "azuread_group_member" "L1_Subscription_Owners-Members_by_objectIDs" {
+  for_each = toset(var.L1_RBAC.ownerObjectIDs)
+
+  group_object_id  = local.azuread_groups_L1.L1_Subscription_Owners.id
+  member_object_id = each.key
+}
+
 resource "azuread_group_member" "L1_Subscription_Contributors-Members" {
   for_each = toset(data.azuread_users.L1_Subscription_Contributors.object_ids)
 
