@@ -6,6 +6,7 @@ module Project_law-sa {
   account_tier             = "Standard"
   account_kind             = "StorageV2"
   account_replication_type = "GRS"
+  allow_blob_public_access = false
   tags                     = var.tags
 }
 
