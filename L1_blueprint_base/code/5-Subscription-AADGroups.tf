@@ -43,7 +43,7 @@ locals {
 }
 
 module azuread_groups_L1 {
-  source = "github.com/canada-ca-terraform-modules/terraform-azuread-caf-azuread_group?ref=v1.1.0"
+  source = "github.com/canada-ca-terraform-modules/terraform-azuread-caf-azuread_group?ref=v1.1.1"
   for_each = local.azuread_groupsMap
 
   env    = var.env

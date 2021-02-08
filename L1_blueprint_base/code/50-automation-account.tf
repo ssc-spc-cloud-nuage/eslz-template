@@ -10,9 +10,8 @@ resource "azurerm_automation_account" "Project-aa" {
 # Link automation account to a Log Analytics Workspace.
 resource "azurerm_log_analytics_linked_service" "law_link" {
   resource_group_name = local.resource_groups_L1.Logs.name
-  workspace_name      = local.Project-law.name
-  linked_service_name = "automation"
-  resource_id         = azurerm_automation_account.Project-aa.id
+  workspace_id        = local.Project-law.id
+  read_access_id      = azurerm_automation_account.Project-aa.id
 }
 /*
 # azurerm_monitor_diagnostic_setting is required for PBMM-Guardrails
