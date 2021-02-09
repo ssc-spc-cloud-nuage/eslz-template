@@ -32,6 +32,7 @@ module "linux-weekly-updates" {
   scope                      = [data.azurerm_subscription.primary.id]               # Whole subscription
   startTime                  = "${local.update_date}T${local.update_time}:00-00:00" # "2020-06-16T00:00:00-00:00"
   weekDays                   = ["Sunday"]
+  depends_on                 = [azurerm_log_analytics_linked_service.law_link]
 }
 
 module "windows-weekly-updates" {
@@ -44,4 +45,5 @@ module "windows-weekly-updates" {
   scope                      = [data.azurerm_subscription.primary.id]               # Whole subscription
   startTime                  = "${local.update_date}T${local.update_time}:00-00:00" # "2020-06-16T00:00:00-00:00"
   weekDays                   = ["Sunday"]
+  depends_on                 = [azurerm_log_analytics_linked_service.law_link]
 }
