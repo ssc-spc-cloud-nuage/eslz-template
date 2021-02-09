@@ -82,25 +82,8 @@ variable aad_api_permissions {
   default = {}
 }
 
-variable github_projects {
-  default = {}
-}
-
-variable azure_devops {
-  default = {}
-}
-
 variable environment {
   type        = string
   description = "This variable is set by the rover during the deployment based on the -env or -environment flags. Default to sandpit"
 }
 
-variable blueprint_networking {
-  default = {}
-}
-
-variable diagnostics_settings {}
-
-variable log_analytics {}
-
-variable networking {}

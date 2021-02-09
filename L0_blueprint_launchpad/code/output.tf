@@ -14,15 +14,15 @@ output resource_groups {
   value     = module.L0_Launchpad.resource_groups
 }
 
-output log_analytics {
-  sensitive = true
-  value     = module.L0_Launchpad.log_analytics
-}
+# output log_analytics {
+#   sensitive = true
+#   value     = module.L0_Launchpad.log_analytics
+# }
 
-output diagnostics_map {
-  sensitive = true
-  value     = module.L0_Launchpad.diagnostics_map
-}
+# output diagnostics_map {
+#   sensitive = true
+#   value     = module.L0_Launchpad.diagnostics_map
+# }
 
 # output azure_devops_user_admin {
 #   depends_on = [ azuread_user.account ]
@@ -49,14 +49,14 @@ output keyvaults {
   value     = module.L0_Launchpad.keyvaults
 }
 
-output networking {
-  sensitive = true
-  value     = module.L0_Launchpad.networking
-}
+# output networking {
+#   sensitive = true
+#   value     = module.L0_Launchpad.networking
+# }
 
-output github_token_keyvault {
-  sensitive = true
+# output github_token_keyvault {
+#   sensitive = true
 
-  value = module.L0_Launchpad.github_token_keyvault
-}
+#   value = module.L0_Launchpad.github_token_keyvault
+# }
 

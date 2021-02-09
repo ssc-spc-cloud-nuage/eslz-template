@@ -16,11 +16,6 @@ resource_groups = {
     useprefix  = true
     max_length = 40
   }
-  gitops = {
-    name       = "launchpad-devops-agents"
-    useprefix  = true
-    max_length = 40
-  }
 }
 
 storage_account_name = "level0"
@@ -59,22 +54,3 @@ aad_apps = {
     }
   }
 }
-
-diagnostics_settings = {
-  resource_diagnostics_name        = "diag"
-  azure_diagnostics_logs_event_hub = false
-  resource_group_key               = "gitops"
-}
-
-log_analytics = {
-  resource_log_analytics_name = "logs"
-  resource_group_key          = "gitops"
-  solutions_maps = {
-    KeyVaultAnalytics = {
-      "publisher" = "Microsoft"
-      "product"   = "OMSGallery/KeyVaultAnalytics"
-    }
-  }
-}
-
-networking = {}

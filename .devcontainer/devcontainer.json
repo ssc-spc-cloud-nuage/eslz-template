@@ -1,12 +1,13 @@
 {
-    "name": "PBMM_CIO_LZ",
+    "name": "ESLZ",
  
     // Update the 'dockerComposeFile' list if you have more compose files or use different names.
     "dockerComposeFile": "docker-compose.yml",
 
     // Container user to use in VSCode Online and GitHub Codespaces
     "containerUser" : "vscode",
- 
+    "remoteUser" : "vscode",
+  
     // The 'service' property is the name of the service for the container that VS Code should
     // use. Update this value and .devcontainer/docker-compose.yml to the real service name.
     "service": "rover",
@@ -31,7 +32,7 @@
     // "shutdownAction": "none",
  
     // Uncomment the next line to run commands after the container is created.
-    "postCreateCommand": "cp -R /tmp/.ssh-localhost/* ~/.ssh && sudo chmod 600 ~/.ssh/* && sudo chown -R $(whoami) /tf/caf && git config --global core.editor vi",
+    "postCreateCommand": "sudo chown -R $(whoami) /tf/caf && git config --global core.editor vi",
  
     // Add the IDs of extensions you want installed when the container is created in the array below.
     "extensions": [

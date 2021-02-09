@@ -21,7 +21,7 @@ resource "azurerm_key_vault" "Project-kv" {
 */
 
 module Project-kv {
-  source            = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-keyvault?ref=dev"
+  source            = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-keyvault?ref=v2.1.1"
   env               = var.env
   userDefinedString = "${local.group_short}-${local.project_short}"
   resource_group    = local.resource_groups_L1.Keyvault
@@ -31,7 +31,6 @@ module Project-kv {
       enabled_for_disk_encryption     = true
       enabled_for_deployment          = true
       enabled_for_template_deployment = true
-      soft_delete_enabled             = true
       purge_protection_enabled        = true
     }
 

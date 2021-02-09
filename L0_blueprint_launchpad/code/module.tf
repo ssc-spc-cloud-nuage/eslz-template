@@ -1,6 +1,7 @@
 
 module "L0_Launchpad" {
-  source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-l0-launchpad?ref=v1.0.0"
+  # source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-l0-launchpad?ref=v1.0.0"
+  source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-l0-launchpad?ref=v1.1.0"
   launchpad_mode = var.launchpad_mode
   level = var.level
   convention = var.convention
@@ -21,13 +22,7 @@ module "L0_Launchpad" {
   aad_users = var.aad_users
   aad_roles = var.aad_roles
   aad_api_permissions = var.aad_api_permissions
-  github_projects = var.github_projects
-  azure_devops = var.azure_devops
   environment = var.environment
-  blueprint_networking = var.blueprint_networking
-  diagnostics_settings = var.diagnostics_settings
-  log_analytics = var.log_analytics
-  networking = var.networking
   env = var.env
   group = var.group
   project = var.project
