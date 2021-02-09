@@ -6,7 +6,7 @@
   version: '3.7'
   services:
     rover:
-      image: sscspccloudnuage/rover:2102.0308
+      image: sscspccloudnuage/rover:2102.0913
       user: vscode
     
       labels:
