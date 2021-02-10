@@ -1,7 +1,7 @@
 
 module "L0_Launchpad" {
   # source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-l0-launchpad?ref=v1.0.0"
-  source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-l0-launchpad?ref=v1.1.0"
+  source = "github.com/canada-ca-terraform-modules/terraform-azurerm-caf-l0-launchpad?ref=v1.1.1"
   launchpad_mode = var.launchpad_mode
   level = var.level
   convention = var.convention
